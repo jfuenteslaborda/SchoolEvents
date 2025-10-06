@@ -16,7 +16,7 @@ import {IonHeader, IonIcon, IonToolbar} from "@ionic/angular/standalone";
 export class HeaderCalendarComponent  implements OnInit {
 
   constructor() {
-      
+
   }
 
   ngOnInit() {}
