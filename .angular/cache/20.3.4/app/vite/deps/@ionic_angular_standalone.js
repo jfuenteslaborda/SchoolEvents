@@ -1,4 +1,10 @@
 import {
+  startFocusVisible
+} from "./chunk-L6ISKHKK.js";
+import {
+  mdTransitionAnimation
+} from "./chunk-Y5NC4DKV.js";
+import {
   MENU_BACK_BUTTON_PRIORITY,
   OVERLAY_BACK_BUTTON_PRIORITY,
   shouldUseCloseWatcher
@@ -6,6 +12,11 @@ import {
 import {
   isRTL
 } from "./chunk-IUXA2G6D.js";
+import {
+  BACKDROP_NO_SCROLL,
+  GESTURE_CONTROLLER,
+  createGesture
+} from "./chunk-6U2AQA2C.js";
 import {
   KEYBOARD_DID_OPEN
 } from "./chunk-G5UZVNUA.js";
@@ -25,9 +36,6 @@ import {
   printIonContentErrorMsg,
   resetContentScrollY
 } from "./chunk-D6MKN2U2.js";
-import {
-  startFocusVisible
-} from "./chunk-L6ISKHKK.js";
 import {
   ActivatedRoute,
   ChildrenOutletContexts,
@@ -140,10 +148,7 @@ import {
 } from "./chunk-7NOP7VGK.js";
 import {
   iosTransitionAnimation
-} from "./chunk-SLW6MJK4.js";
-import {
-  mdTransitionAnimation
-} from "./chunk-QWEZNZKP.js";
+} from "./chunk-GHDEDF4D.js";
 import {
   LIFECYCLE_DID_ENTER,
   LIFECYCLE_DID_LEAVE,
@@ -156,7 +161,7 @@ import {
   setPageHidden,
   transition,
   waitForMount
-} from "./chunk-37A5YRCU.js";
+} from "./chunk-TN6KSJHA.js";
 import {
   Build,
   Fragment,
@@ -204,11 +209,6 @@ import {
   printIonWarning,
   saveConfig
 } from "./chunk-2H3NLAAY.js";
-import {
-  BACKDROP_NO_SCROLL,
-  GESTURE_CONTROLLER,
-  createGesture
-} from "./chunk-6U2AQA2C.js";
 import {
   __async,
   __objRest,
@@ -11269,7 +11269,7 @@ var RouterOutlet = proxyCustomElement(class RouterOutlet2 extends H {
           this.swipeHandler.onStart();
         }
       };
-      this.gesture = (yield import("./swipe-back-TL5XF5LG.js")).createSwipeBackGesture(this.el, () => !this.gestureOrAnimationInProgress && !!this.swipeHandler && this.swipeHandler.canStart(), () => onStart(), (step) => {
+      this.gesture = (yield import("./swipe-back-E5COORU7.js")).createSwipeBackGesture(this.el, () => !this.gestureOrAnimationInProgress && !!this.swipeHandler && this.swipeHandler.canStart(), () => onStart(), (step) => {
         var _a;
         return (_a = this.ani) === null || _a === void 0 ? void 0 : _a.progressStep(step);
       }, (shouldComplete, step, dur) => {
@@ -26840,7 +26840,7 @@ var Nav = proxyCustomElement(class Nav2 extends H {
     return __async(this, null, function* () {
       this.didLoad = true;
       this.rootChanged();
-      this.gesture = (yield import("./swipe-back-TL5XF5LG.js")).createSwipeBackGesture(this.el, this.canStart.bind(this), this.onStart.bind(this), this.onMove.bind(this), this.onEnd.bind(this));
+      this.gesture = (yield import("./swipe-back-E5COORU7.js")).createSwipeBackGesture(this.el, this.canStart.bind(this), this.onStart.bind(this), this.onMove.bind(this), this.onEnd.bind(this));
       this.swipeGestureChanged();
     });
   }

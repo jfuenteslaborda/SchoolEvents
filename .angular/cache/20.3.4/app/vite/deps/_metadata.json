@@ -1,46 +1,67 @@
 {
-  "hash": "f1367c3a",
-  "configHash": "62455b0e",
+  "hash": "53d445bd",
+  "configHash": "50b23028",
   "lockfileHash": "2f91c86e",
-  "browserHash": "16654c1f",
+  "browserHash": "4ce8529f",
   "optimized": {
     "@angular/core": {
       "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "61676370",
+      "fileHash": "855641a6",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "7d8084b1",
+      "fileHash": "4a78bf02",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "1138b2e7",
+      "fileHash": "0a95fc37",
       "needsInterop": false
     },
     "@ionic/angular/standalone": {
       "src": "../../../../../../node_modules/@ionic/angular/fesm2022/ionic-angular-standalone.mjs",
       "file": "@ionic_angular_standalone.js",
-      "fileHash": "7bfc7543",
+      "fileHash": "d3b3b818",
       "needsInterop": false
     },
     "zone.js": {
       "src": "../../../../../../node_modules/zone.js/fesm2015/zone.js",
       "file": "zone__js.js",
-      "fileHash": "1cd75109",
+      "fileHash": "d2a3eb27",
       "needsInterop": true
+    },
+    "ionicons": {
+      "src": "../../../../../../node_modules/ionicons/dist/index.js",
+      "file": "ionicons.js",
+      "fileHash": "96aa0522",
+      "needsInterop": false
+    },
+    "ionicons/icons": {
+      "src": "../../../../../../node_modules/ionicons/icons/index.mjs",
+      "file": "ionicons_icons.js",
+      "fileHash": "3bfee007",
+      "needsInterop": false
     }
   },
   "chunks": {
+    "focus-visible-XBL42XGV": {
+      "file": "focus-visible-XBL42XGV.js"
+    },
+    "md.transition-C6O2BE67": {
+      "file": "md__transition-C6O2BE67.js"
+    },
+    "index3-WDJJIG5O": {
+      "file": "index3-WDJJIG5O.js"
+    },
     "hardware-back-button-ONRIE2X4": {
       "file": "hardware-back-button-ONRIE2X4.js"
     },
-    "swipe-back-TL5XF5LG": {
-      "file": "swipe-back-TL5XF5LG.js"
+    "swipe-back-E5COORU7": {
+      "file": "swipe-back-E5COORU7.js"
     },
     "keyboard-DJSYFZAF": {
       "file": "keyboard-DJSYFZAF.js"
@@ -54,14 +75,20 @@
     "input-shims-F7DHXN4G": {
       "file": "input-shims-F7DHXN4G.js"
     },
-    "focus-visible-XBL42XGV": {
-      "file": "focus-visible-XBL42XGV.js"
+    "chunk-L6ISKHKK": {
+      "file": "chunk-L6ISKHKK.js"
+    },
+    "chunk-Y5NC4DKV": {
+      "file": "chunk-Y5NC4DKV.js"
     },
     "chunk-EODYS5EQ": {
       "file": "chunk-EODYS5EQ.js"
     },
     "chunk-IUXA2G6D": {
       "file": "chunk-IUXA2G6D.js"
+    },
+    "chunk-6U2AQA2C": {
+      "file": "chunk-6U2AQA2C.js"
     },
     "chunk-G5UZVNUA": {
       "file": "chunk-G5UZVNUA.js"
@@ -71,9 +98,6 @@
     },
     "chunk-D6MKN2U2": {
       "file": "chunk-D6MKN2U2.js"
-    },
-    "chunk-L6ISKHKK": {
-      "file": "chunk-L6ISKHKK.js"
     },
     "chunk-LJDKW2JW": {
       "file": "chunk-LJDKW2JW.js"
@@ -87,17 +111,11 @@
     "ios.transition-R7QDFWL4": {
       "file": "ios__transition-R7QDFWL4.js"
     },
-    "chunk-SLW6MJK4": {
-      "file": "chunk-SLW6MJK4.js"
+    "chunk-GHDEDF4D": {
+      "file": "chunk-GHDEDF4D.js"
     },
-    "md.transition-C6O2BE67": {
-      "file": "md__transition-C6O2BE67.js"
-    },
-    "chunk-QWEZNZKP": {
-      "file": "chunk-QWEZNZKP.js"
-    },
-    "chunk-37A5YRCU": {
-      "file": "chunk-37A5YRCU.js"
+    "chunk-TN6KSJHA": {
+      "file": "chunk-TN6KSJHA.js"
     },
     "chunk-GGFSAU2Q": {
       "file": "chunk-GGFSAU2Q.js"
@@ -110,12 +128,6 @@
     },
     "chunk-2H3NLAAY": {
       "file": "chunk-2H3NLAAY.js"
-    },
-    "index3-WDJJIG5O": {
-      "file": "index3-WDJJIG5O.js"
-    },
-    "chunk-6U2AQA2C": {
-      "file": "chunk-6U2AQA2C.js"
     },
     "chunk-QHQP2P2Z": {
       "file": "chunk-QHQP2P2Z.js"
