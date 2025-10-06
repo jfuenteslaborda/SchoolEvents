@@ -33,7 +33,6 @@ import {
   NgModule,
   NgModuleRef$1,
   NgZone,
-  Observable,
   Optional,
   PLATFORM_ID,
   PLATFORM_INITIALIZER,
@@ -45,7 +44,6 @@ import {
   ResourceImpl,
   RuntimeError,
   SecurityContext,
-  Subject,
   TESTABILITY,
   TESTABILITY_GETTER,
   TemplateRef,
@@ -71,12 +69,9 @@ import {
   bypassSanitizationTrustStyle,
   bypassSanitizationTrustUrl,
   computed,
-  concatMap,
   createNgModule,
   createPlatformFactory,
   encapsulateResourceError,
-  filter,
-  finalize,
   findLocaleData,
   formatRuntimeError,
   forwardRef,
@@ -88,9 +83,7 @@ import {
   linkedSignal,
   makeEnvironmentProviders,
   makeStateKey,
-  map,
   numberAttribute,
-  of,
   performanceMarkFeature,
   platformCore,
   runInInjectionContext,
@@ -98,7 +91,6 @@ import {
   setDocument,
   signal,
   stringify,
-  switchMap,
   truncateMiddle,
   untracked,
   unwrapSafeValue,
@@ -116,7 +108,17 @@ import {
   ɵɵinject,
   ɵɵinjectAttribute,
   ɵɵstyleProp
-} from "./chunk-7NOP7VGK.js";
+} from "./chunk-WZPN75RG.js";
+import {
+  Observable,
+  Subject,
+  concatMap,
+  filter,
+  finalize,
+  map,
+  of,
+  switchMap
+} from "./chunk-IWCJTUKN.js";
 import {
   __async,
   __objRest,
@@ -9678,4 +9680,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-YAZOEQV6.js.map
+//# sourceMappingURL=chunk-52Y7B3XV.js.map

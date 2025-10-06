@@ -2,8 +2,24 @@ import {
   startFocusVisible
 } from "./chunk-L6ISKHKK.js";
 import {
+  iosTransitionAnimation
+} from "./chunk-KDLH6QXM.js";
+import {
   mdTransitionAnimation
-} from "./chunk-Y5NC4DKV.js";
+} from "./chunk-TH6BBIE7.js";
+import {
+  LIFECYCLE_DID_ENTER,
+  LIFECYCLE_DID_LEAVE,
+  LIFECYCLE_WILL_ENTER,
+  LIFECYCLE_WILL_LEAVE,
+  LIFECYCLE_WILL_UNLOAD,
+  createAnimation,
+  deepReady,
+  lifecycle,
+  setPageHidden,
+  transition,
+  waitForMount
+} from "./chunk-OFD3C4FF.js";
 import {
   MENU_BACK_BUTTON_PRIORITY,
   OVERLAY_BACK_BUTTON_PRIORITY,
@@ -26,6 +42,10 @@ import {
   getCapacitor
 } from "./chunk-IKS2SDKY.js";
 import {
+  doc,
+  win
+} from "./chunk-QEE7QVES.js";
+import {
   ION_CONTENT_CLASS_SELECTOR,
   ION_CONTENT_ELEMENT_SELECTOR,
   disableContentScrollY,
@@ -37,6 +57,49 @@ import {
   resetContentScrollY
 } from "./chunk-D6MKN2U2.js";
 import {
+  Build,
+  Fragment,
+  H,
+  Host as Host2,
+  createEvent,
+  forceUpdate,
+  getAssetPath,
+  getMode,
+  h,
+  proxyCustomElement,
+  readTask,
+  setMode,
+  writeTask
+} from "./chunk-GGFSAU2Q.js";
+import {
+  addEventListener,
+  assert,
+  clamp,
+  componentOnReady,
+  debounceEvent,
+  focusVisibleElement,
+  getElementRoot,
+  hasLazyBuild,
+  hasShadowDom,
+  inheritAriaAttributes,
+  inheritAttributes,
+  isEndSide,
+  isSafeNumber,
+  raf,
+  removeEventListener,
+  renderHiddenInput,
+  shallowEqualStringMap,
+  transitionEndAsync
+} from "./chunk-4554YRK6.js";
+import {
+  config,
+  configFromSession,
+  configFromURL,
+  printIonError,
+  printIonWarning,
+  saveConfig
+} from "./chunk-2H3NLAAY.js";
+import {
   ActivatedRoute,
   ChildrenOutletContexts,
   NavigationStart,
@@ -44,7 +107,7 @@ import {
   Router,
   RouterLink,
   UrlSerializer
-} from "./chunk-LJDKW2JW.js";
+} from "./chunk-3DVLB4S6.js";
 import {
   CommonModule,
   Location,
@@ -52,12 +115,11 @@ import {
   NgIf,
   NgTemplateOutlet,
   getDOM
-} from "./chunk-YAZOEQV6.js";
+} from "./chunk-52Y7B3XV.js";
 import {
   APP_INITIALIZER,
   ApplicationRef,
   Attribute,
-  BehaviorSubject,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -84,33 +146,24 @@ import {
   RuntimeError,
   Self,
   SkipSelf,
-  Subject,
   TemplateRef,
   Version,
   ViewChild,
   ViewContainerRef,
-  __decorate,
   afterNextRender,
   booleanAttribute,
-  combineLatest,
   computed,
   createComponent,
-  distinctUntilChanged,
-  filter,
   forkJoin,
   forwardRef,
-  from,
   fromEvent,
   inject,
   isPromise,
   isSubscribable,
   makeEnvironmentProviders,
-  map,
-  of,
   reflectComponentType,
   setClassMetadata,
   signal,
-  switchMap,
   untracked,
   ɵɵInheritDefinitionFeature,
   ɵɵNgOnChangesFeature,
@@ -145,70 +198,19 @@ import {
   ɵɵrestoreView,
   ɵɵtemplate,
   ɵɵviewQuery
-} from "./chunk-7NOP7VGK.js";
+} from "./chunk-WZPN75RG.js";
 import {
-  iosTransitionAnimation
-} from "./chunk-GHDEDF4D.js";
-import {
-  LIFECYCLE_DID_ENTER,
-  LIFECYCLE_DID_LEAVE,
-  LIFECYCLE_WILL_ENTER,
-  LIFECYCLE_WILL_LEAVE,
-  LIFECYCLE_WILL_UNLOAD,
-  createAnimation,
-  deepReady,
-  lifecycle,
-  setPageHidden,
-  transition,
-  waitForMount
-} from "./chunk-TN6KSJHA.js";
-import {
-  Build,
-  Fragment,
-  H,
-  Host as Host2,
-  createEvent,
-  forceUpdate,
-  getAssetPath,
-  getMode,
-  h,
-  proxyCustomElement,
-  readTask,
-  setMode,
-  writeTask
-} from "./chunk-GGFSAU2Q.js";
-import {
-  doc,
-  win
-} from "./chunk-QEE7QVES.js";
-import {
-  addEventListener,
-  assert,
-  clamp,
-  componentOnReady,
-  debounceEvent,
-  focusVisibleElement,
-  getElementRoot,
-  hasLazyBuild,
-  hasShadowDom,
-  inheritAriaAttributes,
-  inheritAttributes,
-  isEndSide,
-  isSafeNumber,
-  raf,
-  removeEventListener,
-  renderHiddenInput,
-  shallowEqualStringMap,
-  transitionEndAsync
-} from "./chunk-4554YRK6.js";
-import {
-  config,
-  configFromSession,
-  configFromURL,
-  printIonError,
-  printIonWarning,
-  saveConfig
-} from "./chunk-2H3NLAAY.js";
+  BehaviorSubject,
+  Subject,
+  __decorate,
+  combineLatest,
+  distinctUntilChanged,
+  filter,
+  from,
+  map,
+  of,
+  switchMap
+} from "./chunk-IWCJTUKN.js";
 import {
   __async,
   __objRest,
@@ -15405,7 +15407,7 @@ var App = proxyCustomElement(class App2 extends H {
         }
         if (config.getBoolean("inputShims", needInputShims())) {
           const platform = isPlatform(window, "ios") ? "ios" : "android";
-          import("./input-shims-F7DHXN4G.js").then((module) => module.startInputShims(config, platform));
+          import("./input-shims-FXPPACNY.js").then((module) => module.startInputShims(config, platform));
         }
         const hardwareBackButtonModule = yield import("./hardware-back-button-ONRIE2X4.js");
         const supportsHardwareBackButtonEvents = isHybrid2 || shouldUseCloseWatcher();

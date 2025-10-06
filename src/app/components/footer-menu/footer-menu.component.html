@@ -6,18 +6,20 @@
 
     <div class="footer-content">
         <ion-icon
-                name="notifications-circle-outline"
+                name="notifications-outline"
+                [class.active]="activeRoute === '/messages'"
                 (click)="navigateWithAnimation('/messages', $event)"
         ></ion-icon>
 
         <ion-icon
                 name="calendar-outline"
-                class="active"
+                [class.active]="activeRoute === '/calendar'"
                 (click)="navigateWithAnimation('/calendar', $event)"
         ></ion-icon>
 
         <ion-icon
                 name="settings-outline"
+                [class.active]="activeRoute === '/settings'"
                 (click)="navigateWithAnimation('/settings', $event)"
         ></ion-icon>
     </div>

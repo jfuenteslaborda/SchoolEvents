@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import {IonIcon} from "@ionic/angular/standalone";
 
 @Component({
@@ -12,8 +13,16 @@ import {IonIcon} from "@ionic/angular/standalone";
 })
 export class FooterMenuComponent {
     expanded = false;
+    activeRoute: string = '/calendar';
 
-    constructor(private router: Router) {}
+    constructor(private router: Router) {
+
+        this.router.events
+            .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+            .subscribe((event) => {
+                this.activeRoute = event.urlAfterRedirects;
+            });
+    }
 
     toggleMenu() {
         this.expanded = !this.expanded;
@@ -23,10 +32,9 @@ export class FooterMenuComponent {
         const icon = event.target;
         icon.classList.add('clicked');
 
-        // Espera a que termine la animación antes de navegar
         setTimeout(() => {
             icon.classList.remove('clicked');
             this.router.navigate([route]);
-        }, 300); // coincide con la duración de @keyframes click-pop
+        }, 300);
     }
 }
