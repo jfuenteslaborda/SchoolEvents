@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
 import {HeaderCalendarComponent} from "../../components/header-calendar/header-calendar.component";
+import {FooterMenuComponent} from "../../components/footer-menu/footer-menu.component";
 
 
 @Component({
@@ -12,7 +13,8 @@ import {HeaderCalendarComponent} from "../../components/header-calendar/header-c
         IonToolbar,
         IonTitle,
         IonContent,
-        IonHeader
+        IonHeader,
+        FooterMenuComponent
 
 
     ],
