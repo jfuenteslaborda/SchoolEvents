@@ -5,8 +5,20 @@
     </div>
 
     <div class="footer-content">
-        <ion-icon name="notifications-circle-outline"></ion-icon>
-        <ion-icon name="calendar-outline" class="active"></ion-icon>
-        <ion-icon name="settings-outline"></ion-icon>
+        <ion-icon
+                name="notifications-circle-outline"
+                (click)="navigateWithAnimation('/notifications', $event)"
+        ></ion-icon>
+
+        <ion-icon
+                name="calendar-outline"
+                class="active"
+                (click)="navigateWithAnimation('/calendar', $event)"
+        ></ion-icon>
+
+        <ion-icon
+                name="settings-outline"
+                (click)="navigateWithAnimation('/settings', $event)"
+        ></ion-icon>
     </div>
 </div>

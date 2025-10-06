@@ -5,9 +5,9 @@ import {FooterMenuComponent} from "../../components/footer-menu/footer-menu.comp
 
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-calendar',
+  templateUrl: 'calendar.page.html',
+  styleUrls: ['calendar.page.scss'],
     imports: [
         HeaderCalendarComponent,
         IonToolbar,
@@ -19,6 +19,6 @@ import {FooterMenuComponent} from "../../components/footer-menu/footer-menu.comp
 
     ],
 })
-export class HomePage {
+export class CalendarPage {
   constructor() {}
 }
