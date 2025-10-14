@@ -1,3 +1,12 @@
-<p>
-  calendar works!
-</p>
+<ion-datetime
+        class="calendar"
+        presentation="date"
+        (ionChange)="onConfirm($event)"
+        (ionCancel)="onCancel()"
+        [showDefaultButtons]="true"
+        [locale]="'es-ES'"
+></ion-datetime>
+
+<div *ngIf="fechaConfirmada" class="date-buttom animate-fade">
+    Fecha seleccionada: {{ fechaConfirmada }}
+</div>

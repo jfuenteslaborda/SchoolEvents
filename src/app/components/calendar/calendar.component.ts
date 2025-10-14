@@ -1,14 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { CommonModule, registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+import { IonicModule } from '@ionic/angular';
+
+registerLocaleData(localeEs);
 
 @Component({
-  selector: 'app-calendar',
-  templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss'],
+    selector: 'app-calendar-component',
+    standalone: true,
+    imports: [CommonModule, IonicModule],
+    templateUrl: './calendar.component.html',
+    styleUrls: ['./calendar.component.scss'],
 })
-export class CalendarComponent  implements OnInit {
+export class CalendarComponent {
+    fechaConfirmada: string = '';
 
-  constructor() { }
+    onConfirm(event: any) {
+        this.fechaConfirmada = event.detail.value.split('T')[0];
+        const fecha = new Date(this.fechaConfirmada);
+        this.fechaConfirmada = fecha.toLocaleDateString('es-ES', {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
 
-  ngOnInit() {}
+    }
 
+    onCancel() {
+        this.fechaConfirmada = '';
+    }
 }

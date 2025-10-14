@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import { IonContent } from '@ionic/angular/standalone';
 import {HeaderCalendarComponent} from "../../components/header-calendar/header-calendar.component";
 import {FooterMenuComponent} from "../../components/footer-menu/footer-menu.component";
+import {CalendarComponent} from "../../components/calendar/calendar.component";
 
 
 @Component({
@@ -10,13 +11,9 @@ import {FooterMenuComponent} from "../../components/footer-menu/footer-menu.comp
   styleUrls: ['calendar.page.scss'],
     imports: [
         HeaderCalendarComponent,
-        IonToolbar,
-        IonTitle,
         IonContent,
-        IonHeader,
-        FooterMenuComponent
-
-
+        FooterMenuComponent,
+        CalendarComponent
     ],
 })
 export class CalendarPage {
