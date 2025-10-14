@@ -6,50 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="5b4e7149-728e-49f1-9240-88deefa3dcbe" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/20.3.4/app/.tsbuildinfo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/@angular_core.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/@angular_core.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/@angular_platform-browser.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/@angular_platform-browser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/@angular_router.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/@angular_router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/@ionic_angular_standalone.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/@ionic_angular_standalone.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/@ionic_angular_standalone.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/@ionic_angular_standalone.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/_metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/_metadata.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/chunk-3DVLB4S6.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/chunk-3DVLB4S6.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/chunk-52Y7B3XV.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/chunk-52Y7B3XV.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/chunk-EODYS5EQ.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/chunk-EODYS5EQ.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/chunk-IWCJTUKN.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/chunk-IWCJTUKN.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/chunk-KDLH6QXM.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/chunk-KDLH6QXM.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/chunk-OFD3C4FF.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/chunk-OFD3C4FF.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/chunk-TH6BBIE7.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/chunk-TH6BBIE7.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/chunk-WZPN75RG.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/chunk-WZPN75RG.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/hardware-back-button-ONRIE2X4.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/hardware-back-button-ONRIE2X4.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/index7-D6UT5TLT.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/index7-D6UT5TLT.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/input-shims-FXPPACNY.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/input-shims-FXPPACNY.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/ios.transition-YZ42POQZ.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/ios.transition-YZ42POQZ.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/md.transition-B5SK54ZZ.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/md.transition-B5SK54ZZ.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/rxjs_operators.js" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/rxjs_operators.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/swipe-back-E5COORU7.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/20.3.4/app/vite/deps/swipe-back-E5COORU7.js.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/calendar/calendar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/calendar/calendar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/calendar/calendar.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/calendar/calendar.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/calendar/calendar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/calendar/calendar.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/pages/calendar/calendar.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/calendar/calendar.page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/calendar/calendar.page.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/calendar/calendar.page.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/pages/calendar/calendar.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/calendar/calendar.page.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/messages/messages.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/messages/messages.page.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/settings/settings.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/settings/settings.page.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/icon/favicon.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,9 +48,9 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/components" />
       <recent name="$PROJECT_DIR$/src/assets/icon" />
       <recent name="$PROJECT_DIR$/src/app/pages" />
-      <recent name="$PROJECT_DIR$/src/app/components" />
     </key>
   </component>
   <component name="RunManager" selected="npm.Angular CLI Server">
@@ -134,7 +94,7 @@
       <workItem from="1759749562900" duration="3617000" />
       <workItem from="1759767251261" duration="4691000" />
       <workItem from="1759777723086" duration="2288000" />
-      <workItem from="1760429319027" duration="4342000" />
+      <workItem from="1760429319027" duration="5674000" />
     </task>
     <servers />
   </component>

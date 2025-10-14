@@ -3,6 +3,7 @@ import { IonContent } from '@ionic/angular/standalone';
 import {HeaderCalendarComponent} from "../../components/header-calendar/header-calendar.component";
 import {FooterMenuComponent} from "../../components/footer-menu/footer-menu.component";
 import {CalendarComponent} from "../../components/calendar/calendar.component";
+import {CarouselComponent} from "../../components/carousel/carousel.component";
 
 
 @Component({
@@ -13,7 +14,8 @@ import {CalendarComponent} from "../../components/calendar/calendar.component";
         HeaderCalendarComponent,
         IonContent,
         FooterMenuComponent,
-        CalendarComponent
+        CalendarComponent,
+        CarouselComponent
     ],
 })
 export class CalendarPage {
