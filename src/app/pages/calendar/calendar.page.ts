@@ -4,6 +4,7 @@ import {HeaderCalendarComponent} from "../../components/header-calendar/header-c
 import {FooterMenuComponent} from "../../components/footer-menu/footer-menu.component";
 import {CalendarComponent} from "../../components/calendar/calendar.component";
 import {CarouselComponent} from "../../components/carousel/carousel.component";
+import {CarouselUnfilteredComponent} from "../../components/carousel-unfiltered/carousel-unfiltered.component";
 
 
 @Component({
@@ -15,7 +16,8 @@ import {CarouselComponent} from "../../components/carousel/carousel.component";
         IonContent,
         FooterMenuComponent,
         CalendarComponent,
-        CarouselComponent
+        CarouselComponent,
+        CarouselUnfilteredComponent
     ],
 })
 export class CalendarPage {
