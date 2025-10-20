@@ -1,10 +1,8 @@
 <div class="carousel-container">
     <div class="carousel-slide" *ngFor="let slide of slides; let i = index" [class.active]="i === currentIndex">
-        <div class="carousel-caption">
-            <h2>{{ slide.title }}</h2>
-        </div>
         <img [src]="slide.image" [alt]="slide.title" />
         <div class="carousel-caption">
+            <h2>{{ slide.title }}</h2>
             <p>{{ slide.description }}</p>
         </div>
     </div>
@@ -16,6 +14,12 @@
     <span *ngFor="let slide of slides; let i = index"
           [class.active]="i === currentIndex"
           (click)="goTo(i)"></span>
+    </div>
+
+    <div class="carousel-button-container">
+        <ion-button class="carousel-button" color="primary" (click)="goToPage()">
+            Ver evento
+        </ion-button>
     </div>
 </div>
 <br>

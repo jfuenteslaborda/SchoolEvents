@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
+import {NavigationEnd, Router} from "@angular/router";
+import {filter} from "rxjs/operators";
 
 @Component({
     selector: 'app-carousel-unfiltered',
@@ -18,6 +20,9 @@ export class CarouselUnfilteredComponent {
 
     currentIndex = 0;
 
+    constructor(private router: Router) {}
+
+
     next() {
         this.currentIndex = (this.currentIndex + 1) % this.slides.length;
     }
@@ -29,4 +34,9 @@ export class CarouselUnfilteredComponent {
     goTo(index: number) {
         this.currentIndex = index;
     }
+
+    goToPage() {
+        this.router.navigate(['/event']);
+    }
+
 }

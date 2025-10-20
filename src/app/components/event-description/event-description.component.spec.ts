@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { CarouselComponent } from './carousel.component';
+import { EventDescriptionComponent } from './event-description.component';
 
-describe('CarouselImagesComponent', () => {
-  let component: CarouselComponent;
-  let fixture: ComponentFixture<CarouselComponent>;
+describe('EventDescriptionComponent', () => {
+  let component: EventDescriptionComponent;
+  let fixture: ComponentFixture<EventDescriptionComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [CarouselComponent],
+      imports: [EventDescriptionComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CarouselComponent);
+    fixture = TestBed.createComponent(EventDescriptionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

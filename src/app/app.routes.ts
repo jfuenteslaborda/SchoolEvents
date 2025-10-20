@@ -6,6 +6,10 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/calendar/calendar.page').then((m) => m.CalendarPage),
     },
     {
+        path: 'event',
+        loadComponent: () => import('./pages/event/event.page').then((m) => m.EventPage),
+    },
+    {
         path: 'messages',
         loadComponent: () =>
             import('./pages/messages/messages.page').then((m) => m.MessagesPage),
