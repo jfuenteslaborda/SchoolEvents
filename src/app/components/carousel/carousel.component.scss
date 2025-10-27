@@ -30,7 +30,7 @@
 
 .carousel-control {
   position: absolute;
-  top: 50%;
+  top: 30%;
   transform: translateY(-50%);
   background-color: rgba(0,0,0,0.3);
   color: white;
@@ -68,8 +68,7 @@
   margin: 1rem auto 2rem auto;
   text-align: center;
 }
-
 .carousel-button{
-  border-radius:20%;
+  --border-radius: 30px;
 }
 

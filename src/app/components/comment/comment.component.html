@@ -1,0 +1,18 @@
+<ion-list class="list-comment">
+    <ion-card *ngFor="let c of comentarios" class="coment-card">
+        <ion-item lines="none">
+            <ion-avatar slot="start">
+                <img [src]="c.profilePic" alt="Foto de perfil">
+            </ion-avatar>
+            <ion-label>
+                <h2>{{ c.username }}</h2>
+                <p>{{ c.comment }}</p>
+            </ion-label>
+        </ion-item>
+    </ion-card>
+</ion-list>
+
+<ion-button class="buttom-comment"
+            color="primary" (click)="abrirModal()">
+    Comentar
+</ion-button>

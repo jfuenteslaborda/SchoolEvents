@@ -1,4 +1,4 @@
-.carousel-container {
+.carousel-container-0 {
   position: relative;
   width: 100%;
   max-width: 500px;
@@ -28,7 +28,7 @@
   }
 }
 
-.carousel-control {
+.carousel-control-0 {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -44,24 +44,6 @@
   &.next { right: 10px; }
 }
 
-.carousel-indicators {
-  text-align: center;
-  margin-top: 10px;
-
-  span {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    margin: 0 5px;
-    background: #ccc;
-    border-radius: 50%;
-    cursor: pointer;
-
-    &.active {
-      background: #333;
-    }
-  }
-}
 
 .carousel-button-container {
   width: 50%;

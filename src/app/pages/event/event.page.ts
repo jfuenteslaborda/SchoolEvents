@@ -4,6 +4,7 @@ import {IonContent} from "@ionic/angular/standalone";
 import {FooterMenuComponent} from "../../components/footer-menu/footer-menu.component";
 import {CarouselImagesComponent} from "../../components/carousel-images/carousel-images.component";
 import {EventDescriptionComponent} from "../../components/event-description/event-description.component";
+import {CommentComponent} from "../../components/comment/comment.component";
 
 @Component({
     selector: 'app-event',
@@ -15,7 +16,8 @@ import {EventDescriptionComponent} from "../../components/event-description/even
         IonContent,
         FooterMenuComponent,
         CarouselImagesComponent,
-        EventDescriptionComponent
+        EventDescriptionComponent,
+        CommentComponent
     ]
 })
 export class EventPage  implements OnInit {

@@ -1,4 +1,4 @@
-.carousel-container {
+.carousel-container-1 {
   position: relative;
   width: 100%;
   max-width: 500px;
@@ -28,9 +28,9 @@
   }
 }
 
-.carousel-control {
+.carousel-control-1 {
   position: absolute;
-  top: 50%;
+  top: 30%;
   transform: translateY(-50%);
   background-color: rgba(0,0,0,0.3);
   color: white;
@@ -44,7 +44,7 @@
   &.next { right: 10px; }
 }
 
-.carousel-indicators {
+.carousel-indicators-1 {
   text-align: center;
   margin-top: 10px;
 
@@ -70,7 +70,7 @@
 }
 
 .carousel-button{
-  border-radius:20%;
+  --border-radius:30px;
 }
 
 

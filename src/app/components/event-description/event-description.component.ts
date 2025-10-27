@@ -25,8 +25,8 @@ import {
 export class EventDescriptionComponent {
 
      event = {
-        tittle: 'Example',
-        date: '12-12-12',
+        tittle: 'Ejemplo',
+        date: '12 de diciembre de 2025',
         description: 'Esto es un ejemplo aaaaaaaaaaaaaaaaaaaaaa dios mio aaaaaaaaaaaaaaaa',
         isFree: false
     };
@@ -60,7 +60,4 @@ export class EventDescriptionComponent {
         console.log('Redirigiendo al pago...');
     }
 
-    back() {
-        console.log('Volver a la pantalla anterior');
-    }
 }

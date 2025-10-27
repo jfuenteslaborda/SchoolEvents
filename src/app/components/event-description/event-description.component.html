@@ -6,14 +6,15 @@
 
     <ion-card-content>
         <p>{{ event.description }}</p>
+        <br>
         <p>
-            <strong>
+            <strong style="display: flex; justify-content: center">
                 {{ event.isFree ? 'Gratis' : 'Evento de pago' }}
             </strong>
         </p>
     </ion-card-content>
 
-    <ion-button color="primary" (click)="suscribe()">
+    <ion-button class="buttom-event" color="primary" (click)="suscribe()">
         Inscribirse
     </ion-button>
 

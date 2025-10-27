@@ -44,7 +44,6 @@ import {
   IonicSafeString,
   IonicSlides,
   MenuController,
-  NG_VALUE_ACCESSOR,
   NavController,
   NavParams,
   OVERLAY_GESTURE_PRIORITY,
@@ -88,7 +87,7 @@ import {
   setIonicClasses,
   setOverlayId,
   toastController
-} from "./chunk-WVAUXMTF.js";
+} from "./chunk-FC6N4I5D.js";
 import {
   iosTransitionAnimation
 } from "./chunk-2CZSUW6O.js";
@@ -155,6 +154,9 @@ import {
   doc,
   win
 } from "./chunk-QEE7QVES.js";
+import {
+  NG_VALUE_ACCESSOR
+} from "./chunk-3YVP6IDS.js";
 import {
   ActivatedRoute,
   Router
