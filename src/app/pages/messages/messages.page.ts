@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FooterMenuComponent} from "../../components/footer-menu/footer-menu.component";
 import {IonContent, IonHeader, IonTitle, IonToolbar} from "@ionic/angular/standalone";
 import {HeaderMessagesComponent} from "../../components/header-messages/header-messages.component";
+import {MessageComponent} from "../../components/message/message.component";
 
 @Component({
     selector: 'app-messages',
@@ -10,10 +11,8 @@ import {HeaderMessagesComponent} from "../../components/header-messages/header-m
     imports: [
         FooterMenuComponent,
         IonContent,
-        IonHeader,
-        IonTitle,
-        IonToolbar,
         HeaderMessagesComponent,
+        MessageComponent,
     ]
 })
 export class MessagesPage implements OnInit {

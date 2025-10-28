@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {IonAvatar, IonCard, IonItem, IonLabel, IonList, IonSpinner} from "@ionic/angular/standalone";
+import { IonAvatar, IonCard, IonItem, IonLabel, IonList, IonSpinner } from "@ionic/angular/standalone";
+import { CommonModule } from "@angular/common";
 
 interface Message {
     nombre: string;
@@ -10,15 +10,17 @@ interface Message {
 
 @Component({
     selector: 'app-message',
+    standalone: true,
     templateUrl: './message.component.html',
     styleUrls: ['./message.component.scss'],
     imports: [
-        IonSpinner,
+        CommonModule,
         IonList,
         IonCard,
         IonItem,
         IonAvatar,
-        IonLabel
+        IonLabel,
+        IonSpinner
     ]
 })
 export class MessageComponent implements OnInit {
@@ -50,13 +52,12 @@ export class MessageComponent implements OnInit {
             avatar: 'assets/luis.png'
         }
     ];
-    loading: boolean = true;
 
-    constructor() {}
+    loading = true;
 
     ngOnInit() {
-
+        setTimeout(() => {
+            this.loading = false;
+        }, 1000);
     }
-
-
 }
