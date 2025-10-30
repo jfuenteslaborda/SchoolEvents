@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import {addIcons} from 'ionicons'
 import {notificationsOutline, schoolOutline, personCircleOutline,
-        calendarOutline, settingsOutline} from "ionicons/icons";
+        calendarOutline, settingsOutline, footballOutline, tennisballOutline} from "ionicons/icons";
 
 @Component({
   selector: 'app-root',
@@ -17,8 +17,9 @@ export class AppComponent {
           schoolOutline,
           notificationsOutline,
           calendarOutline,
-          settingsOutline
+          settingsOutline,
+          footballOutline,
+          tennisballOutline
       });
-
   }
 }

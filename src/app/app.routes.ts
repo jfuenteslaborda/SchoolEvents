@@ -21,7 +21,12 @@ export const routes: Routes = [
     },
     {
         path: '',
-        redirectTo: 'calendar',
+        redirectTo: 'home',
         pathMatch: 'full',
     },
+  {
+    path: 'home',
+    loadComponent: () => import('./pages/home/home.page').then(m => m.HomePage)
+  },
+
 ];

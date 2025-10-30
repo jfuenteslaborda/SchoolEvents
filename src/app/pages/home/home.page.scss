@@ -1,0 +1,90 @@
+.home-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  background: linear-gradient(to bottom right, #f0f4f8, #d9eaf7);
+  min-height: 100vh;
+
+  .header {
+    text-align: center;
+    margin-bottom: 1rem;
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+
+      .black {
+        color: #2c3e50;
+      }
+
+      .green {
+        color: #27ae60;
+      }
+    }
+  }
+
+  .image-section {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 1.5rem;
+
+    img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .icon-ball {
+      position: absolute;
+      font-size: 7rem;
+      color: #27ae60;
+      top: 10%;
+      left: 6%;
+      animation: bounce 2s infinite ease-in-out;
+
+      &.tennis {
+        top: 40%;
+        left: 70%;
+        color: #f39c12;
+        animation-delay: 0.5s;
+      }
+    }
+  }
+
+
+  .description {
+    text-align: center;
+    font-size: 1rem;
+    color: #34495e;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+
+    p {
+      line-height: 1.6;
+    }
+  }
+
+  .button-group {
+
+    margin: auto;
+    width: 100%;
+    max-width: 300px;
+
+    ion-button {
+      margin-bottom: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}

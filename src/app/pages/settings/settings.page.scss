@@ -55,6 +55,7 @@ $input-bg: #ffffff;
     }
 
     .username-item {
+      background-color: transparent;
       width: 100%;
       margin-bottom: 8px;
 
@@ -76,6 +77,7 @@ $input-bg: #ffffff;
 
   // Lista de ajustes
   .settings-list {
+    background-color: transparent;
     margin-bottom: 16px;
 
     .settings-item {

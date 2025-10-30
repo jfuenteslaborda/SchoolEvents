@@ -39,3 +39,7 @@
 ion-content {
   --background: #d6ebf1;
 }
+ion-item{
+  --background: transparentize();
+}
+
