@@ -4,7 +4,7 @@
     <ion-card *ngFor="let notif of notificaciones" class="notif-card">
         <ion-item lines="none">
             <ion-avatar slot="start">
-                <img [src]="notif.avatar || 'assets/default-avatar.png'" />
+                <img [src]="notif.avatar || 'assets/default-avatar.jpg'" />
             </ion-avatar>
             <ion-label>
                 <h2>{{ notif.nombre }}</h2>
@@ -12,7 +12,13 @@
             </ion-label>
         </ion-item>
     </ion-card>
+
 </ion-list>
+
+<ion-button class="buttom-comment"
+            color="primary" (click)="abrirModal()">
+    Escribir
+</ion-button>
 
 <div *ngIf="!loading && !notificaciones.length" style="text-align:center; color:#555; margin-top:20px;">
     No hay notificaciones

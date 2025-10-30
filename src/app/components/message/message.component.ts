@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { IonAvatar, IonCard, IonItem, IonLabel, IonList, IonSpinner } from "@ionic/angular/standalone";
+import {IonAvatar, IonButton, IonCard, IonItem, IonLabel, IonList, IonSpinner} from "@ionic/angular/standalone";
 import { CommonModule } from "@angular/common";
+import {CommentModalComponent} from "../comment-modal/comment-modal.component";
+import {ModalController} from "@ionic/angular";
+import {MessageModalComponent} from "../message-modal/message-modal.component";
 
 interface Message {
     nombre: string;
@@ -20,36 +23,34 @@ interface Message {
         IonItem,
         IonAvatar,
         IonLabel,
-        IonSpinner
+        IonSpinner,
+        IonButton,
     ]
 })
 export class MessageComponent implements OnInit {
 
+    constructor(private modalCtrl: ModalController) {}
+
     notificaciones: Message[] = [
         {
             nombre: 'Juan Pérez',
-            mensaje: 'Has recibido una nueva tarea de matemáticas.',
-            avatar: 'assets/juan.png'
+            mensaje: 'Has recibido una nueva tarea de matemáticas.'
         },
         {
             nombre: 'María López',
-            mensaje: 'El evento de ciencias ha sido actualizado.',
-            avatar: 'assets/maria.png'
+            mensaje: 'El evento de ciencias ha sido actualizado.'
         },
         {
             nombre: 'Carlos Sánchez',
-            mensaje: 'Tu asistencia al taller de arte ha sido confirmada.',
-            avatar: 'assets/carlos.png'
+            mensaje: 'Tu asistencia al taller de arte ha sido confirmada.'
         },
         {
             nombre: 'Ana Gómez',
-            mensaje: 'Nueva notificación de recordatorio: Reunión con padres.',
-            avatar: 'assets/ana.png'
+            mensaje: 'Nueva notificación de recordatorio: Reunión con padres.'
         },
         {
             nombre: 'Luis Martínez',
-            mensaje: 'Tu comentario en el foro ha recibido respuesta.',
-            avatar: 'assets/luis.png'
+            mensaje: 'Tu comentario en el foro ha recibido respuesta.'
         }
     ];
 
@@ -59,5 +60,22 @@ export class MessageComponent implements OnInit {
         setTimeout(() => {
             this.loading = false;
         }, 1000);
+    }
+
+    async abrirModal() {
+        const modal = await this.modalCtrl.create({
+            component: MessageModalComponent,
+        });
+
+        modal.onDidDismiss().then((result) => {
+            if (result.data) {
+                this.notificaciones.push({
+                    nombre: 'Tú',
+                    mensaje: result.data,
+                });
+            }
+        });
+
+        await modal.present();
     }
 }
