@@ -1,5 +1,5 @@
-<ion-content class="home-content">
 
+<div class="home-content">
     <div class="header">
         <h1><span class="black">School</span><span class="green">Events</span></h1>
     </div>
@@ -12,14 +12,14 @@
 
     <div class="description">
         <p>
-            Damos la bienvenida a la nueva app para la gestión de eventos escolares.
-            Diseñada para la gestión de inscripciones, noticias y red de los eventos iniciados en el centro.
+            Bienvenidos a <strong>SchoolEvents</strong>, la nueva app para gestionar
+            <em>eventos escolares</em>. Registra, descubre y participa en las
+            actividades del centro educativo.
         </p>
     </div>
 
     <div class="button-group">
-        <ion-button expand="block" color="primary" routerLink="/login">Login</ion-button>
-        <ion-button expand="block" color="success" routerLink="/register">Register</ion-button>
+        <ion-button expand="block" color="primary" (click)="navigateWithAnimation('/login', $event)" >Iniciar Sesión</ion-button>
+        <ion-button expand="block" color="success" (click)="navigateWithAnimation('/register', $event)" >Registrarse</ion-button>
     </div>
-
-</ion-content>
+</div>
