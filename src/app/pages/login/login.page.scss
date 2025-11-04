@@ -13,11 +13,29 @@ section {
 
 .container{
   margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+ion-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-form{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .header {
   text-align: center;
-  margin-bottom: 1.5rem;
   font-family: 'Poppins', sans-serif;
 
   h1 {
@@ -42,6 +60,19 @@ html {
   -ms-text-size-adjust: 100%;
 }
 
+ion-content {
+  --background: linear-gradient(to bottom, #98caf5 0%, #d4ee86 40%, #9aee56 100%);
+  background-size: 400% 400%;
+  animation: skyMove 12s ease-in-out infinite;
+  transition: background 0.5s ease;
+
+  @keyframes skyMove {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 0%; }
+  }
+}
+
 input:focus,
 textarea:focus {
   outline: none;
@@ -52,7 +83,7 @@ select,
 button,
 input[type="submit"],
 input[type="radio"],
-input[type="checkbox"]
+input[type="checkbox"],
 input[type="button"] {
   cursor: pointer;
 }
@@ -194,4 +225,28 @@ h6 {
   font-family: 'Arial', sans-serif;
   font-size: 14px;
   line-height: 1.6;
+}
+
+input.invalid {
+  border-color: #f44336 !important;
+}
+
+.error {
+  color: #f44336;
+  font-size: 0.85em;
+  margin-top: -5px;
+  margin-bottom: 10px;
+  animation: fadeIn 0.3s ease;
+  text-align: left;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

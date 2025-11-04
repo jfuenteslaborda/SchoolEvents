@@ -1,22 +1,69 @@
-<div class="container">
-    <div class="header" style="margin-top: 10%">
-        <h1><span class="black">School</span><span class="green">Events</span></h1>
-    </div>
-    <form>
-        <h1><span>Registrate</span></h1>
-        <input placeholder="Nombre" type="text"/>
-        <input placeholder="Fecha de Nacimiento" type="date"/>
-        <input placeholder="Correo" type="text"/>
-        <input placeholder="Contraseña" type="password"/>
-        <button class="btn">Sign In</button>
-    </form>
-</div>
 
-<footer class="footer-container">
-    <p>
-        Respetamos y protegemos su información personal. Los datos se usan solo para mejorar su experiencia.
-        Al usar la app, acepta nuestra <a href='login' style='color:#1E90FF; text-decoration:none;'>Política de Privacidad</a> y
-        <a href='login' style='color:#1E90FF; text-decoration:none;'>Términos y Condiciones</a>.
-        Más info en nuestra sección <strong>SchoolEvents</strong>.
-    </p>
-</footer>
+    <div class="container">
+        <div class="header" style="margin-top: 10%">
+            <h1><span class="black">School</span><span class="green">Events</span></h1>
+        </div>
+
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <h1><span>Regístrate</span></h1>
+
+            <input
+                    placeholder="Nombre"
+                    type="text"
+                    formControlName="nombre"
+                    [class.invalid]="nombre?.invalid && nombre?.touched"
+            />
+            <div *ngIf="nombre?.invalid && nombre?.touched" class="error">
+                <small *ngIf="nombre?.errors?.['required']">El nombre es obligatorio.</small>
+                <small *ngIf="nombre?.errors?.['minlength']">Mínimo 3 caracteres.</small>
+            </div>
+
+            <input
+                    placeholder="Fecha de Nacimiento"
+                    type="date"
+                    formControlName="fechaNacimiento"
+                    [class.invalid]="fechaNacimiento?.invalid && fechaNacimiento?.touched"
+            />
+            <div *ngIf="fechaNacimiento?.invalid && fechaNacimiento?.touched" class="error">
+                <small>Selecciona una fecha válida.</small>
+            </div>
+
+            <input
+                    placeholder="Correo"
+                    type="email"
+                    formControlName="correo"
+                    [class.invalid]="correo?.invalid && correo?.touched"
+            />
+            @if(correo?.invalid && correo?.touched){
+                <div  class="error">
+                <small *ngIf="correo?.errors?.['required']">El correo es obligatorio.</small>
+                <small *ngIf="correo?.errors?.['email']">Introduce un correo válido.</small>
+            </div>
+            }
+
+
+            <input
+                    placeholder="Contraseña"
+                    type="password"
+                    formControlName="password"
+                    [class.invalid]="password?.invalid && password?.touched"
+            />
+            <div *ngIf="password?.invalid && password?.touched" class="error">
+                <small *ngIf="password?.errors?.['required']">La contraseña es obligatoria.</small>
+                <small *ngIf="password?.errors?.['minlength']">Mínimo 6 caracteres.</small>
+            </div>
+
+            <button class="btn" type="submit" [disabled]="registerForm.invalid">Sign In</button>
+        </form>
+    </div>
+
+<ion-footer>
+    <footer class="footer-container">
+        <p>
+            Respetamos y protegemos su información personal. Los datos se usan solo para mejorar su experiencia.
+            Al usar la app, acepta nuestra <a href='login' style='color:#1E90FF; text-decoration:none;'>Política de Privacidad</a> y
+            <a href='login' style='color:#1E90FF; text-decoration:none;'>Términos y Condiciones</a>.
+            Más info en nuestra sección <strong>SchoolEvents</strong>.
+        </p>
+    </footer>
+</ion-footer>

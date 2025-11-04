@@ -1,15 +1,11 @@
 // Variables de estilo
 $primary-color: #3880ff;
 $secondary-color: #92949c;
-$background-color: #f5f6fa;
 $text-color: #222428;
-$divider-color: #dcdde1;
-$input-bg: #ffffff;
 
 // Contenedor principal
 .settings-container {
   padding: 16px;
-  background-color: $background-color;
 
   // Sección de usuario
   .user-section {
@@ -56,11 +52,10 @@ $input-bg: #ffffff;
 
     .username-item {
       background-color: transparent;
-      width: 100%;
+      width: 110%;
       margin-bottom: 8px;
 
       .username-input {
-        background-color: $input-bg;
         border-radius: 8px;
         padding: 8px 12px;
         color: $text-color;
@@ -85,7 +80,6 @@ $input-bg: #ffffff;
       --inner-padding-end: 0;
       ion-input {
         width: 100%;
-        background-color: $input-bg;
         border-radius: 8px;
         padding: 8px 12px;
         color: $text-color;
@@ -102,7 +96,6 @@ $input-bg: #ffffff;
   // Línea divisoria
   .divider {
     height: 1px;
-    background-color: $divider-color;
     margin: 16px 0;
   }
 

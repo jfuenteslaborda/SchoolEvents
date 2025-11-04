@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonButton, IonIcon } from '@ionic/angular/standalone';
+import {IonButton, IonContent, IonFooter, IonIcon} from '@ionic/angular/standalone';
 import { filter } from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
 
@@ -10,7 +10,7 @@ import { NavigationEnd, Router } from '@angular/router';
     templateUrl: './home.page.html',
     styleUrls: ['./home.page.scss'],
     standalone: true,
-    imports: [CommonModule, FormsModule, IonIcon, IonButton]
+    imports: [CommonModule, FormsModule, IonIcon, IonButton, IonContent, IonFooter]
 })
 export class HomePage {
 

@@ -1,20 +1,53 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import {ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormsModule} from '@angular/forms';
+import {IonContent, IonFooter} from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, IonFooter]
 })
-export class RegisterPage implements OnInit {
+export class RegisterPage  {
 
-  constructor() { }
+    registerForm: FormGroup;
 
-  ngOnInit() {
-  }
+    constructor(private fb: FormBuilder) {
+        this.registerForm = this.fb.group({
+            nombre: ['', [Validators.required, Validators.minLength(3)]],
+            fechaNacimiento: ['', Validators.required],
+            correo: ['', [Validators.required, Validators.email]],
+            password: ['', [Validators.required, Validators.minLength(6)]],
+        });
+    }
 
+    get nombre() {
+        return this.registerForm.get('nombre');
+    }
+
+    get fechaNacimiento() {
+        return this.registerForm.get('fechaNacimiento');
+    }
+
+    get correo() {
+        return this.registerForm.get('correo');
+    }
+
+    get password() {
+        return this.registerForm.get('password');
+    }
+
+    onSubmit() {
+        if (this.registerForm.invalid) {
+            this.registerForm.markAllAsTouched();
+            return;
+        }
+
+        const { nombre, fechaNacimiento, correo, password } = this.registerForm.value;
+        console.log('Datos registrados:', nombre, fechaNacimiento, correo, password);
+        // Aquí podrías conectar con tu backend o servicio de registro
+
+    }
 }
