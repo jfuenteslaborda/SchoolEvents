@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormsModule} from '@angular/forms';
 import {IonContent, IonFooter} from "@ionic/angular/standalone";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,7 @@ export class RegisterPage  {
 
     registerForm: FormGroup;
 
-    constructor(private fb: FormBuilder) {
+    constructor(private fb: FormBuilder, private router: Router) {
         this.registerForm = this.fb.group({
             nombre: ['', [Validators.required, Validators.minLength(3)]],
             fechaNacimiento: ['', Validators.required],
@@ -47,7 +48,16 @@ export class RegisterPage  {
 
         const { nombre, fechaNacimiento, correo, password } = this.registerForm.value;
         console.log('Datos registrados:', nombre, fechaNacimiento, correo, password);
-        // Aquí podrías conectar con tu backend o servicio de registro
 
+    }
+
+    navigateWithAnimation(route: string, event: any) {
+        const icon = event.target;
+        icon.classList.add('clicked');
+
+        setTimeout(() => {
+            icon.classList.remove('clicked');
+            this.router.navigate([route]);
+        }, 300);
     }
 }

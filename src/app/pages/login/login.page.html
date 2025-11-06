@@ -29,7 +29,7 @@
                 <small *ngIf="password?.errors?.['minlength']">Mínimo 6 caracteres.</small>
             </div>
 
-            <button class="btn" type="submit" [routerLink]="'/calendar'" [disabled]="loginForm.invalid">Log in</button>
+            <button class="btn" type="submit" (click)="navigateWithAnimation('/calendar', $event)" [disabled]="loginForm.invalid">Log in</button>
         </form>
     </div>
 </ion-content>
