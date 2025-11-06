@@ -8,7 +8,7 @@ import {IonContent, IonFooter} from "@ionic/angular/standalone";
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
   standalone: true,
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, IonFooter]
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, IonFooter, IonContent]
 })
 export class RegisterPage  {
 
