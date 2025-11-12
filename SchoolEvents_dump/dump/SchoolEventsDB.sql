@@ -1,9 +1,8 @@
-
 -- Base de Datos SchoolEvents
 -- Creado por Jose Fuentes Laborda 
 
--- TABLA 1 Users
-CREATE TABLE Users (
+-- TABLA 1 app_user    
+CREATE TABLE app_user (
     id SERIAL PRIMARY KEY,
     full_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
@@ -13,25 +12,19 @@ CREATE TABLE Users (
     is_admin BOOLEAN DEFAULT FALSE
 );
 
--- TABLA 2 Events
-CREATE TABLE Events (
+-- TABLA 2 Event
+CREATE TABLE event (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description TEXT,
     price NUMERIC(10, 2) DEFAULT 0.00,
     capacity INTEGER,
     date TIMESTAMP WITHOUT TIME ZONE,
-    need_payment BOOLEAN DEFAULT FALSE,
-    creator_id INTEGER NOT NULL,
-    
-    CONSTRAINT fk_creator
-        FOREIGN KEY (creator_id)
-        REFERENCES Users(id)
-        ON DELETE CASCADE
+    need_payment BOOLEAN DEFAULT FALSE
 );
 
--- TABLA 3 Messages
-CREATE TABLE Messages (
+-- TABLA 3 Message
+CREATE TABLE message (
     id SERIAL PRIMARY KEY,
     content TEXT NOT NULL,
     send_date TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
@@ -39,12 +32,12 @@ CREATE TABLE Messages (
     
     CONSTRAINT fk_message_user
         FOREIGN KEY (user_id)
-        REFERENCES Users(id)
+        REFERENCES app_user(id) 
         ON DELETE CASCADE
 );
 
--- TABLA 4 Images
-CREATE TABLE Images (
+-- TABLA 4 Image
+CREATE TABLE image (
     id SERIAL PRIMARY KEY,
     src VARCHAR(255) NOT NULL,
     description TEXT,
@@ -52,12 +45,12 @@ CREATE TABLE Images (
     
     CONSTRAINT fk_images_event
         FOREIGN KEY (event_id)
-        REFERENCES Events(id)
+        REFERENCES event(id)
         ON DELETE CASCADE
 );
 
--- TABLA 5 Comments
-CREATE TABLE Comments (
+-- TABLA 5 Comment
+CREATE TABLE comment (
     id SERIAL PRIMARY KEY,
     description TEXT NOT NULL,
     date TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
@@ -66,19 +59,17 @@ CREATE TABLE Comments (
     
     CONSTRAINT fk_comment_user
         FOREIGN KEY (user_id)
-        REFERENCES Users(id)
+        REFERENCES app_user(id) 
         ON DELETE CASCADE,
         
     CONSTRAINT fk_comment_event
         FOREIGN KEY (event_id)
-        REFERENCES Events(id)
+        REFERENCES event(id)
         ON DELETE CASCADE
 );
 
--- Tablas de Muchos a Muchos que crean tablan, solo 1
-
--- TABLA 6 Signs
-CREATE TABLE Signs (
+-- TABLA 6 Sign 
+CREATE TABLE sign (
     user_id INTEGER NOT NULL,
     event_id INTEGER NOT NULL,
     date TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
@@ -87,11 +78,11 @@ CREATE TABLE Signs (
     
     CONSTRAINT fk_signs_user
         FOREIGN KEY (user_id)
-        REFERENCES Users(id)
+        REFERENCES app_user(id) 
         ON DELETE CASCADE,
         
     CONSTRAINT fk_signs_event
         FOREIGN KEY (event_id)
-        REFERENCES Events(id)
+        REFERENCES event(id) 
         ON DELETE CASCADE
 );
