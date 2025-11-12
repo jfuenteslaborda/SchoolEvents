@@ -3,11 +3,10 @@ package com.schoolevents.schoolevents_api.models;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import java.time.LocalDate;
 
 @Entity
-@Table(name = "comment")
-class Comment {
+@Table(name = "image")
+class Image {
 
     @Getter
     @Id
@@ -16,43 +15,36 @@ class Comment {
 
     @Getter
     @Setter
-    @Column(name = "description", length = 400, nullable = false)
-    private String description;
+    @Column(name = "src", length = 150, nullable = false)
+    private String src;
 
     @Getter
     @Setter
-    @Column(name = "date", nullable = false)
-    private LocalDate date;
-
-    @Getter
-    @ManyToOne @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "description", length = 500, nullable = false)
+    private String description;
 
     @Getter
     @ManyToOne @JoinColumn(name = "event_id")
     private Event event;
 
-    public Comment(String description, LocalDate date, User user, Event event) {
+    public Image(String src, String description, Event event) {
+        this.src = src;
         this.description = description;
-        this.date = date;
-        this.user = user;
         this.event = event;
     }
 
-    public Comment() {
-        this.date = LocalDate.now();
-        this.user = new User();
-        this.event = new Event();
+    public Image() {
+        this.src = "Unknow";
         this.description = "Unknow";
+        this.event = new Event();
     }
 
     @Override
     public String toString() {
-        return "Comment{" +
+        return "Image{" +
                 "id=" + getId() +
+                ", src='" + getSrc() + '\'' +
                 ", description='" + getDescription() + '\'' +
-                ", date=" + getDate() +
-                ", user=" + getUser() +
                 ", event=" + getEvent() +
                 '}';
     }
