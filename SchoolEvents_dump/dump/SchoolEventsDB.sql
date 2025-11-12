@@ -68,13 +68,14 @@ CREATE TABLE comment (
         ON DELETE CASCADE
 );
 
--- TABLA 6 Sign 
+-- TABLA 6 Sign (CORREGIDA)
 CREATE TABLE sign (
+	id SERIAL PRIMARY KEY, 
     user_id INTEGER NOT NULL,
     event_id INTEGER NOT NULL,
     date TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     
-    PRIMARY KEY (user_id, event_id),
+    UNIQUE (user_id, event_id), 
     
     CONSTRAINT fk_signs_user
         FOREIGN KEY (user_id)
