@@ -1,59 +1,34 @@
 package com.schoolevents.schoolevents_api.models;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
 import java.time.LocalDate;
 
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "comment")
 class Comment {
 
-    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Getter
-    @Setter
     @Column(name = "description", length = 400, nullable = false)
     private String description;
 
-    @Getter
-    @Setter
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
-    @Getter
     @ManyToOne @JoinColumn(name = "user_id")
     private User user;
 
-    @Getter
     @ManyToOne @JoinColumn(name = "event_id")
     private Event event;
 
-    public Comment(String description, LocalDate date, User user, Event event) {
-        this.description = description;
-        this.date = date;
-        this.user = user;
-        this.event = event;
-    }
-
-    public Comment() {
-        this.date = LocalDate.now();
-        this.user = new User();
-        this.event = new Event();
-        this.description = "Unknow";
-    }
-
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "id=" + getId() +
-                ", description='" + getDescription() + '\'' +
-                ", date=" + getDate() +
-                ", user=" + getUser() +
-                ", event=" + getEvent() +
-                '}';
-    }
 }
