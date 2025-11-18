@@ -15,7 +15,7 @@ import java.util.Set;
 @ToString
 @Entity
 @Table(name = "Event")
-class Event {
+public class Event {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)

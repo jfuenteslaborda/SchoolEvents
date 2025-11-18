@@ -23,12 +23,11 @@ public class Sign {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("eventId")
     @JoinColumn(name = "event_id", nullable = false)
     private Event event;
-    
+
     @Column(name = "date", nullable = false)
     private LocalDateTime date;
 }
