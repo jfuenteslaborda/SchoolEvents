@@ -17,7 +17,7 @@ public interface EventRepository extends Repository<Event, Long> {
 
     @Query(value = "SELECT e FROM Event e WHERE e.date BETWEEN :today AND :inTwoWeeks",
             nativeQuery = true)
-    List<Event> findByTwoWeeksLater(@Param("today") LocalDate today,
+    List<Event> filterByTwoWeeksLater(@Param("today") LocalDate today,
                                     @Param("inTwoWeeks") LocalDate inTwoWeeks);
 
 

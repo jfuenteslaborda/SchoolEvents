@@ -32,7 +32,7 @@ public class EventService {
     }
 
     public List<Event> findByTwoWeeksLater() {
-        return eventRepository.findByTwoWeeksLater(LocalDate.now(), LocalDate.now().plusWeeks(2));
+        return eventRepository.filterByTwoWeeksLater(LocalDate.now(), LocalDate.now().plusWeeks(2));
     }
 
     public Event save(Event event) {
