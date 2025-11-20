@@ -30,8 +30,12 @@ public class ImageService {
         return imageRepository.save(image);
     }
     
-    public Image update(Image image, Long id){
-        return imageRepository.update(image, id);
+    public Image updateImage(Image image, Long id){
+        Image i = imageRepository.findById(id);
+        i.setSrc(image.getSrc());
+        i.setDescription(image.getDescription());
+        i.setEvent(image.getEvent());
+        return imageRepository.save(i);
     }
     
     public void deleteById(Long id){

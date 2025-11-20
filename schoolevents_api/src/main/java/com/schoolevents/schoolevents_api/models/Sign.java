@@ -19,12 +19,12 @@ public class Sign {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("userId")
+    @MapsId("id")
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("eventId")
+    @MapsId("id")
     @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 

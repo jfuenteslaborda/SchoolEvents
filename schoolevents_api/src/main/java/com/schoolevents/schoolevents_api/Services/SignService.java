@@ -35,10 +35,14 @@ public class SignService {
     }
 
     public Sign update(Sign sign, Long id){
-        return signRepository.update(sign, id);
+        Sign s = signRepository.findById(id);
+        s.setEvent(s.getEvent());
+        s.setUser(sign.getUser());
+        s.setDate(sign.getDate());
+        return signRepository.save(s);
     }
 
     public void delete(Long id){
-        signRepository.delete(id);
+        signRepository.deleteById(id);
     }
 }

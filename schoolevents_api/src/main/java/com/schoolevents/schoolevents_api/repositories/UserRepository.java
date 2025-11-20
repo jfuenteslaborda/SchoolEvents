@@ -10,6 +10,5 @@ public interface UserRepository extends Repository<User, Long> {
     User findById(Long id);
     User findByEmail(String email);
     User save(User user);
-    User update(User user, Long id);
-    void delete(Long id);
+    void deleteById(Long id);
 }

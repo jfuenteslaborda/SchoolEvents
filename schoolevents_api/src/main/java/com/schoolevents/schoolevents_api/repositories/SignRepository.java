@@ -11,6 +11,5 @@ public interface SignRepository extends Repository<Sign, Long> {
     Sign findByEventId(Long event_id);
     Sign findByUserId(Long user_id);
     Sign save(Sign sign);
-    Sign update(Sign sign, Long id);
-    void delete(Long id);
+    void deleteById(Long id);
 }

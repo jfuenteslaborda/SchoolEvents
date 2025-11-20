@@ -10,6 +10,5 @@ public interface MessageRepository extends Repository<Message, Long> {
     Message findById(Long id);
     List<Message> findByUserId(Long user_id);
     Message save(Message message);
-    Message update(Message message, Long id);
     void deleteById(Long id);
 }

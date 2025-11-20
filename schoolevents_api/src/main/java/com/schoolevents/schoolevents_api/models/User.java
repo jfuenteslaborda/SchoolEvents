@@ -37,13 +37,4 @@ public class User {
 
     @Column(name = "is_admin")
     private Boolean is_Admin;
-
-    @OneToMany(mappedBy = "app_user")
-    private Set<Comment> comments = new HashSet<>();
-
-    @OneToMany(mappedBy = "message")
-    private Set<Message> messages = new HashSet<>();
-
-    @OneToMany(mappedBy = "sign", cascade = CascadeType.ALL)
-    private Set<Sign> signs = new HashSet<>();
 }

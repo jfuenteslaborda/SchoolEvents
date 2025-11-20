@@ -30,10 +30,17 @@ public class UserService {
     }
 
     public User update(User user, Long id){
-        return userRepository.update(user, id);
+        User u = userRepository.findById(id);
+        u.setEmail(user.getEmail());
+        u.setDate(user.getDate());
+        u.setPassword(user.getPassword());
+        u.setPhoto(user.getPhoto());
+        u.setFull_name(user.getFull_name());
+        u.setIs_Admin(user.getIs_Admin());
+        return userRepository.save(u);
     }
 
     public void delete(Long id){
-        userRepository.delete(id);
+        userRepository.deleteById(id);
     }
 }

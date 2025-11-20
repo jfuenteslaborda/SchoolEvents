@@ -23,7 +23,7 @@ public class EventService {
         return eventRepository.findById(id);
     }
 
-    public List<Event> findByTitle(String title) {
+    public Event findByTitle(String title) {
         return eventRepository.findByTitle(title);
     }
 
@@ -39,8 +39,15 @@ public class EventService {
         return eventRepository.save(event);
     }
 
-    public Event update(Event event, Long id) {
-        return eventRepository.update(event, id);
+    public Event updateEvent(Event event, Long id) {
+        Event e = eventRepository.findById(id);
+        e.setCapacity(event.getCapacity());
+        e.setDescription(event.getDescription());
+        e.setDate(event.getDate());
+        e.setPrice(event.getPrice());
+        e.setTitle(event.getTitle());
+        e.setNeed_payment(event.getNeed_payment());
+        return eventRepository.save(e);
     }
 
     public void deleteById(Long id) {

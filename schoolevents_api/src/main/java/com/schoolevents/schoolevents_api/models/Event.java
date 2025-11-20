@@ -39,13 +39,4 @@ public class Event {
     @Column(name = "need_payment")
     private Boolean need_payment;
 
-    @OneToMany(mappedBy = "comment")
-    private Set<Comment> comments = new HashSet<>();
-
-    @OneToMany(mappedBy = "image")
-    private Set<Image> images = new HashSet<>();
-
-    @OneToMany(mappedBy = "sign", cascade = CascadeType.ALL)
-    private Set<Sign> signs = new HashSet<>();
-
 }

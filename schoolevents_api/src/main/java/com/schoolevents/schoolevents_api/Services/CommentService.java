@@ -33,8 +33,10 @@ public class CommentService {
         return commentRepository.save(comment);
     }
 
-    public Comment update(Comment comment, Long id) {
-        return commentRepository.update(comment, id);
+    public Comment updateComment(Comment newData, Long id) {
+        Comment c = commentRepository.findById(id);
+        c.setDescription(newData.getDescription());
+        return  commentRepository.save(c);
     }
 
     public void deleteById(Long id) {

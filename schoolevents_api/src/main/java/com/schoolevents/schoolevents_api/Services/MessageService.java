@@ -30,8 +30,12 @@ public class MessageService {
         return messageRepository.save(message);
     }
 
-    public Message update(Message message, Long id){
-        return messageRepository.update(message, id);
+    public Message updateMessage(Message message, Long id){
+        Message m = messageRepository.findById(id);
+        m.setMessage(message.getMessage());
+        m.setUser(message.getUser());
+        m.setSend_date(message.getSend_date());
+        return messageRepository.save(m);
     }
 
     public void delete(Long id){

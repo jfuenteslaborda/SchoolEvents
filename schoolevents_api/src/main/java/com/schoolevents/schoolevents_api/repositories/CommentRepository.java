@@ -12,6 +12,5 @@ public interface CommentRepository extends Repository<Comment, Long> {
     List<Comment> findByEventId(Long event_id);
     Comment findById(Long id);
     Comment save(Comment comment);
-    Comment update(Comment comment, Long id);
     void deleteById(Long id);
 }

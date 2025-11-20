@@ -10,6 +10,5 @@ public interface ImageRepository extends Repository<Image, Long> {
     Image findById(Long id);
     List<Image> findByEventId(Long event_id);
     Image save(Image image);
-    Image update(Image image, Long id);
     void deleteById(Long id);
 }

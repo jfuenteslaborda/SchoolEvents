@@ -12,7 +12,7 @@ public interface EventRepository extends Repository<Event, Long> {
 
     List<Event> findAll();
     Event findById(Long id);
-    List<Event> findByTitle(String title);
+    Event findByTitle(String title);
     List<Event> findByDate(LocalDate date);
 
     @Query(value = "SELECT e FROM Event e WHERE e.date BETWEEN :today AND :inTwoWeeks",
@@ -22,6 +22,5 @@ public interface EventRepository extends Repository<Event, Long> {
 
 
     Event save(Event event);
-    Event update(Event event, Long id);
     void deleteById(Long id);
 }
