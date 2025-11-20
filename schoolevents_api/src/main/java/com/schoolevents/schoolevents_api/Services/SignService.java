@@ -22,11 +22,11 @@ public class SignService {
         return signRepository.findById(id);
     }
 
-    public Sign findByEventId(Long event_id){
+    public List<Sign> findByEventId(Long event_id){
         return signRepository.findByEventId(event_id);
     }
 
-    public Sign findByUserId(Long user_id){
+    public List<Sign> findByUserId(Long user_id){
         return signRepository.findByUserId(user_id);
     }
 

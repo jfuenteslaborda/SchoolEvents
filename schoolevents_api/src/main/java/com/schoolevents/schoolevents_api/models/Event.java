@@ -1,12 +1,10 @@
 package com.schoolevents.schoolevents_api.models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+
 
 @Getter
 @Setter
@@ -14,7 +12,7 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "Event")
+@Table(name = "event")
 public class Event {
 
     @Id

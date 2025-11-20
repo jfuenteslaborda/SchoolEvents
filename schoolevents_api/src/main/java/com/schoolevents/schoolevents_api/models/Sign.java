@@ -3,7 +3,7 @@ package com.schoolevents.schoolevents_api.models;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime; // Cambiado a LocalDateTime para incluir tiempo
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
