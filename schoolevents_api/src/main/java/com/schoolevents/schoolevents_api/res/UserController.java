@@ -1,10 +1,8 @@
 package com.schoolevents.schoolevents_api.res;
 
-import com.schoolevents.schoolevents_api.Services.MessageService;
 import com.schoolevents.schoolevents_api.Services.UserService;
 import com.schoolevents.schoolevents_api.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,12 +14,12 @@ class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping
-    public List<User> showUsers(User user){
+    @GetMapping("/all")
+    public List<User> showUsers(){
         return userService.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/by_id/{id}")
     public User showUserById(@PathVariable Long id){
         return userService.findById(id);
     }
@@ -31,17 +29,17 @@ class UserController {
         return userService.findByEmail(email);
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public User createUser(@RequestBody User user){
         return userService.save(user);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public User updateUser(@PathVariable Long id, @RequestBody User user){
         return userService.update(user, id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteUser(@PathVariable Long id){
         userService.delete(id);
     }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Injectable} from '@angular/core';
 import { IonicModule, ModalController, IonButton } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { CommentModalComponent } from 'src/app/components/comment-modal/comment-modal.component'
@@ -16,6 +16,7 @@ interface Comentario {
     templateUrl: './comment.component.html',
     styleUrls: ['./comment.component.scss'],
 })
+
 export class CommentComponent {
     comentarios: Comentario[] = [
         {

@@ -15,12 +15,12 @@ public class ImageController {
     @Autowired
     private ImageService imageService;
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Image> findAll() {
         return imageService.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/by_id/{id}")
     public Image findImage(@PathVariable Long id) {
         return imageService.findById(id);
     }
@@ -30,17 +30,17 @@ public class ImageController {
         return  imageService.findByEventId(id);
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public Image addImage(@RequestBody Image image) {
         return imageService.save(image);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public Image updateImage(@PathVariable Long id, @RequestBody Image image) {
         return imageService.updateImage(image, id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteImage(@PathVariable Long id) {
         imageService.deleteById(id);
     }

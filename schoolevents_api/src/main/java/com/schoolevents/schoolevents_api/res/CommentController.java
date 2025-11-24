@@ -14,7 +14,7 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Comment> getComments() {
         return commentService.findAll();
     }
@@ -29,22 +29,22 @@ public class CommentController {
         return commentService.findByEventId(id);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/by_id/{id}")
     public Comment getCommentById(@PathVariable long id) {
         return commentService.findById(id);
     }
 
-    @PostMapping
+    @PostMapping("/create/")
     public Comment addComment(@RequestBody Comment comment) {
         return commentService.save(comment);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public Comment updateComment(@RequestBody Comment comment,  @PathVariable long id) {
         return commentService.updateComment(comment, id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteComment(@PathVariable long id) {
         commentService.deleteById(id);
     }

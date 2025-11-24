@@ -1,15 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {IonAvatar, IonButton, IonCard, IonItem, IonLabel, IonList, IonSpinner} from "@ionic/angular/standalone";
 import { CommonModule } from "@angular/common";
-import {CommentModalComponent} from "../comment-modal/comment-modal.component";
 import {ModalController} from "@ionic/angular";
 import {MessageModalComponent} from "../message-modal/message-modal.component";
-
-interface Message {
-    nombre: string;
-    mensaje: string;
-    avatar?: string;
-}
+import {MessageService} from "../../services/MessageService";
 
 @Component({
     selector: 'app-message',
@@ -29,8 +23,12 @@ interface Message {
 })
 export class MessageComponent implements OnInit {
 
-    constructor(private modalCtrl: ModalController) {}
+    constructor(private modalCtrl: ModalController, private messageService: MessageService) { }
 
+    messages: Message[] = [];
+
+    //newMessage: Message;
+    /*
     notificaciones: Message[] = [
         {
             nombre: 'Juan Pérez',
@@ -52,7 +50,7 @@ export class MessageComponent implements OnInit {
             nombre: 'Luis Martínez',
             mensaje: 'Tu comentario en el foro ha recibido respuesta.'
         }
-    ];
+    ];*/
 
     loading = true;
 
@@ -60,22 +58,34 @@ export class MessageComponent implements OnInit {
         setTimeout(() => {
             this.loading = false;
         }, 1000);
-    }
 
+        this.messageService.getAllMessages().subscribe(
+            data => this.messages = data
+        )
+    }
+/*
     async abrirModal() {
         const modal = await this.modalCtrl.create({
             component: MessageModalComponent,
         });
 
+
         modal.onDidDismiss().then((result) => {
             if (result.data) {
-                this.notificaciones.push({
+
+                this.messages.push({
                     nombre: 'Tú',
                     mensaje: result.data,
                 });
+
+
+                this.newMessage.content = result.data
+                this.newMessage.user
+                this.messageService.createMessage(
+                )
             }
         });
 
         await modal.present();
-    }
+    }*/
 }

@@ -3,7 +3,6 @@ package com.schoolevents.schoolevents_api.res;
 import com.schoolevents.schoolevents_api.Services.SignService;
 import com.schoolevents.schoolevents_api.models.Sign;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,12 +14,12 @@ class SignController {
     @Autowired
     private SignService signService;
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Sign> getSigns(){
         return signService.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/by_id/{id}")
     public Sign getSignById(@PathVariable Long id){
         return signService.findId(id);
     }
@@ -34,17 +33,17 @@ class SignController {
         return signService.findByUserId(id);
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public Sign save(@RequestBody Sign sign){
         return signService.save(sign);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public Sign update(@PathVariable Long id, @RequestBody Sign sign){
         return signService.update(sign, id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable Long id){
         signService.delete(id);
     }

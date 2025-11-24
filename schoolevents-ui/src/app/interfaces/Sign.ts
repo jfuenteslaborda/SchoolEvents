@@ -1,0 +1,3 @@
+interface Sign {
+    date: string;
+}

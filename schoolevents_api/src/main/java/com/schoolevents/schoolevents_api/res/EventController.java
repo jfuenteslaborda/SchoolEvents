@@ -15,38 +15,38 @@ public class EventController {
     @Autowired
     EventService eventService;
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Event> getEvents() {
         return eventService.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/by_id/{id}")
     public Event getEvent(@PathVariable Long id) {
         return eventService.findById(id);
     }
 
-    @GetMapping("/{title}")
+    @GetMapping("/by_title/{title}")
     public Event getEventByTitle(@PathVariable String title) {
         return eventService.findByTitle(title);
     }
 
-    @GetMapping("/{date}")
+    @GetMapping("/by_date/{date}")
     public List<Event> getEventByDate(@PathVariable LocalDate date) {
         return eventService.findByDate(date);
     }
 
 
-    @PostMapping
+    @PostMapping("/create")
     public Event addEvent(@RequestBody Event event){
         return eventService.save(event);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public Event updateEvent(@RequestBody Event event,  @PathVariable Long id){
         return eventService.updateEvent(event, id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteEvent(@PathVariable Long id){
         eventService.deleteById(id);
     }
