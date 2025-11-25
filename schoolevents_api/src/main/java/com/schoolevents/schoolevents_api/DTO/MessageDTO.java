@@ -9,7 +9,7 @@ import java.util.Set;
 public class MessageDTO {
     private Long id;
     private String content;
-    private LocalDate date;
+    private LocalDate send_date;
 
     private Set<User> users;
 }

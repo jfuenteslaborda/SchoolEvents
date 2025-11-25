@@ -1,5 +1,7 @@
 package com.schoolevents.schoolevents_api.Services;
 
+import com.schoolevents.schoolevents_api.DTO.CommentDTO;
+import com.schoolevents.schoolevents_api.mappers.CommentMapper;
 import com.schoolevents.schoolevents_api.repositories.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,9 +14,15 @@ public class CommentService {
 
     @Autowired
     private CommentRepository commentRepository;
+    private CommentMapper commentMapper;
 
-    public List<Comment> findAll() {
-        return commentRepository.findAll();
+    public List<CommentDTO> findAll() {
+        List<Comment> comments= commentRepository.findAll();
+        List<CommentDTO> commentsDTO = List.of();
+         for (Comment comment : comments) {
+             commentsDTO.add(commentMapper.commentToCommentDTO(comment));
+         }
+         return commentsDTO;
     }
 
     public List<Comment> findByUserId(Long user_id) {

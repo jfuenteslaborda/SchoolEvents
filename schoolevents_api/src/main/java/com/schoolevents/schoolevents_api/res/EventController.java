@@ -35,6 +35,10 @@ public class EventController {
         return eventService.findByDate(date);
     }
 
+    @GetMapping("/by_two_weeks")
+    public List<Event> getEventByTwoWeeks() {
+        return eventService.findByTwoWeeksLater();
+    }
 
     @PostMapping("/create")
     public Event addEvent(@RequestBody Event event){

@@ -15,7 +15,5 @@ public class EventDTO {
     private LocalDate date;
     private Boolean need_payment;
 
-    private Set<Comment> comments;
-    private Set<Image> images;
-    private Set<Sign> signs;
+
 }
