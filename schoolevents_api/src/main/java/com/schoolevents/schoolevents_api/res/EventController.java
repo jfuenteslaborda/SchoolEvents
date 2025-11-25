@@ -1,5 +1,6 @@
 package com.schoolevents.schoolevents_api.res;
 
+import com.schoolevents.schoolevents_api.DTO.EventDTO;
 import com.schoolevents.schoolevents_api.Services.EventService;
 import com.schoolevents.schoolevents_api.models.Event;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,37 +17,37 @@ public class EventController {
     EventService eventService;
 
     @GetMapping("/all")
-    public List<Event> getEvents() {
+    public List<EventDTO> getEvents() {
         return eventService.findAll();
     }
 
     @GetMapping("/by_id/{id}")
-    public Event getEvent(@PathVariable Long id) {
+    public EventDTO getEvent(@PathVariable Long id) {
         return eventService.findById(id);
     }
 
     @GetMapping("/by_title/{title}")
-    public Event getEventByTitle(@PathVariable String title) {
+    public EventDTO getEventByTitle(@PathVariable String title) {
         return eventService.findByTitle(title);
     }
 
     @GetMapping("/by_date/{date}")
-    public List<Event> getEventByDate(@PathVariable LocalDate date) {
+    public List<EventDTO> getEventByDate(@PathVariable LocalDate date) {
         return eventService.findByDate(date);
     }
 
     @GetMapping("/by_two_weeks")
-    public List<Event> getEventByTwoWeeks() {
+    public List<EventDTO> getEventByTwoWeeks() {
         return eventService.findByTwoWeeksLater();
     }
 
     @PostMapping("/create")
-    public Event addEvent(@RequestBody Event event){
+    public EventDTO addEvent(@RequestBody Event event){
         return eventService.save(event);
     }
 
     @PutMapping("/update/{id}")
-    public Event updateEvent(@RequestBody Event event,  @PathVariable Long id){
+    public EventDTO updateEvent(@RequestBody Event event,  @PathVariable Long id){
         return eventService.updateEvent(event, id);
     }
 

@@ -1,6 +1,8 @@
 package com.schoolevents.schoolevents_api.Services;
 
 
+import com.schoolevents.schoolevents_api.DTO.ImageDTO;
+import com.schoolevents.schoolevents_api.mappers.ImageMapper;
 import com.schoolevents.schoolevents_api.models.*;
 import com.schoolevents.schoolevents_api.repositories.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,29 +15,43 @@ public class ImageService {
     
     @Autowired
     private ImageRepository imageRepository;
+    private ImageMapper imageMapper;
 
-    public List<Image> findAll(){
-        return imageRepository.findAll();
+    public List<ImageDTO> findAll(){
+        List<Image> images = imageRepository.findAll();
+        List<ImageDTO> imagesDTO = new java.util.ArrayList<>(List.of());
+        for (Image i : images) {
+            imagesDTO.add(imageMapper.imageToImageDTO(i));
+        }
+        return imagesDTO;
     }
     
-    public Image findById(Long id){
-        return imageRepository.findById(id);
+    public ImageDTO findById(Long id){
+        Image image = imageRepository.findById(id);
+        return imageMapper.imageToImageDTO(image);
     }
 
-    public List<Image> findByEventId(Long event_id){
-        return imageRepository.findByEventId(event_id);
+    public List<ImageDTO> findByEventId(Long event_id){
+        List<Image> images = imageRepository.findByEventId(event_id);
+        List<ImageDTO> imagesDTO = new java.util.ArrayList<>(List.of());
+        for (Image i : images) {
+            imagesDTO.add(imageMapper.imageToImageDTO(i));
+        }
+        return imagesDTO;
     }
     
-    public Image save(Image image){
-        return imageRepository.save(image);
+    public ImageDTO save(Image image){
+        Image i = imageRepository.save(image);
+        return imageMapper.imageToImageDTO(i);
     }
     
-    public Image updateImage(Image image, Long id){
+    public ImageDTO updateImage(Image image, Long id){
         Image i = imageRepository.findById(id);
         i.setSrc(image.getSrc());
         i.setDescription(image.getDescription());
         i.setEvent(image.getEvent());
-        return imageRepository.save(i);
+        Image image0 = imageRepository.save(i);
+        return imageMapper.imageToImageDTO(image0);
     }
     
     public void deleteById(Long id){

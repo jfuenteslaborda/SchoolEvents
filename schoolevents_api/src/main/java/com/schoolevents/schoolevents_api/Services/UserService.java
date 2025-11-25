@@ -1,5 +1,7 @@
 package com.schoolevents.schoolevents_api.Services;
 
+import com.schoolevents.schoolevents_api.DTO.UserDTO;
+import com.schoolevents.schoolevents_api.mappers.UserMapper;
 import com.schoolevents.schoolevents_api.models.*;
 import com.schoolevents.schoolevents_api.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,24 +14,33 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    private UserMapper userMapper;
 
-    public List<User> findAll(){
-        return userRepository.findAll();
+    public List<UserDTO> findAll(){
+        List<User> users = userRepository.findAll();
+        List<UserDTO> usersDTO = new java.util.ArrayList<>(List.of());
+        for (User user : users){
+            usersDTO.add(userMapper.userToUserDTO(user));
+        }
+        return usersDTO;
     }
 
-    public User findById(Long id){
-        return userRepository.findById(id);
+    public UserDTO findById(Long id){
+        User user = userRepository.findById(id);
+        return userMapper.userToUserDTO(user);
     }
 
-    public User findByEmail(String email){
-        return userRepository.findByEmail(email);
+    public UserDTO findByEmail(String email){
+        User user = userRepository.findByEmail(email);
+        return userMapper.userToUserDTO(user);
     }
 
-    public User save(User user){
-        return userRepository.save(user);
+    public UserDTO save(User user){
+        User u = userRepository.save(user);
+        return userMapper.userToUserDTO(u);
     }
 
-    public User update(User user, Long id){
+    public UserDTO update(User user, Long id){
         User u = userRepository.findById(id);
         u.setEmail(user.getEmail());
         u.setDate(user.getDate());
@@ -37,7 +48,8 @@ public class UserService {
         u.setPhoto(user.getPhoto());
         u.setFull_name(user.getFull_name());
         u.setIs_Admin(user.getIs_Admin());
-        return userRepository.save(u);
+        User u0 = userRepository.save(u);
+        return userMapper.userToUserDTO(u0);
     }
 
     public void delete(Long id){

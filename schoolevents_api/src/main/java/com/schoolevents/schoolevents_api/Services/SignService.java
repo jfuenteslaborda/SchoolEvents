@@ -1,6 +1,7 @@
 package com.schoolevents.schoolevents_api.Services;
 
-
+import com.schoolevents.schoolevents_api.DTO.SignDTO;
+import com.schoolevents.schoolevents_api.mappers.SignMapper;
 import com.schoolevents.schoolevents_api.models.Sign;
 import com.schoolevents.schoolevents_api.repositories.SignRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,33 +14,52 @@ public class SignService {
 
     @Autowired
     private SignRepository signRepository;
+    private SignMapper signMapper;
 
-    public List<Sign> findAll(){
-        return signRepository.findAll();
+    public List<SignDTO> findAll(){
+        List<Sign> signs = signRepository.findAll();
+        List<SignDTO> signsDTO = new java.util.ArrayList<>(List.of());
+        for (Sign sign : signs) {
+            signsDTO.add(signMapper.signToSignDTO(sign));
+        }
+        return signsDTO;
     }
 
-    public Sign findId(Long id){
-        return signRepository.findById(id);
+    public SignDTO findId(Long id){
+        Sign sign = signRepository.findById(id);
+        return signMapper.signToSignDTO(sign);
     }
 
-    public List<Sign> findByEventId(Long event_id){
-        return signRepository.findByEventId(event_id);
+    public List<SignDTO> findByEventId(Long event_id){
+        List<Sign> signs = signRepository.findByEventId(event_id);
+        List<SignDTO> signsDTO = new java.util.ArrayList<>(List.of());
+        for (Sign sign : signs) {
+            signsDTO.add(signMapper.signToSignDTO(sign));
+        }
+        return signsDTO;
     }
 
-    public List<Sign> findByUserId(Long user_id){
-        return signRepository.findByUserId(user_id);
+    public List<SignDTO> findByUserId(Long user_id){
+        List<Sign> signs = signRepository.findByUserId(user_id);
+        List<SignDTO> signsDTO = new java.util.ArrayList<>(List.of());
+        for (Sign sign : signs) {
+            signsDTO.add(signMapper.signToSignDTO(sign));
+        }
+        return signsDTO;
     }
 
-    public Sign save(Sign sign){
-        return signRepository.save(sign);
+    public SignDTO save(Sign sign){
+        Sign s = signRepository.save(sign);
+        return signMapper.signToSignDTO(s);
     }
 
-    public Sign update(Sign sign, Long id){
+    public SignDTO update(Sign sign, Long id){
         Sign s = signRepository.findById(id);
         s.setEvent(s.getEvent());
         s.setUser(sign.getUser());
         s.setDate(sign.getDate());
-        return signRepository.save(s);
+        Sign s0 = signRepository.save(s);
+        return signMapper.signToSignDTO(s0);
     }
 
     public void delete(Long id){
