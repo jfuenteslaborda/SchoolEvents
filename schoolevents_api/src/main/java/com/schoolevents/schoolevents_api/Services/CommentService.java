@@ -16,13 +16,8 @@ public class CommentService {
     private CommentRepository commentRepository;
     private CommentMapper commentMapper;
 
-    public List<CommentDTO> findAll() {
-        List<Comment> comments= commentRepository.findAll();
-        List<CommentDTO> commentsDTO = List.of();
-         for (Comment comment : comments) {
-             commentsDTO.add(commentMapper.commentToCommentDTO(comment));
-         }
-         return commentsDTO;
+    public List<Comment> findAll() {
+        return commentRepository.findAll();
     }
 
     public List<Comment> findByUserId(Long user_id) {
