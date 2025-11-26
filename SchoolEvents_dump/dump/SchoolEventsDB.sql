@@ -9,7 +9,7 @@ CREATE TABLE app_user (
     password VARCHAR(255) NOT NULL,
     photo VARCHAR(255),
     date DATE,
-    is_admin BOOLEAN DEFAULT FALSE
+    is_admin INTEGER DEFAULT 0
 );
 
 -- TABLA 2 Event

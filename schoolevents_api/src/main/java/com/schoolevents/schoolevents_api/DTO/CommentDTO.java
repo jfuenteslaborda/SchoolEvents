@@ -9,5 +9,7 @@ import java.util.Set;
 public class CommentDTO {
     private Long id;
     private String description;
-    private LocalDate date;
+    private String date;
+    private Integer user_id;
+    private Integer event_id;
 }

@@ -10,4 +10,5 @@ public class ImageDTO {
     private Long id;
     private String src;
     private String description;
+    private Integer event_id;
 }

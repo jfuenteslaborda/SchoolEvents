@@ -8,5 +8,7 @@ import java.util.Set;
 @Data
 public class SignDTO {
     private Long id;
-    private LocalDate date;
+    private String date;
+    private Integer user_id;
+    private Integer event_id;
 }
