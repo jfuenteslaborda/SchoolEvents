@@ -12,6 +12,6 @@ public class EventDTO {
     private String description;
     private Integer price;
     private Integer capacity;
-    private LocalDate date;
+    private String date;
     private Boolean need_payment;
 }
