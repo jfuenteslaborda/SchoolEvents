@@ -19,7 +19,7 @@ public class Message {
     private Long id;
 
     @Column(name = "content", length = 400, nullable = false)
-    private String message;
+    private String content;
 
     @Column(name = "send_date", nullable = false)
     private LocalDate send_date;

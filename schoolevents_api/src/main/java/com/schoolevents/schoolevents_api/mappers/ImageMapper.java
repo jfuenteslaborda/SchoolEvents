@@ -9,7 +9,7 @@ import org.mapstruct.Mappings;
 @Mapper
 public interface ImageMapper {
 
-    ImageDTO imageDTOToImageDTO(Image image);
+    ImageDTO imageToImageDTO(Image image);
 
     Image imageDTOToImage(ImageDTO imageDTO);
 

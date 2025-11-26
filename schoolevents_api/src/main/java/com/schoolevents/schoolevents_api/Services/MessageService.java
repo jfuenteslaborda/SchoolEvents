@@ -1,6 +1,8 @@
 package com.schoolevents.schoolevents_api.Services;
 
 
+import com.schoolevents.schoolevents_api.DTO.MessageDTO;
+import com.schoolevents.schoolevents_api.mappers.MessageMapper;
 import com.schoolevents.schoolevents_api.models.*;
 import com.schoolevents.schoolevents_api.repositories.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,29 +15,43 @@ public class MessageService {
 
     @Autowired
     private MessageRepository messageRepository;
+    private MessageMapper messageMapper;
 
-    public List<Message> findAll(){
-        return messageRepository.findAll();
+    public List<MessageDTO> findAll(){
+        List<Message> messages = messageRepository.findAll();
+        List<MessageDTO> messagesDTO = new java.util.ArrayList<>(List.of());
+        for (Message message : messages) {
+            messagesDTO.add(messageMapper.messageToMessageDTO(message));
+        }
+        return messagesDTO;
     }
 
-    public Message findById(Long id){
-        return messageRepository.findById(id);
-    }
-
-    public List<Message> findByUserId(Long user_id){
-        return messageRepository.findByUserId(user_id);
-    }
-
-    public Message save(Message message){
-        return messageRepository.save(message);
-    }
-
-    public Message updateMessage(Message message, Long id){
+    public MessageDTO findById(Long id){
         Message m = messageRepository.findById(id);
-        m.setMessage(message.getMessage());
+        return messageMapper.messageToMessageDTO(m);
+    }
+
+    public List<MessageDTO> findByUserId(Long user_id){
+        List<Message> messages = messageRepository.findByUserId(user_id);
+        List<MessageDTO> messagesDTO = new java.util.ArrayList<>(List.of());
+        for (Message message : messages) {
+            messagesDTO.add(messageMapper.messageToMessageDTO(message));
+        }
+        return messagesDTO;
+    }
+
+    public MessageDTO save(Message message){
+        Message m = messageRepository.save(message);
+        return messageMapper.messageToMessageDTO(m);
+    }
+
+    public MessageDTO updateMessage(Message message, Long id){
+        Message m = messageRepository.findById(id);
+        m.setContent(message.getContent());
         m.setUser(message.getUser());
         m.setSend_date(message.getSend_date());
-        return messageRepository.save(m);
+        Message m0 = messageRepository.save(m);
+        return messageMapper.messageToMessageDTO(m0);
     }
 
     public void delete(Long id){

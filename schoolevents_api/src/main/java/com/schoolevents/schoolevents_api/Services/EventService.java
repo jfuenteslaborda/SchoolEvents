@@ -1,6 +1,8 @@
 package com.schoolevents.schoolevents_api.Services;
 
 
+import com.schoolevents.schoolevents_api.DTO.EventDTO;
+import com.schoolevents.schoolevents_api.mappers.EventMapper;
 import com.schoolevents.schoolevents_api.models.*;
 import com.schoolevents.schoolevents_api.repositories.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,32 +16,51 @@ public class EventService {
 
     @Autowired
     private EventRepository eventRepository;
+    private EventMapper eventMapper;
 
-    public List<Event> findAll() {
-        return eventRepository.findAll();
+    public List<EventDTO> findAll() {
+        List<Event> events = eventRepository.findAll();
+        List<EventDTO> eventsDTO = new java.util.ArrayList<>(List.of());
+        for (Event event : events) {
+            eventsDTO.add(eventMapper.eventToEventDTO(event));
+        }
+        return eventsDTO;
     }
 
-    public Event findById(Long id) {
-        return eventRepository.findById(id);
+    public EventDTO findById(Long id) {
+        Event e = eventRepository.findById(id);
+        return eventMapper.eventToEventDTO(e);
     }
 
-    public Event findByTitle(String title) {
-        return eventRepository.findByTitle(title);
+    public EventDTO findByTitle(String title) {
+        Event e = eventRepository.findByTitle(title);
+        return eventMapper.eventToEventDTO(e);
     }
 
-    public List<Event> findByDate(LocalDate date) {
-        return eventRepository.findByDate(date);
+    public List<EventDTO> findByDate(LocalDate date) {
+        List<Event> events = eventRepository.findByDate(date);
+        List<EventDTO> eventsDTO = new java.util.ArrayList<>(List.of());
+        for (Event event : events) {
+            eventsDTO.add(eventMapper.eventToEventDTO(event));
+        }
+        return eventsDTO;
     }
 
-    public List<Event> findByTwoWeeksLater() {
-        return eventRepository.filterByTwoWeeksLater(LocalDate.now(), LocalDate.now().plusWeeks(2));
+    public List<EventDTO> findByTwoWeeksLater() {
+        List<Event> events = eventRepository.filterByTwoWeeksLater(LocalDate.now(), LocalDate.now().plusWeeks(2));
+        List<EventDTO> eventsDTO = new java.util.ArrayList<>(List.of());
+        for (Event event : events) {
+            eventsDTO.add(eventMapper.eventToEventDTO(event));
+        }
+        return eventsDTO;
     }
 
-    public Event save(Event event) {
-        return eventRepository.save(event);
+    public EventDTO save(Event event) {
+        Event e = eventRepository.save(event);
+        return eventMapper.eventToEventDTO(e);
     }
 
-    public Event updateEvent(Event event, Long id) {
+    public EventDTO updateEvent(Event event, Long id) {
         Event e = eventRepository.findById(id);
         e.setCapacity(event.getCapacity());
         e.setDescription(event.getDescription());
@@ -47,7 +68,8 @@ public class EventService {
         e.setPrice(event.getPrice());
         e.setTitle(event.getTitle());
         e.setNeed_payment(event.getNeed_payment());
-        return eventRepository.save(e);
+        Event event1 = eventRepository.save(e);
+        return eventMapper.eventToEventDTO(event1);
     }
 
     public void deleteById(Long id) {
