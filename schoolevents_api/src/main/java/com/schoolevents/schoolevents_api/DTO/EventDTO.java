@@ -14,6 +14,4 @@ public class EventDTO {
     private Integer capacity;
     private LocalDate date;
     private Boolean need_payment;
-
-
 }

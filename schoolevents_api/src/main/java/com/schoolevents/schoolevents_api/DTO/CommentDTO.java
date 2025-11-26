@@ -10,7 +10,4 @@ public class CommentDTO {
     private Long id;
     private String description;
     private LocalDate date;
-
-    private Set<User> users;
-    private Set<Event> events;
 }

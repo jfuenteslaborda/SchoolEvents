@@ -13,8 +13,4 @@ public class UserDTO {
     private String photo;
     private LocalDate date;
     private Boolean is_admin;
-
-    private Set<Comment> comments;
-    private Set<Message> messages;
-    private Set<Sign> signs;
 }

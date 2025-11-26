@@ -10,6 +10,4 @@ public class MessageDTO {
     private Long id;
     private String content;
     private LocalDate send_date;
-
-    private Set<User> users;
 }

@@ -13,9 +13,14 @@ import java.util.List;
 @Service
 public class MessageService {
 
+    private final MessageRepository messageRepository;
+    private final MessageMapper messageMapper;
+
     @Autowired
-    private MessageRepository messageRepository;
-    private MessageMapper messageMapper;
+    public MessageService(MessageRepository messageRepository, MessageMapper messageMapper) {
+        this.messageRepository = messageRepository;
+        this.messageMapper = messageMapper;
+    }
 
     public List<MessageDTO> findAll(){
         List<Message> messages = messageRepository.findAll();

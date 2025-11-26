@@ -12,9 +12,14 @@ import java.util.List;
 @Service
 public class SignService {
 
+    private final SignRepository signRepository;
+    private final SignMapper signMapper;
+
     @Autowired
-    private SignRepository signRepository;
-    private SignMapper signMapper;
+    public SignService(SignRepository signRepository, SignMapper signMapper) {
+        this.signRepository = signRepository;
+        this.signMapper = signMapper;
+    }
 
     public List<SignDTO> findAll(){
         List<Sign> signs = signRepository.findAll();

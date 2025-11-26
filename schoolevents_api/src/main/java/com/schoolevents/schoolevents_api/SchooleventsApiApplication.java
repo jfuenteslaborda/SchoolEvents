@@ -19,7 +19,8 @@ public class SchooleventsApiApplication {
                 ╚══════╝ ╚═════╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚══════╝  ╚═══╝  ╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝
                                                         \s
                                                          \s
-                            Swagger-ui: http://localhost:8080/swagger-ui.html
+                Swagger-ui: http://localhost:8080/swagger-ui.html
+                Swagger-ui: http://localhost:8080/
                \s
                \s""");
 	}

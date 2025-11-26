@@ -12,10 +12,15 @@ import java.util.List;
 
 @Service
 public class ImageService {
-    
+
+    private  final ImageRepository imageRepository;
+    private final  ImageMapper imageMapper;
+
     @Autowired
-    private ImageRepository imageRepository;
-    private ImageMapper imageMapper;
+    public ImageService(ImageRepository imageRepository, ImageMapper imageMapper) {
+        this.imageRepository = imageRepository;
+        this.imageMapper = imageMapper;
+    }
 
     public List<ImageDTO> findAll(){
         List<Image> images = imageRepository.findAll();

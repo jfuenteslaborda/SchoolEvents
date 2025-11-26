@@ -12,9 +12,14 @@ import java.util.List;
 @Service
 public class UserService {
 
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
+
     @Autowired
-    private UserRepository userRepository;
-    private UserMapper userMapper;
+    public UserService(UserRepository userRepository, UserMapper userMapper) {
+        this.userRepository = userRepository;
+        this.userMapper = userMapper;
+    }
 
     public List<UserDTO> findAll(){
         List<User> users = userRepository.findAll();

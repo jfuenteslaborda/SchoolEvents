@@ -6,16 +6,20 @@ import com.schoolevents.schoolevents_api.repositories.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.schoolevents.schoolevents_api.models.*;
-import java.util.ArrayList;
 
 import java.util.List;
 
 @Service
 public class CommentService {
 
+    private final CommentRepository commentRepository;
+    private final CommentMapper commentMapper;
+
     @Autowired
-    private CommentRepository commentRepository;
-    private CommentMapper commentMapper;
+    public CommentService(CommentRepository commentRepository, CommentMapper commentMapper) {
+        this.commentRepository = commentRepository;
+        this.commentMapper = commentMapper;
+    }
 
     public List<CommentDTO> findAll() {
         List<Comment> comments= commentRepository.findAll();

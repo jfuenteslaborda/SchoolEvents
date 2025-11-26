@@ -9,7 +9,4 @@ import java.util.Set;
 public class SignDTO {
     private Long id;
     private LocalDate date;
-
-    private Set<User> users;
-    private Set<Event> events;
 }

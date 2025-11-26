@@ -14,9 +14,14 @@ import java.util.List;
 @Service
 public class EventService {
 
+    private final EventRepository eventRepository;
+    private final EventMapper eventMapper;
+
     @Autowired
-    private EventRepository eventRepository;
-    private EventMapper eventMapper;
+    public EventService(EventRepository eventRepository, EventMapper eventMapper) {
+        this.eventRepository = eventRepository;
+        this.eventMapper = eventMapper;
+    }
 
     public List<EventDTO> findAll() {
         List<Event> events = eventRepository.findAll();

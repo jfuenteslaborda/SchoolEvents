@@ -10,6 +10,4 @@ public class ImageDTO {
     private Long id;
     private String src;
     private String description;
-
-    private Set<Event> events;
 }
