@@ -35,6 +35,10 @@ public class UserService {
         return userMapper.userToUserDTO(user);
     }
 
+    public User findByIdEntity(Long id){
+        return userRepository.findById(id);
+    }
+
     public UserDTO findByEmail(String email){
         User user = userRepository.findByEmail(email);
         return userMapper.userToUserDTO(user);

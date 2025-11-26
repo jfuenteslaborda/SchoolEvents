@@ -37,6 +37,10 @@ public class EventService {
         return eventMapper.eventToEventDTO(e);
     }
 
+    public Event findByIdEntity(Long id) {
+        return eventRepository.findById(id);
+    }
+
     public EventDTO findByTitle(String title) {
         Event e = eventRepository.findByTitle(title);
         return eventMapper.eventToEventDTO(e);

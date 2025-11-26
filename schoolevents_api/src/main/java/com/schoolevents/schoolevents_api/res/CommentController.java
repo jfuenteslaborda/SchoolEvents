@@ -35,7 +35,7 @@ public class CommentController {
         return commentService.findById(id);
     }
 
-    @PostMapping("/create/")
+    @PostMapping("/create")
     public CommentDTO addComment(@RequestBody Comment comment) {
         return commentService.save(comment);
     }
