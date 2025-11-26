@@ -33,5 +33,5 @@ public class User {
     private LocalDate date;
 
     @Column(name = "is_admin")
-    private Boolean is_Admin;
+    private Integer is_Admin;
 }

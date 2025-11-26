@@ -11,6 +11,6 @@ public class UserDTO {
     private String full_name;
     private String email;
     private String photo;
-    private LocalDate date;
-    private Boolean is_admin;
+    private String date;
+    private Integer is_Admin;
 }

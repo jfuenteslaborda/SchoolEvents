@@ -52,7 +52,9 @@ public class EventService {
     }
 
     public List<EventDTO> findByTwoWeeksLater() {
-        List<Event> events = eventRepository.filterByTwoWeeksLater(LocalDate.now(), LocalDate.now().plusWeeks(2));
+        LocalDate start = LocalDate.now();
+        LocalDate end = start.plusWeeks(2);
+        List<Event> events = eventRepository.findByDateBetween(start, end);
         List<EventDTO> eventsDTO = new java.util.ArrayList<>(List.of());
         for (Event event : events) {
             eventsDTO.add(eventMapper.eventToEventDTO(event));

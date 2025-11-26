@@ -87,3 +87,6 @@ CREATE TABLE sign (
         REFERENCES event(id) 
         ON DELETE CASCADE
 );
+
+
+
