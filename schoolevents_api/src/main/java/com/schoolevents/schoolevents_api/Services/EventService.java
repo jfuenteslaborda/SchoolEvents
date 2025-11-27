@@ -2,6 +2,7 @@ package com.schoolevents.schoolevents_api.Services;
 
 
 import com.schoolevents.schoolevents_api.DTO.EventDTO;
+import com.schoolevents.schoolevents_api.DTO.EventStadisticsDTO;
 import com.schoolevents.schoolevents_api.mappers.EventMapper;
 import com.schoolevents.schoolevents_api.models.*;
 import com.schoolevents.schoolevents_api.repositories.EventRepository;
@@ -69,6 +70,10 @@ public class EventService {
     public EventDTO save(Event event) {
         Event e = eventRepository.save(event);
         return eventMapper.eventToEventDTO(e);
+    }
+
+    public List<EventStadisticsDTO> getEventsStadistic() {
+        return eventRepository.getEventStadistics();
     }
 
     public EventDTO updateEvent(Event event, Long id) {

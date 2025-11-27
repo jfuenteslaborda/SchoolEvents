@@ -89,7 +89,6 @@ CREATE TABLE sign (
 );
 
 
-// Consultas Estadistica
 SELECT
     e.id AS event_id,
     e.title,
@@ -97,7 +96,7 @@ SELECT
     e.price,
     e.capacity,
     e.date,
-    COUNT(s.user_id) AS numero_asistentes
+    COUNT(s.user_id) AS assist_num
     FROM
     event e
 JOIN
@@ -105,7 +104,7 @@ JOIN
 GROUP BY
     e.id, e.title, e.description, e.price, e.capacity, e.date
 ORDER BY
-    numero_asistentes DESC
+    assist_num DESC
 LIMIT 5;
 
 

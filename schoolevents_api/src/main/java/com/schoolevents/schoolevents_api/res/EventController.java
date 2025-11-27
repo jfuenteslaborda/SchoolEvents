@@ -1,6 +1,7 @@
 package com.schoolevents.schoolevents_api.res;
 
 import com.schoolevents.schoolevents_api.DTO.EventDTO;
+import com.schoolevents.schoolevents_api.DTO.EventStadisticsDTO;
 import com.schoolevents.schoolevents_api.Services.EventService;
 import com.schoolevents.schoolevents_api.models.Event;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,11 @@ public class EventController {
     @GetMapping("/by_two_weeks")
     public List<EventDTO> getEventByTwoWeeks() {
         return eventService.findByTwoWeeksLater();
+    }
+
+    @GetMapping("/stadistic")
+    public List<EventStadisticsDTO> getEventStadistics() {
+        return eventService.getEventsStadistic();
     }
 
     @PostMapping("/create")
