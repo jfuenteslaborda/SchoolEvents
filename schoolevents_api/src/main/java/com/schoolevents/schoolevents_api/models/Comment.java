@@ -25,10 +25,12 @@ public class Comment {
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
-    @ManyToOne @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id",  nullable = false)
     private User user;
 
-    @ManyToOne @JoinColumn(name = "event_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id",  nullable = false)
     private Event event;
 
 }
