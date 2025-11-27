@@ -1,14 +1,14 @@
 package com.schoolevents.schoolevents_api.DTO;
 
-import com.schoolevents.schoolevents_api.models.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import java.time.LocalDate;
-import java.util.Set;
 
 @Data
 public class MessageDTO {
     private Long id;
     private String content;
-    private String send_date;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDate send_date;
     private Integer user_id;
 }

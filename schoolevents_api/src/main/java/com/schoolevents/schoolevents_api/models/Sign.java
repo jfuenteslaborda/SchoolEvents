@@ -3,6 +3,7 @@ package com.schoolevents.schoolevents_api.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -19,15 +20,13 @@ public class Sign {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("id")
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("id")
     @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
     @Column(name = "date", nullable = false)
-    private LocalDateTime date;
+    private LocalDate date;
 }

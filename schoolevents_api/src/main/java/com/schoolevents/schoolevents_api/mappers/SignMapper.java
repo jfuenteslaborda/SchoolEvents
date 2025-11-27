@@ -10,10 +10,14 @@ import org.mapstruct.Mappings;
 public interface SignMapper {
 
     @Mapping(target = "date", dateFormat = "dd-MM-yyyy", source = "date")
+    @Mapping(target = "user_id", source = "user.id")
+    @Mapping(target = "event_id", source = "event.id")
 
     SignDTO signToSignDTO(Sign sign);
 
     @Mapping(target = "date", dateFormat = "dd-MM-yyyy", source = "date")
+    @Mapping(target = "user", ignore = true)
+    @Mapping(target = "event", ignore = true)
 
     Sign signDTOToSign(SignDTO signDTO);
 

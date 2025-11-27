@@ -89,4 +89,24 @@ CREATE TABLE sign (
 );
 
 
+// Consultas Estadistica
+SELECT
+    e.id AS event_id,
+    e.title,
+    e.description,
+    e.price,
+    e.capacity,
+    e.date,
+    COUNT(s.user_id) AS numero_asistentes
+    FROM
+    event e
+JOIN
+    sign s ON e.id = s.event_id
+GROUP BY
+    e.id, e.title, e.description, e.price, e.capacity, e.date
+ORDER BY
+    numero_asistentes DESC
+LIMIT 5;
+
+
 

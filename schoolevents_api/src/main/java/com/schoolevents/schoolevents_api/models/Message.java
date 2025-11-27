@@ -24,6 +24,7 @@ public class Message {
     @Column(name = "send_date", nullable = false)
     private LocalDate send_date;
 
-    @ManyToOne @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 }

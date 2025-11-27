@@ -22,7 +22,8 @@ public class Image {
     @Column(name = "description", length = 500, nullable = false)
     private String description;
 
-    @ManyToOne @JoinColumn(name = "event_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
 }
