@@ -1,6 +1,7 @@
 package com.schoolevents.schoolevents_api.Services;
 
 import com.schoolevents.schoolevents_api.DTO.UserDTO;
+import com.schoolevents.schoolevents_api.DTO.UserStadisticsDTO;
 import com.schoolevents.schoolevents_api.mappers.UserMapper;
 import com.schoolevents.schoolevents_api.models.*;
 import com.schoolevents.schoolevents_api.repositories.UserRepository;
@@ -33,6 +34,10 @@ public class UserService {
     public UserDTO findById(Long id){
         User user = userRepository.findById(id);
         return userMapper.userToUserDTO(user);
+    }
+
+    public UserStadisticsDTO getUserStadistics(){
+        return userRepository.getUserStadistic();
     }
 
     public User findByIdEntity(Long id){

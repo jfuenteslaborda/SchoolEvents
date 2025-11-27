@@ -1,6 +1,7 @@
 package com.schoolevents.schoolevents_api.res;
 
 import com.schoolevents.schoolevents_api.DTO.UserDTO;
+import com.schoolevents.schoolevents_api.DTO.UserStadisticsDTO;
 import com.schoolevents.schoolevents_api.Services.UserService;
 import com.schoolevents.schoolevents_api.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,11 @@ class UserController {
     @GetMapping("/by_email/{email}")
     public UserDTO showUserByEmail(@PathVariable String email){
         return userService.findByEmail(email);
+    }
+
+    @GetMapping("/stadistic")
+    public UserStadisticsDTO showUserStadistics(){
+        return userService.getUserStadistics();
     }
 
     @PostMapping("/create")
