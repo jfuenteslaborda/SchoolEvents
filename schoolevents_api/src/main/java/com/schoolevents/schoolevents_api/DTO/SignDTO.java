@@ -9,6 +9,6 @@ public class SignDTO {
     private Long id;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate date;
-    private Integer user_id;
-    private Integer event_id;
+    private UserDTO user;
+    private EventDTO event;
 }

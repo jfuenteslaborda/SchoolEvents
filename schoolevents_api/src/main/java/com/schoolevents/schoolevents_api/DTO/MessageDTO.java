@@ -10,5 +10,5 @@ public class MessageDTO {
     private String content;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate send_date;
-    private Integer user_id;
+    private UserDTO user;
 }

@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {IonAvatar, IonButton, IonCard, IonItem, IonLabel, IonList, IonSpinner} from "@ionic/angular/standalone";
 import { CommonModule } from "@angular/common";
 import {ModalController} from "@ionic/angular";
+import {MessageService} from "../../services/messageService/message-service";
 import {MessageModalComponent} from "../message-modal/message-modal.component";
-import {MessageService} from "../../services/MessageService";
+import {Observable} from "rxjs";
 
 @Component({
     selector: 'app-message',
@@ -25,11 +26,9 @@ export class MessageComponent implements OnInit {
 
     constructor(private modalCtrl: ModalController, private messageService: MessageService) { }
 
-    messages: Message[] = [];
+    mensajes: Message[] = []
 
-    //newMessage: Message;
-    /*
-    notificaciones: Message[] = [
+        /*[
         {
             nombre: 'Juan Pérez',
             mensaje: 'Has recibido una nueva tarea de matemáticas.'
@@ -58,12 +57,8 @@ export class MessageComponent implements OnInit {
         setTimeout(() => {
             this.loading = false;
         }, 1000);
-
-        this.messageService.getAllMessages().subscribe(
-            data => this.messages = data
-        )
     }
-/*
+
     async abrirModal() {
         const modal = await this.modalCtrl.create({
             component: MessageModalComponent,
@@ -72,20 +67,13 @@ export class MessageComponent implements OnInit {
 
         modal.onDidDismiss().then((result) => {
             if (result.data) {
-
-                this.messages.push({
-                    nombre: 'Tú',
-                    mensaje: result.data,
-                });
-
-
-                this.newMessage.content = result.data
-                this.newMessage.user
-                this.messageService.createMessage(
-                )
             }
         });
 
         await modal.present();
-    }*/
+    }
+
+    cargarMensajes(mensajes: Observable<Message[]>) {
+        mensajes = this.messageService.getAllMessages();
+    }
 }

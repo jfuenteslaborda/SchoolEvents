@@ -1,5 +1,6 @@
 interface Image {
     id: number;
     src: string;
-    descripcion: string;
+    description: string;
+    event: Event;
 }

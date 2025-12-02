@@ -9,7 +9,6 @@ import org.mapstruct.Mapping;
 public interface MessageMapper {
 
     @Mapping(target = "send_date", dateFormat = "dd-MM-yyyy", source = "send_date")
-    @Mapping(target = "user_id", source = "user.id")
 
     MessageDTO messageToMessageDTO(Message message);
 

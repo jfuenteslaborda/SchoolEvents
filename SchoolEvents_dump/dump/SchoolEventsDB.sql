@@ -109,3 +109,22 @@ LIMIT 5;
 
 
 
+
+
+
+SELECT
+    au.id AS user_id,
+    au.full_name,
+    COUNT(s.id) AS signs_total
+FROM
+    app_user au
+JOIN
+    sign s ON au.id = s.user_id
+GROUP BY
+    au.id, au.full_name
+ORDER BY
+    signs_total DESC
+LIMIT 1;
+
+
+

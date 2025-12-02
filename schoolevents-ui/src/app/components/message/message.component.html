@@ -1,18 +1,19 @@
 <ion-spinner *ngIf="loading" name="crescent" style="display:block; margin:50% auto;"></ion-spinner>
 
-<ion-list class="list-notifications" *ngIf="!loading && notificaciones.length">
-    <ion-card *ngFor="let notif of notificaciones" class="notif-card">
-        <ion-item lines="none">
-            <ion-avatar slot="start">
-                <img [src]="notif.avatar || 'assets/default-avatar.jpg'" />
-            </ion-avatar>
-            <ion-label>
-                <h2>{{ notif.nombre }}</h2>
-                <p>{{ notif.mensaje }}</p>
-            </ion-label>
-        </ion-item>
-    </ion-card>
-
+<ion-list class="list-notifications" *ngIf="!loading && mensajes.length">
+    @for (m of mensajes; track m.id){
+        <ion-card class="notif-card">
+            <ion-item lines="none">
+                <ion-avatar slot="start">
+                    <img [src]="m.user.photo|| 'assets/default-avatar.jpg'" alt=""/>
+                </ion-avatar>
+                <ion-label>
+                    <h2>{{ m.user.full_name}}</h2>
+                    <p>{{ m.content }}</p>
+                </ion-label>
+            </ion-item>
+        </ion-card>
+    }
 </ion-list>
 
 <ion-button class="buttom-comment"
@@ -20,6 +21,6 @@
     Escribir
 </ion-button>
 
-<div *ngIf="!loading && !notificaciones.length" style="text-align:center; color:#555; margin-top:20px;">
+<div *ngIf="!loading && !mensajes.length" style="text-align:center; color:#555; margin-top:20px;">
     No hay notificaciones
 </div>

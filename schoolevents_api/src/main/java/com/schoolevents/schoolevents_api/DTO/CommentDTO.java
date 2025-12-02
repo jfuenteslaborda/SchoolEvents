@@ -10,6 +10,6 @@ public class CommentDTO {
     private String description;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate date;
-    private Long user_id;
-    private Long event_id;
+    private UserDTO user;
+    private EventDTO event;
 }
