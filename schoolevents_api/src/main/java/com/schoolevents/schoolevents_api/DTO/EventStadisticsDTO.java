@@ -3,6 +3,7 @@ package com.schoolevents.schoolevents_api.DTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,10 @@ public class EventStadisticsDTO {
     @Min(value = 5, message = "La capacidad debe de ser minima")
     private Integer capacity;
     @NotBlank(message = "La fecha no debe de ser nula")
+    @Pattern(
+            regexp = "^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-\\d{4}$",
+            message = "La fecha debe tener el formato dd-MM-yyyy"
+    )
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDateTime date;
     private Long assist_num;

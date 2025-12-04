@@ -2,6 +2,7 @@ package com.schoolevents.schoolevents_api.DTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.schoolevents.schoolevents_api.models.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ public class UserDTO {
     @NotBlank(message = "El nombre no puede estar en blanco o nulo")
     private String full_name;
     @NotBlank(message = "Debe haber algun email")
+    @Email
     private String email;
     private String password;
     private String photo;
