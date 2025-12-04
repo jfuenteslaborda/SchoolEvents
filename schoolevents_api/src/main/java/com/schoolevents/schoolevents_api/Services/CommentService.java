@@ -1,6 +1,7 @@
 package com.schoolevents.schoolevents_api.Services;
 
 import com.schoolevents.schoolevents_api.DTO.CommentDTO;
+import com.schoolevents.schoolevents_api.exception.ElementNotFoundException;
 import com.schoolevents.schoolevents_api.mappers.CommentMapper;
 import com.schoolevents.schoolevents_api.repositories.CommentRepository;
 import com.schoolevents.schoolevents_api.repositories.EventRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.schoolevents.schoolevents_api.models.*;
 
 import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class CommentService {
@@ -29,7 +31,7 @@ public class CommentService {
 
     public List<CommentDTO> findAll() {
         List<Comment> comments= commentRepository.findAll();
-        List<CommentDTO> commentsDTO = new java.util.ArrayList<>(List.of());
+        List<CommentDTO> commentsDTO = new ArrayList<>(List.of());
          for (Comment comment : comments) {
              commentsDTO.add(commentMapper.commentToCommentDTO(comment));
          }
@@ -38,25 +40,37 @@ public class CommentService {
 
     public List<CommentDTO> findByUserId(Long user_id) {
         List<Comment> comments = commentRepository.findByUserId(user_id);
-        List<CommentDTO> commentsDTO = new java.util.ArrayList<>(List.of());
+        List<CommentDTO> commentsDTO = new ArrayList<>(List.of());
         for (Comment comment : comments) {
-            commentsDTO.add(commentMapper.commentToCommentDTO(comment));
+            if (comment == null){
+                throw new ElementNotFoundException("El usuario con el id: " + user_id + " no existe");
+            } else{
+                commentsDTO.add(commentMapper.commentToCommentDTO(comment));
+            }
         }
         return commentsDTO;
     }
 
     public List<CommentDTO> findByEventId(Long event_id) {
         List<Comment> comments= commentRepository.findByEventId(event_id);
-        List<CommentDTO> commentsDTO = new java.util.ArrayList<>(List.of());
+        List<CommentDTO> commentsDTO = new ArrayList<>(List.of());
         for (Comment comment : comments) {
-            commentsDTO.add(commentMapper.commentToCommentDTO(comment));
+            if (comment == null){
+                throw new ElementNotFoundException("El evento con el id: " + event_id + " no existe");
+            } else{
+                commentsDTO.add(commentMapper.commentToCommentDTO(comment));
+            }
         }
         return commentsDTO;
     }
 
     public CommentDTO findById(Long id) {
         Comment comment = commentRepository.findById(id);
-        return commentMapper.commentToCommentDTO(comment);
+        if (comment == null) {
+            throw new ElementNotFoundException("Comentario no encontrado con el id: "+id);
+        }else{
+            return commentMapper.commentToCommentDTO(comment);
+        }
     }
 
     public CommentDTO save(Comment comment) {
@@ -77,13 +91,24 @@ public class CommentService {
     }
 
     public CommentDTO updateComment(Comment newData, Long id) {
-        Comment c = commentRepository.findById(id);
-        c.setDescription(newData.getDescription());
-        Comment comment = commentRepository.save(c);
-        return commentMapper.commentToCommentDTO(comment);
+
+        if (commentRepository.findById(id) == null) {
+            throw new ElementNotFoundException("Comentario no encontrado con el id: "+id);
+        } else {
+            Comment c = commentRepository.findById(id);
+            c.setDescription(newData.getDescription());
+            Comment comment = commentRepository.save(c);
+            return commentMapper.commentToCommentDTO(comment);
+        }
     }
 
     public void deleteById(Long id) {
-        commentRepository.deleteById(id);
+        Comment c = commentRepository.findById(id);
+
+        if (c == null) {
+            throw new ElementNotFoundException("Comentario no encontrado con el id: " + id);
+        } else{
+            commentRepository.deleteById(id);
+        }
     }
 }
