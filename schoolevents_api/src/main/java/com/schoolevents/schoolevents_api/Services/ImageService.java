@@ -47,24 +47,41 @@ public class ImageService {
         for (Image i : images) {
             imagesDTO.add(imageMapper.imageToImageDTO(i));
         }
-        return imagesDTO;
+        if (images.isEmpty()){
+            throw new ElementNotFoundException("No hay imagenes registradas para el evento con el id: "+event_id);
+        } else return imagesDTO;
     }
     
     public ImageDTO save(Image image){
-        Image i = imageRepository.save(image);
-        return imageMapper.imageToImageDTO(i);
+        if (image == null) {
+            throw new ElementNotFoundException("No se puede guardar una imagen vacia");
+        } else {
+            Image i = imageRepository.save(image);
+            return imageMapper.imageToImageDTO(i);
+        }
     }
     
     public ImageDTO updateImage(Image image, Long id){
-        Image i = imageRepository.findById(id);
-        i.setSrc(image.getSrc());
-        i.setDescription(image.getDescription());
-        i.setEvent(image.getEvent());
-        Image image0 = imageRepository.save(i);
-        return imageMapper.imageToImageDTO(image0);
+
+        if (image == null) {
+            throw new ElementNotFoundException("No se puede actualizar una imagen vacia");
+        } else {
+            if (imageRepository.findById(id) == null) {
+                throw new ElementNotFoundException("No se puede actualizar una imagen sin id");
+            } else {
+                Image i = imageRepository.findById(id);
+                i.setSrc(image.getSrc());
+                i.setDescription(image.getDescription());
+                i.setEvent(image.getEvent());
+                Image image0 = imageRepository.save(i);
+                return imageMapper.imageToImageDTO(image0);
+            }
+        }
     }
     
     public void deleteById(Long id){
-        imageRepository.deleteById(id);
+        if (imageRepository.findById(id) == null) {
+            throw new ElementNotFoundException("Imagen no encontrada con el id: "+id);
+        } else imageRepository.deleteById(id);
     }
 }

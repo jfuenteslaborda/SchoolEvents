@@ -93,15 +93,19 @@ public class EventService {
         if (eventRepository.findById(id) == null) {
             throw new ElementNotFoundException("Evento no encontrado con el id: "+id);
         } else {
-            Event e = eventRepository.findById(id);
-            e.setCapacity(event.getCapacity());
-            e.setDescription(event.getDescription());
-            e.setDate(event.getDate());
-            e.setPrice(event.getPrice());
-            e.setTitle(event.getTitle());
-            e.setNeed_payment(event.getNeed_payment());
-            Event event1 = eventRepository.save(e);
-            return eventMapper.eventToEventDTO(event1);
+            if (event == null) {
+                throw new ElementNotFoundException("No se puede actualizar un evento vacio");
+            } else {
+                Event e = eventRepository.findById(id);
+                e.setCapacity(event.getCapacity());
+                e.setDescription(event.getDescription());
+                e.setDate(event.getDate());
+                e.setPrice(event.getPrice());
+                e.setTitle(event.getTitle());
+                e.setNeed_payment(event.getNeed_payment());
+                Event event1 = eventRepository.save(e);
+                return eventMapper.eventToEventDTO(event1);
+            }
         }
     }
 
