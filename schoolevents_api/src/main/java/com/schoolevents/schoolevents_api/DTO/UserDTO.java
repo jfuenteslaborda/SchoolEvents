@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.schoolevents.schoolevents_api.models.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
 import lombok.Data;
 import java.time.LocalDate;
 import java.util.Set;
@@ -20,6 +21,7 @@ public class UserDTO {
     private String password;
     private String photo;
     @JsonFormat(pattern = "dd-MM-yyyy")
+    @Past(message = "La fecha no puede ser en el pasado")
     @NotBlank(message = "Debe de haber alguna fecha")
     private LocalDate date;
     @NotBlank(message = "Debe de tener algun rol")
