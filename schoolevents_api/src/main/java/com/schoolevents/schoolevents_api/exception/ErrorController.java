@@ -20,7 +20,6 @@ public class ErrorController {
         for(FieldError error : exception.getBindingResult().getFieldErrors()){
             mapaErrores.put(error.getField(), error.getDefaultMessage());}
         return new ResponseEntity<>(mapaErrores, HttpStatus.BAD_REQUEST);
-
     }
 
     @ExceptionHandler(ElementNotFoundException.class)

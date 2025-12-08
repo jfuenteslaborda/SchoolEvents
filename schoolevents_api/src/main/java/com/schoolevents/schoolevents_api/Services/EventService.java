@@ -3,6 +3,7 @@ package com.schoolevents.schoolevents_api.Services;
 
 import com.schoolevents.schoolevents_api.DTO.EventDTO;
 import com.schoolevents.schoolevents_api.DTO.EventStadisticsDTO;
+import com.schoolevents.schoolevents_api.exception.ElementNotFoundException;
 import com.schoolevents.schoolevents_api.mappers.EventMapper;
 import com.schoolevents.schoolevents_api.models.*;
 import com.schoolevents.schoolevents_api.repositories.EventRepository;
@@ -30,21 +31,23 @@ public class EventService {
         for (Event event : events) {
             eventsDTO.add(eventMapper.eventToEventDTO(event));
         }
-        return eventsDTO;
+        if (events.isEmpty()){
+            throw new ElementNotFoundException("No hay eventos registrados");
+        }else return eventsDTO;
     }
 
     public EventDTO findById(Long id) {
         Event e = eventRepository.findById(id);
-        return eventMapper.eventToEventDTO(e);
-    }
-
-    public Event findByIdEntity(Long id) {
-        return eventRepository.findById(id);
+        if (e == null) {
+            throw new ElementNotFoundException("Evento no encontrado con el id: "+id);
+        } else return eventMapper.eventToEventDTO(e);
     }
 
     public EventDTO findByTitle(String title) {
         Event e = eventRepository.findByTitle(title);
-        return eventMapper.eventToEventDTO(e);
+        if (e == null) {
+            throw new ElementNotFoundException("Evento con el titulo no encontrado: "+title);
+        } else return eventMapper.eventToEventDTO(e);
     }
 
     public List<EventDTO> findByDate(LocalDate date) {
@@ -53,7 +56,9 @@ public class EventService {
         for (Event event : events) {
             eventsDTO.add(eventMapper.eventToEventDTO(event));
         }
-        return eventsDTO;
+        if (events.isEmpty()){
+            throw new ElementNotFoundException("No hay eventos registrados en la fecha: "+date);
+        } else return eventsDTO;
     }
 
     public List<EventDTO> findByTwoWeeksLater() {
@@ -64,33 +69,47 @@ public class EventService {
         for (Event event : events) {
             eventsDTO.add(eventMapper.eventToEventDTO(event));
         }
-        return eventsDTO;
+        if (events.isEmpty()){
+            throw new ElementNotFoundException("No hay eventos en dos semanas");
+        } else return eventsDTO;
     }
 
     public EventDTO save(Event event) {
-        Event e = eventRepository.save(event);
-        return eventMapper.eventToEventDTO(e);
+        if (event.getId() != null) {
+            throw new ElementNotFoundException("El evento ya existe");
+        }else {
+            Event e = eventRepository.save(event);
+            return eventMapper.eventToEventDTO(e);
+        }
     }
 
     public List<EventStadisticsDTO> getEventsStadistic() {
-        return eventRepository.getEventStadistics();
+        if (eventRepository.getEventStadistics().isEmpty()){
+            throw new ElementNotFoundException("No hay eventos registrados");
+        }else return eventRepository.getEventStadistics();
     }
 
     public EventDTO updateEvent(Event event, Long id) {
-        Event e = eventRepository.findById(id);
-        e.setCapacity(event.getCapacity());
-        e.setDescription(event.getDescription());
-        e.setDate(event.getDate());
-        e.setPrice(event.getPrice());
-        e.setTitle(event.getTitle());
-        e.setNeed_payment(event.getNeed_payment());
-        Event event1 = eventRepository.save(e);
-        return eventMapper.eventToEventDTO(event1);
+        if (eventRepository.findById(id) == null) {
+            throw new ElementNotFoundException("Evento no encontrado con el id: "+id);
+        } else {
+            Event e = eventRepository.findById(id);
+            e.setCapacity(event.getCapacity());
+            e.setDescription(event.getDescription());
+            e.setDate(event.getDate());
+            e.setPrice(event.getPrice());
+            e.setTitle(event.getTitle());
+            e.setNeed_payment(event.getNeed_payment());
+            Event event1 = eventRepository.save(e);
+            return eventMapper.eventToEventDTO(event1);
+        }
     }
 
     public void deleteById(Long id) {
-        eventRepository.deleteById(id);
+        if (eventRepository.findById(id) == null) {
+            throw new ElementNotFoundException("Evento no encontrado con el id: "+id);
+        } else {
+            eventRepository.deleteById(id);
+        }
     }
-
-
 }

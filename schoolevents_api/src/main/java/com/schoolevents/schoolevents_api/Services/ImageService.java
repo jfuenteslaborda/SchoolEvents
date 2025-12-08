@@ -2,6 +2,7 @@ package com.schoolevents.schoolevents_api.Services;
 
 
 import com.schoolevents.schoolevents_api.DTO.ImageDTO;
+import com.schoolevents.schoolevents_api.exception.ElementNotFoundException;
 import com.schoolevents.schoolevents_api.mappers.ImageMapper;
 import com.schoolevents.schoolevents_api.models.*;
 import com.schoolevents.schoolevents_api.repositories.ImageRepository;
@@ -28,12 +29,16 @@ public class ImageService {
         for (Image i : images) {
             imagesDTO.add(imageMapper.imageToImageDTO(i));
         }
-        return imagesDTO;
+        if (images.isEmpty()){
+            throw new ElementNotFoundException("No hay imagenes registradas");
+        } else return imagesDTO;
     }
     
     public ImageDTO findById(Long id){
         Image image = imageRepository.findById(id);
-        return imageMapper.imageToImageDTO(image);
+        if (image == null) {
+            throw new ElementNotFoundException("Imagen no encontrada con el id: "+id);
+        } else return imageMapper.imageToImageDTO(image);
     }
 
     public List<ImageDTO> findByEventId(Long event_id){
