@@ -2,6 +2,7 @@ package com.schoolevents.schoolevents_api.Services;
 
 
 import com.schoolevents.schoolevents_api.DTO.MessageDTO;
+import com.schoolevents.schoolevents_api.exception.ElementNotFoundException;
 import com.schoolevents.schoolevents_api.mappers.MessageMapper;
 import com.schoolevents.schoolevents_api.models.*;
 import com.schoolevents.schoolevents_api.repositories.MessageRepository;
@@ -28,12 +29,16 @@ public class MessageService {
         for (Message message : messages) {
             messagesDTO.add(messageMapper.messageToMessageDTO(message));
         }
-        return messagesDTO;
+        if (messages.isEmpty()){
+            throw new ElementNotFoundException("No hay mensajes registrados");
+        } else return messagesDTO;
     }
 
     public MessageDTO findById(Long id){
         Message m = messageRepository.findById(id);
-        return messageMapper.messageToMessageDTO(m);
+        if (m == null) {
+            throw new ElementNotFoundException("Mensaje no encontrado con el id: "+id);
+        } else return messageMapper.messageToMessageDTO(m);
     }
 
     public List<MessageDTO> findByUserId(Long user_id){
@@ -42,24 +47,40 @@ public class MessageService {
         for (Message message : messages) {
             messagesDTO.add(messageMapper.messageToMessageDTO(message));
         }
-        return messagesDTO;
+        if (messages.isEmpty()){
+            throw new ElementNotFoundException("No hay mensajes registrados para el usuario con el id: "+user_id);
+        } else return messagesDTO;
     }
 
     public MessageDTO save(Message message){
-        Message m = messageRepository.save(message);
-        return messageMapper.messageToMessageDTO(m);
+        if (message == null) {
+            throw new ElementNotFoundException("No se puede guardar un mensaje vacio");
+        } else {
+            Message m = messageRepository.save(message);
+            return messageMapper.messageToMessageDTO(m);
+        }
     }
 
     public MessageDTO updateMessage(Message message, Long id){
-        Message m = messageRepository.findById(id);
-        m.setContent(message.getContent());
-        m.setUser(message.getUser());
-        m.setSend_date(message.getSend_date());
-        Message m0 = messageRepository.save(m);
-        return messageMapper.messageToMessageDTO(m0);
+        if (message == null) {
+            throw new ElementNotFoundException("No se puede actualizar un mensaje vacio");
+        } else {
+            if (messageRepository.findById(id) == null) {
+                throw new ElementNotFoundException("Mensaje no encontrado con el id: "+id);
+            } else {
+                Message m = messageRepository.findById(id);
+                m.setContent(message.getContent());
+                m.setUser(message.getUser());
+                m.setSend_date(message.getSend_date());
+                Message m0 = messageRepository.save(m);
+                return messageMapper.messageToMessageDTO(m0);
+            }
+        }
     }
 
     public void delete(Long id){
-        messageRepository.deleteById(id);
+        if (messageRepository.findById(id) == null) {
+            throw new ElementNotFoundException("Mensaje no encontrado con el id: "+id);
+        } else  messageRepository.deleteById(id);
     }
 }
