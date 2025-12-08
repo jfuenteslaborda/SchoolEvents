@@ -35,33 +35,31 @@ public class CommentService {
          for (Comment comment : comments) {
              commentsDTO.add(commentMapper.commentToCommentDTO(comment));
          }
-         return commentsDTO;
+         if (comments.isEmpty()){
+             throw new ElementNotFoundException("No hay comentarios registrados");
+         }else return commentsDTO;
     }
 
     public List<CommentDTO> findByUserId(Long user_id) {
         List<Comment> comments = commentRepository.findByUserId(user_id);
         List<CommentDTO> commentsDTO = new ArrayList<>(List.of());
         for (Comment comment : comments) {
-            if (comment == null){
-                throw new ElementNotFoundException("El usuario con el id: " + user_id + " no existe");
-            } else{
-                commentsDTO.add(commentMapper.commentToCommentDTO(comment));
-            }
+            commentsDTO.add(commentMapper.commentToCommentDTO(comment));
         }
-        return commentsDTO;
+        if (comments.isEmpty()){
+            throw new ElementNotFoundException("El usuario con el id: " + user_id + " no tiene comentarios");
+        }else return commentsDTO;
     }
 
     public List<CommentDTO> findByEventId(Long event_id) {
         List<Comment> comments= commentRepository.findByEventId(event_id);
         List<CommentDTO> commentsDTO = new ArrayList<>(List.of());
         for (Comment comment : comments) {
-            if (comment == null){
-                throw new ElementNotFoundException("El evento con el id: " + event_id + " no existe");
-            } else{
-                commentsDTO.add(commentMapper.commentToCommentDTO(comment));
-            }
+            commentsDTO.add(commentMapper.commentToCommentDTO(comment));
         }
-        return commentsDTO;
+        if (comments.isEmpty()){
+            throw new ElementNotFoundException("El evento con el id: " + event_id + " no tiene comentarios");
+        } else return commentsDTO;
     }
 
     public CommentDTO findById(Long id) {
@@ -85,9 +83,12 @@ public class CommentService {
         comment.setUser(user);
         comment.setEvent(event);
 
-        Comment saved = commentRepository.save(comment);
-
-        return commentMapper.commentToCommentDTO(saved);
+        if (commentRepository.save(comment) == null) {
+            throw new ElementNotFoundException("No se pudo guardar el comentario");
+        }else {
+            Comment saved = commentRepository.save(comment);
+            return commentMapper.commentToCommentDTO(saved);
+        }
     }
 
     public CommentDTO updateComment(Comment newData, Long id) {
