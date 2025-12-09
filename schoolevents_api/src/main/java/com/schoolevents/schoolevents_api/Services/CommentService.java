@@ -96,14 +96,11 @@ public class CommentService {
         if (commentRepository.findById(id) == null) {
             throw new ElementNotFoundException("Comentario no encontrado con el id: "+id);
         } else {
-            if (newData == null) {
-                Comment c = commentRepository.findById(id);
-                c.setDescription(newData.getDescription());
-                Comment comment = commentRepository.save(c);
-                return commentMapper.commentToCommentDTO(comment);
-            }
+            Comment c = commentRepository.findById(id);
+            c.setDescription(newData.getDescription());
+            Comment comment = commentRepository.save(c);
+            return commentMapper.commentToCommentDTO(comment);
         }
-        return null;
     }
 
     public void deleteById(Long id) {
