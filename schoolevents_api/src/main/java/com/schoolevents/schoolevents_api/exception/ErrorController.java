@@ -1,5 +1,6 @@
 package com.schoolevents.schoolevents_api.exception;
 
+import jakarta.validation.UnexpectedTypeException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -24,6 +25,13 @@ public class ErrorController {
 
     @ExceptionHandler(ElementNotFoundException.class)
     public ResponseEntity<Map<String, String>> manejarRecursoNoEncontrado(ElementNotFoundException ex) {
+        Map<String, String> error = new HashMap<>();
+        error.put("error", ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(UnexpectedTypeException.class)
+    public ResponseEntity<Map<String, String>> manejarRecursoNoEncontrado(UnexpectedTypeException ex) {
         Map<String, String> error = new HashMap<>();
         error.put("error", ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);

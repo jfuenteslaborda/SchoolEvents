@@ -1,8 +1,11 @@
 package com.schoolevents.schoolevents_api.Services;
 
 import com.schoolevents.schoolevents_api.DTO.CommentDTO;
+import com.schoolevents.schoolevents_api.DTO.UserDTO;
 import com.schoolevents.schoolevents_api.exception.ElementNotFoundException;
 import com.schoolevents.schoolevents_api.mappers.CommentMapper;
+import com.schoolevents.schoolevents_api.mappers.EventMapper;
+import com.schoolevents.schoolevents_api.mappers.UserMapper;
 import com.schoolevents.schoolevents_api.repositories.CommentRepository;
 import com.schoolevents.schoolevents_api.repositories.EventRepository;
 import com.schoolevents.schoolevents_api.repositories.UserRepository;
@@ -20,13 +23,17 @@ public class CommentService {
     private final CommentMapper commentMapper;
     private final EventRepository eventRepository;
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
+    private final EventMapper eventMapper;
 
     @Autowired
-    public CommentService(CommentRepository commentRepository, CommentMapper commentMapper, EventRepository eventRepository, UserRepository userRepository) {
+    public CommentService(CommentRepository commentRepository, CommentMapper commentMapper, EventRepository eventRepository, UserRepository userRepository, UserMapper userMapper, EventMapper eventMapper) {
         this.commentRepository = commentRepository;
         this.commentMapper = commentMapper;
         this.eventRepository = eventRepository;
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
+        this.eventMapper = eventMapper;
     }
 
     public List<CommentDTO> findAll() {
@@ -71,25 +78,27 @@ public class CommentService {
         }
     }
 
-    public CommentDTO save(Comment comment) {
-        Long userId = comment.getUser().getId();
-
+    public CommentDTO save(CommentDTO commentDTO) {
+        Long userId = commentDTO.getUser().getId();
         User user = userRepository.findById(userId);
 
-        Long eventId = comment.getEvent().getId();
-
+        Long eventId = commentDTO.getEvent().getId();
         Event event = eventRepository.findById(eventId);
 
-        comment.setUser(user);
-        comment.setEvent(event);
+        Comment comment = commentMapper.commentDTOToComment(commentDTO);
+        if (comment == null){
+            throw new ElementNotFoundException("Comentario no encontrado");
+        } else {
 
-        if (commentRepository.save(comment) == null) {
-            throw new ElementNotFoundException("No se pudo guardar el comentario");
-        }else {
+            comment.setUser(user);
+            comment.setEvent(event);
+
             Comment saved = commentRepository.save(comment);
+
             return commentMapper.commentToCommentDTO(saved);
         }
     }
+
 
     public CommentDTO updateComment(Comment newData, Long id) {
 
