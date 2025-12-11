@@ -1,15 +1,15 @@
 <ion-spinner *ngIf="loading" name="crescent" style="display:block; margin:50% auto;"></ion-spinner>
 
 <ion-list class="list-notifications" *ngIf="!loading && mensajes.length">
-    @for (m of mensajes; track m.id){
+    @for (m of mensajes; track m){
         <ion-card class="notif-card">
             <ion-item lines="none">
                 <ion-avatar slot="start">
-                    <img [src]="m.user.photo|| 'assets/default-avatar.jpg'" alt=""/>
+                    <img [src]=" 'assets/default-avatar.jpg'" alt=""/>
                 </ion-avatar>
                 <ion-label>
-                    <h2>{{ m.user.full_name}}</h2>
-                    <p>{{ m.content }}</p>
+                    <h2>{{ m.nombre}}</h2>
+                    <p>{{ m.mensaje }}</p>
                 </ion-label>
             </ion-item>
         </ion-card>

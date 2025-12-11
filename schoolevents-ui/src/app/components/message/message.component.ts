@@ -4,7 +4,6 @@ import { CommonModule } from "@angular/common";
 import {ModalController} from "@ionic/angular";
 import {MessageService} from "../../services/messageService/message-service";
 import {MessageModalComponent} from "../message-modal/message-modal.component";
-import {Observable} from "rxjs";
 
 @Component({
     selector: 'app-message',
@@ -26,9 +25,7 @@ export class MessageComponent implements OnInit {
 
     constructor(private modalCtrl: ModalController, private messageService: MessageService) { }
 
-    mensajes: Message[] = []
-
-        /*[
+    mensajes = [
         {
             nombre: 'Juan Pérez',
             mensaje: 'Has recibido una nueva tarea de matemáticas.'
@@ -49,7 +46,7 @@ export class MessageComponent implements OnInit {
             nombre: 'Luis Martínez',
             mensaje: 'Tu comentario en el foro ha recibido respuesta.'
         }
-    ];*/
+    ];
 
     loading = true;
 
@@ -73,7 +70,7 @@ export class MessageComponent implements OnInit {
         await modal.present();
     }
 
-    cargarMensajes(mensajes: Observable<Message[]>) {
+    /*cargarMensajes(mensajes: Observable<Message[]>) {
         mensajes = this.messageService.getAllMessages();
-    }
+    }*/
 }
