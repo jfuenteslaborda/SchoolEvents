@@ -1,6 +1,7 @@
 package com.schoolevents.schoolevents_api.Services;
 
 import com.schoolevents.schoolevents_api.DTO.CommentDTO;
+import com.schoolevents.schoolevents_api.DTO.EventDTO;
 import com.schoolevents.schoolevents_api.DTO.UserDTO;
 import com.schoolevents.schoolevents_api.exception.ElementNotFoundException;
 import com.schoolevents.schoolevents_api.mappers.CommentMapper;
@@ -82,14 +83,21 @@ public class CommentService {
         Long userId = commentDTO.getUser().getId();
         User user = userRepository.findById(userId);
 
+        UserDTO userDTO = userMapper.userToUserDTO(user);
+
         Long eventId = commentDTO.getEvent().getId();
         Event event = eventRepository.findById(eventId);
 
+        EventDTO eventDTO = eventMapper.eventToEventDTO(event);
+
+        commentDTO.setEvent(eventDTO);
+        commentDTO.setUser(userDTO);
+
         Comment comment = commentMapper.commentDTOToComment(commentDTO);
+
         if (comment == null){
             throw new ElementNotFoundException("Comentario no encontrado");
         } else {
-
             comment.setUser(user);
             comment.setEvent(event);
 
