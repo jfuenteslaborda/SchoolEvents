@@ -1,0 +1,17 @@
+package com.schoolevents.schoolevents_api.mappers;
+
+import com.schoolevents.schoolevents_api.DTO.ImageDTO;
+import com.schoolevents.schoolevents_api.models.Image;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+
+@Mapper(componentModel = "spring")
+public interface ImageMapper {
+
+    ImageDTO imageToImageDTO(Image image);
+
+    @Mapping(target = "event", ignore = true)
+
+    Image imageDTOToImage(ImageDTO imageDTO);
+
+}

@@ -1,0 +1,28 @@
+<app-header-calendar></app-header-calendar>
+
+<ion-content [fullscreen]="true">
+
+    <div style="margin-top: 10%" class="carousel-header">
+        <h2>CALENDARIO</h2>
+    </div>
+
+    <div class="card">
+        <app-calendar-component class="calendar"></app-calendar-component>
+    </div>
+
+    <div class="carousel-header">
+        <h2>Eventos filtrado por día</h2>
+    </div>
+    <div class="card carousel-container">
+        <app-carousel></app-carousel>
+    </div>
+
+    <div class="carousel-header">
+        <h2>Eventos en 2 semanas</h2>
+    </div>
+    <div style="margin-bottom: 25%" class="card carousel-container">
+        <app-carousel-unfiltered></app-carousel-unfiltered>
+    </div>
+</ion-content>
+
+<app-footer-menu></app-footer-menu>

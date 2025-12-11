@@ -1,0 +1,10 @@
+-- Este es el orden de borrado de la base de datos
+
+-- ASEGURESE DE TENER COPIA DE SEGURIDAD O BACKUP
+
+DROP TABLE IF EXISTS sign;
+DROP TABLE IF EXISTS comment;
+DROP TABLE IF EXISTS message;
+DROP TABLE IF EXISTS image;
+DROP TABLE IF EXISTS event;
+DROP TABLE IF EXISTS app_user;
