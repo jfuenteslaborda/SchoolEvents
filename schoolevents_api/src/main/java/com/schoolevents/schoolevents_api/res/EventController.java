@@ -4,6 +4,7 @@ import com.schoolevents.schoolevents_api.DTO.EventDTO;
 import com.schoolevents.schoolevents_api.DTO.EventStadisticsDTO;
 import com.schoolevents.schoolevents_api.Services.EventService;
 import com.schoolevents.schoolevents_api.models.Event;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,12 +49,12 @@ public class EventController {
     }
 
     @PostMapping("/create")
-    public EventDTO addEvent(@RequestBody Event event){
+    public EventDTO addEvent(@Valid @RequestBody EventDTO event){
         return eventService.save(event);
     }
 
     @PutMapping("/update/{id}")
-    public EventDTO updateEvent(@RequestBody Event event,  @PathVariable Long id){
+    public EventDTO updateEvent(@Valid @RequestBody EventDTO event,  @PathVariable Long id){
         return eventService.updateEvent(event, id);
     }
 

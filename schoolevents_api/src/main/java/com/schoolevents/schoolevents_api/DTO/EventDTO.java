@@ -5,13 +5,14 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.hibernate.sql.Update;
 
 import java.time.LocalDate;
 
 @Data
 public class EventDTO {
 
-    @NotNull(message = "El id no puede ser nulo")
+    @NotNull(groups = Update.class, message = "El id de evento no puede ser nulo")
     private Long id;
 
     @NotBlank(message = "Tiene que tener algún titulo")

@@ -22,17 +22,17 @@ public class CommentController {
     }
 
     @GetMapping("/by_user/{id}")
-    public List<CommentDTO> getCommentByUserId(@Valid @PathVariable("id") long id) {
+    public List<CommentDTO> getCommentByUserId(@PathVariable("id") long id) {
         return commentService.findByUserId(id);
     }
 
     @GetMapping("/by_event/{id}")
-    public List<CommentDTO> getCommentsByEventId(@Valid @PathVariable("id") long id) {
+    public List<CommentDTO> getCommentsByEventId(@PathVariable("id") long id) {
         return commentService.findByEventId(id);
     }
 
     @GetMapping("/by_id/{id}")
-    public CommentDTO getCommentById(@Valid @PathVariable long id) {
+    public CommentDTO getCommentById(@PathVariable long id) {
         return commentService.findById(id);
     }
 
@@ -42,12 +42,12 @@ public class CommentController {
     }
 
     @PutMapping("/update/{id}")
-    public CommentDTO updateComment(@Valid @RequestBody Comment comment, @Valid @PathVariable long id) {
+    public CommentDTO updateComment(@Valid @RequestBody CommentDTO comment, @PathVariable long id) {
         return commentService.updateComment(comment, id);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteComment(@Valid @PathVariable long id) {
+    public void deleteComment( @PathVariable long id) {
         commentService.deleteById(id);
     }
 }

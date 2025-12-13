@@ -83,10 +83,18 @@ public class CommentService {
         Long userId = commentDTO.getUser().getId();
         User user = userRepository.findById(userId);
 
+        if (user == null){
+            throw new ElementNotFoundException("Usuario no encontrado o sin ID");
+        }
+
         UserDTO userDTO = userMapper.userToUserDTO(user);
 
         Long eventId = commentDTO.getEvent().getId();
         Event event = eventRepository.findById(eventId);
+
+        if (event == null){
+            throw new ElementNotFoundException("Evento no encontrado o sin ID");
+        }
 
         EventDTO eventDTO = eventMapper.eventToEventDTO(event);
 
@@ -108,16 +116,30 @@ public class CommentService {
     }
 
 
-    public CommentDTO updateComment(Comment newData, Long id) {
-
-        if (commentRepository.findById(id) == null) {
-            throw new ElementNotFoundException("Comentario no encontrado con el id: "+id);
-        } else {
-            Comment c = commentRepository.findById(id);
-            c.setDescription(newData.getDescription());
-            Comment comment = commentRepository.save(c);
-            return commentMapper.commentToCommentDTO(comment);
+    public CommentDTO updateComment(CommentDTO newData, Long id) {
+        Comment existingComment = commentRepository.findById(id);
+        if (existingComment == null) {
+            throw new ElementNotFoundException("Comentario no encontrado");
         }
+
+        existingComment.setDescription(newData.getDescription());
+        existingComment.setDate(newData.getDate());
+
+        if (newData.getUser() != null && newData.getUser().getId() != null) {
+            existingComment.setUser(userRepository.findById(newData.getUser().getId()));
+        } else  {
+            throw new ElementNotFoundException("Usuario no encontrado");
+        }
+
+        if (newData.getEvent() != null && newData.getEvent().getId() != null) {
+            existingComment.setEvent(eventRepository.findById(newData.getEvent().getId()));
+        } else {
+            throw new ElementNotFoundException("Evento no encontrado");
+        }
+
+        Comment updatedComment = commentRepository.save(existingComment);
+
+        return commentMapper.commentToCommentDTO(updatedComment);
     }
 
     public void deleteById(Long id) {

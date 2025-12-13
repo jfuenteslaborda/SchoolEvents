@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Data
 public class UserDTO {
 
-    @NotNull(message = "El id no debe de ser nulo")
+    @NotNull(message = "El id de usuario no debe de ser nulo")
     private Long id;
 
     @NotBlank(message = "El nombre no puede estar en blanco o nulo")

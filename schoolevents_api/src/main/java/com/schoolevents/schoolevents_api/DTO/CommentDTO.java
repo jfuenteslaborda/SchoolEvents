@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.Data;
+import org.hibernate.sql.Update;
 
 import java.time.LocalDate;
 
 @Data
 public class CommentDTO {
 
+    @NotNull(groups = Update.class, message = "El id de comentario no puede ser nulo")
     private Long id;
 
     @NotBlank(message = "La descripcion esta vacia")
