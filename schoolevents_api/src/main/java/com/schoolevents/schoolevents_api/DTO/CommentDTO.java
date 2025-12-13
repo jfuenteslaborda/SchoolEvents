@@ -18,7 +18,7 @@ public class CommentDTO {
     @NotNull(message = "Tiene que haber alguna fecha")
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate date;
-    
+
     @NotNull(message = "Tiene que estar asociado a algun usuario")
     private UserDTO user;
 
