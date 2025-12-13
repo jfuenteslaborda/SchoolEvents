@@ -3,6 +3,7 @@ package com.schoolevents.schoolevents_api.res;
 import com.schoolevents.schoolevents_api.DTO.SignDTO;
 import com.schoolevents.schoolevents_api.Services.SignService;
 import com.schoolevents.schoolevents_api.models.Sign;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,12 +36,12 @@ class SignController {
     }
 
     @PostMapping("/create")
-    public SignDTO save(@RequestBody Sign sign){
+    public SignDTO save(@Valid @RequestBody SignDTO sign){
         return signService.save(sign);
     }
 
     @PutMapping("/update/{id}")
-    public SignDTO update(@PathVariable Long id, @RequestBody Sign sign){
+    public SignDTO update(@PathVariable Long id, @Valid @RequestBody SignDTO sign){
         return signService.update(sign, id);
     }
 

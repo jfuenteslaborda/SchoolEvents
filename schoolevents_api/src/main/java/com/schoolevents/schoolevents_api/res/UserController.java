@@ -4,6 +4,7 @@ import com.schoolevents.schoolevents_api.DTO.UserDTO;
 import com.schoolevents.schoolevents_api.DTO.UserStadisticsDTO;
 import com.schoolevents.schoolevents_api.Services.UserService;
 import com.schoolevents.schoolevents_api.models.User;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,12 +38,12 @@ class UserController {
     }
 
     @PostMapping("/create")
-    public UserDTO createUser(@RequestBody User user){
+    public UserDTO createUser(@Valid @RequestBody UserDTO user){
         return userService.save(user);
     }
 
     @PutMapping("/update/{id}")
-    public UserDTO updateUser(@PathVariable Long id, @RequestBody User user){
+    public UserDTO updateUser(@PathVariable Long id, @Valid @RequestBody UserDTO user){
         return userService.update(user, id);
     }
 

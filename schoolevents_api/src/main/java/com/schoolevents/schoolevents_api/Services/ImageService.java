@@ -6,6 +6,7 @@ import com.schoolevents.schoolevents_api.exception.ElementNotFoundException;
 import com.schoolevents.schoolevents_api.mappers.EventMapper;
 import com.schoolevents.schoolevents_api.mappers.ImageMapper;
 import com.schoolevents.schoolevents_api.models.*;
+import com.schoolevents.schoolevents_api.repositories.EventRepository;
 import com.schoolevents.schoolevents_api.repositories.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,12 +19,14 @@ public class ImageService {
     private  final ImageRepository imageRepository;
     private final  ImageMapper imageMapper;
     private final EventMapper eventMapper;
+    private final EventRepository eventRepository;
 
     @Autowired
-    public ImageService(ImageRepository imageRepository, ImageMapper imageMapper, EventMapper eventMapper) {
+    public ImageService(ImageRepository imageRepository, ImageMapper imageMapper, EventMapper eventMapper, EventRepository eventRepository) {
         this.imageRepository = imageRepository;
         this.imageMapper = imageMapper;
         this.eventMapper = eventMapper;
+        this.eventRepository = eventRepository;
     }
 
     public List<ImageDTO> findAll(){
@@ -54,15 +57,31 @@ public class ImageService {
             throw new ElementNotFoundException("No hay imagenes registradas para el evento con el id: "+event_id);
         } else return imagesDTO;
     }
-    
-    public ImageDTO save(ImageDTO image){
+
+    public ImageDTO save(ImageDTO image) {
         if (image == null) {
-            throw new ElementNotFoundException("No se puede guardar una imagen vacia");
-        } else {
-            Image i = imageRepository.save(imageMapper.imageDTOToImage(image));
-            return imageMapper.imageToImageDTO(i);
+            throw new ElementNotFoundException("No se puede guardar una imagen vacía");
         }
+
+        if (image.getEvent() == null || image.getEvent().getId() == null) {
+            throw new ElementNotFoundException("La imagen debe estar asociada a un evento válido");
+        }
+
+        Event e = eventRepository.findById(image.getEvent().getId());
+        if (e == null) {
+            throw new ElementNotFoundException("Evento no encontrado con id: " + image.getEvent().getId());
+        }
+
+        Image entity = imageMapper.imageDTOToImage(image);
+
+        entity.setEvent(e);
+
+        Image saved = imageRepository.save(entity);
+
+        return imageMapper.imageToImageDTO(saved);
     }
+
+
 
     public ImageDTO updateImage(ImageDTO imageDTO, Long id) {
         if (imageDTO == null) {
@@ -73,15 +92,22 @@ public class ImageService {
         if (existingImage == null) {
             throw new ElementNotFoundException("Imagen no encontrada con el id: "+id);
         }
-
         existingImage.setSrc(imageDTO.getSrc());
         existingImage.setDescription(imageDTO.getDescription());
-        existingImage.setEvent(eventMapper.eventDTOToEvent(imageDTO.getEvent()));
+
+        if (imageDTO.getEvent() == null || imageDTO.getEvent().getId() == null) {
+            throw new ElementNotFoundException("La imagen debe estar asociada a un evento válido");
+        }
+        Event event = eventRepository.findById(imageDTO.getEvent().getId());
+        if (event == null) {
+            throw new ElementNotFoundException("Evento no encontrado con id: " + imageDTO.getEvent().getId());
+        }
+        existingImage.setEvent(event);
 
         Image updatedImage = imageRepository.save(existingImage);
-
         return imageMapper.imageToImageDTO(updatedImage);
     }
+
 
 
     public void deleteById(Long id){

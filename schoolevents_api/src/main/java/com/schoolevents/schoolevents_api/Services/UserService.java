@@ -54,34 +54,62 @@ public class UserService {
         } else return userMapper.userToUserDTO(user);
     }
 
-    public UserDTO save(User user){
-        if (user == null) {
-            throw new ElementNotFoundException("No se puede guardar un usuario vacio");
-        } else {
-            User u = userRepository.save(user);
-            return userMapper.userToUserDTO(u);
+    public UserDTO save(UserDTO userDTO) {
+        if (userDTO == null) {
+            throw new ElementNotFoundException("No se puede guardar un usuario vacío");
         }
+
+        if (userDTO.getFull_name() == null || userDTO.getFull_name().isBlank()) {
+            throw new IllegalArgumentException("El nombre del usuario no puede estar vacío");
+        }
+        if (userDTO.getEmail() == null || userDTO.getEmail().isBlank()) {
+            throw new IllegalArgumentException("El email del usuario no puede estar vacío");
+        }
+        if (userDTO.getDate() == null) {
+            throw new IllegalArgumentException("Debe existir una fecha de registro para el usuario");
+        }
+        if (userDTO.getIs_Admin() == null) {
+            throw new IllegalArgumentException("El usuario debe tener un rol definido");
+        }
+
+        User existingUser = userRepository.findByEmail(userDTO.getEmail());
+        if (existingUser != null && !existingUser.getId().equals(userDTO.getId())) {
+            throw new ElementNotFoundException("Ya existe un usuario con el email: " + userDTO.getEmail());
+        }
+
+        User userEntity = userMapper.userDTOToUser(userDTO);
+        User savedUser = userRepository.save(userEntity);
+
+        return userMapper.userToUserDTO(savedUser);
     }
 
-    public UserDTO update(User user, Long id){
-        if (user == null) {
-            throw new ElementNotFoundException("No se puede actualizar un usuario vacio");
-        } else {
-            if (userRepository.findById(id) == null) {
-                throw new ElementNotFoundException("Usuario no encontrado con el id: "+id);
-            } else {
-                User u = userRepository.findById(id);
-                u.setEmail(user.getEmail());
-                u.setDate(user.getDate());
-                u.setPassword(user.getPassword());
-                u.setPhoto(user.getPhoto());
-                u.setFull_name(user.getFull_name());
-                u.setIs_Admin(user.getIs_Admin());
-                User u0 = userRepository.save(u);
-                return userMapper.userToUserDTO(u0);
-            }
+
+    public UserDTO update(UserDTO userDTO, Long id) {
+        if (userDTO == null) {
+            throw new ElementNotFoundException("No se puede actualizar un usuario vacío");
         }
+
+        User existingUser = userRepository.findByEmail(userDTO.getEmail());
+        if (existingUser != null && !existingUser.getId().equals(userDTO.getId())) {
+            throw new ElementNotFoundException("Ya existe un usuario con el email: " + userDTO.getEmail());
+        }
+
+        User existingUser0 = userRepository.findById(id);
+        if (existingUser0 == null) {
+            throw new ElementNotFoundException("Usuario no encontrado con el id: " + id);
+        }
+
+        existingUser.setEmail(userDTO.getEmail());
+        existingUser.setDate(userDTO.getDate());
+        existingUser.setPassword(userDTO.getPassword());
+        existingUser.setPhoto(userDTO.getPhoto());
+        existingUser.setFull_name(userDTO.getFull_name());
+        existingUser.setIs_Admin(userDTO.getIs_Admin());
+
+        User updatedUser = userRepository.save(existingUser);
+        return userMapper.userToUserDTO(updatedUser);
     }
+
 
     public void delete(Long id){
         if (userRepository.findById(id) == null) {
