@@ -5,7 +5,7 @@
         <ion-card class="notif-card">
             <ion-item lines="none">
                 <ion-avatar slot="start">
-                    <img [src]=" 'assets/default-avatar.jpg'" alt=""/>
+                    <img [src]="m.user.photo ? m.user.photo : 'assets/default-avatar.jpg'" alt=""/>
                 </ion-avatar>
                 <ion-label>
                     <h2>{{ m.user.full_name}}</h2>
