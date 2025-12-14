@@ -1,21 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core'; // <--- Importar OnInit
 import { CommonModule } from '@angular/common';
-import {ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormsModule} from '@angular/forms';
-import {IonContent, IonFooter} from "@ionic/angular/standalone";
-import {Router} from "@angular/router";
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
+import { IonContent, IonFooter } from "@ionic/angular/standalone";
+import { Router } from "@angular/router";
+import { UserService } from '../../services/userService/user-service';
+import { User } from '../../interfaces/User';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss'],
-  standalone: true,
+    selector: 'app-register',
+    templateUrl: './register.page.html',
+    styleUrls: ['./register.page.scss'],
+    standalone: true,
     imports: [CommonModule, FormsModule, ReactiveFormsModule, IonFooter, IonContent]
 })
-export class RegisterPage  {
+export class RegisterPage implements OnInit {
 
     registerForm: FormGroup;
+    passwordStrength: number = 0;
 
-    constructor(private fb: FormBuilder, private router: Router) {
+    constructor(
+        private fb: FormBuilder,
+        private router: Router,
+        private userService: UserService
+    ) {
         this.registerForm = this.fb.group({
             nombre: ['', [Validators.required, Validators.minLength(3)]],
             fechaNacimiento: ['', Validators.required],
@@ -24,20 +31,28 @@ export class RegisterPage  {
         });
     }
 
-    get nombre() {
-        return this.registerForm.get('nombre');
+    // Método para suscribirse a los cambios del control de contraseña
+    ngOnInit() {
+        this.password?.valueChanges.subscribe(password => {
+            this.passwordStrength = this.calculatePasswordStrength(password || '');
+            console.log('Fuerza de la contra: ', this.passwordStrength);
+        });
     }
 
-    get fechaNacimiento() {
-        return this.registerForm.get('fechaNacimiento');
-    }
+    get nombre() { return this.registerForm.get('nombre'); }
+    get fechaNacimiento() { return this.registerForm.get('fechaNacimiento'); }
+    get correo() { return this.registerForm.get('correo'); }
+    get password() { return this.registerForm.get('password'); }
 
-    get correo() {
-        return this.registerForm.get('correo');
-    }
+    // Ya no se necesita onPasswordInput
 
-    get password() {
-        return this.registerForm.get('password');
+    calculatePasswordStrength(password: string): number {
+        let strength = 0;
+        if (password.length >= 6) strength += 25;
+        if (/[A-Z]/.test(password)) strength += 25;
+        if (/[0-9]/.test(password)) strength += 25;
+        if (/[\W]/.test(password)) strength += 25;
+        return Math.min(strength, 100);
     }
 
     onSubmit() {
@@ -47,9 +62,31 @@ export class RegisterPage  {
         }
 
         const { nombre, fechaNacimiento, correo, password } = this.registerForm.value;
-        console.log('Datos registrados:', nombre, fechaNacimiento, correo, password);
 
+
+        const fechaParts = fechaNacimiento.split('-');
+        const fechaFormateada = `${fechaParts[2]}-${fechaParts[1]}-${fechaParts[0]}`;
+
+        const newUserPayload = {
+            full_name: nombre,
+            date: fechaFormateada,
+            email: correo,
+            password: password,
+            is_Admin: 0
+        };
+
+        console.log('Payload a enviar al backend:', newUserPayload);
+
+        this.userService.crearUsuario(newUserPayload).subscribe({
+            next: (resp) => {
+                console.log('Usuario registrado:', resp);
+                this.router.navigate(['/login']);
+            },
+            error: (err) => console.error('Error al registrar usuario:', err)
+        });
     }
+
+
 
     navigateWithAnimation(route: string, event: any) {
         const icon = event.target;
@@ -59,5 +96,9 @@ export class RegisterPage  {
             icon.classList.remove('clicked');
             this.router.navigate([route]);
         }, 300);
+    }
+
+    isFormValid(): boolean {
+        return !!(this.nombre?.valid && this.fechaNacimiento?.valid && this.correo?.valid && this.password?.valid);
     }
 }

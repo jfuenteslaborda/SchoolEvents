@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import {
     IonButton,
@@ -8,11 +8,13 @@ import {
     IonCardSubtitle,
     IonCardTitle
 } from "@ionic/angular/standalone";
+import { EventService } from '../../services/eventService/event-service';
+import { Event } from '../../interfaces/Event';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-event-description',
-    templateUrl: './event-description.component.html',
-    styleUrls: ['./event-description.component.scss'],
+    standalone: true,
     imports: [
         IonCard,
         IonCardHeader,
@@ -20,23 +22,36 @@ import {
         IonCardSubtitle,
         IonCardContent,
         IonButton
-    ]
+    ],
+    templateUrl: './event-description.component.html',
+    styleUrls: ['./event-description.component.scss'],
 })
-export class EventDescriptionComponent {
+export class EventDescriptionComponent implements OnInit, OnDestroy {
 
-     event = {
-        tittle: 'Ejemplo',
-        date: '12 de diciembre de 2025',
-        description: 'Esto es un ejemplo aaaaaaaaaaaaaaaaaaaaaa dios mio aaaaaaaaaaaaaaaa',
-        isFree: false
-    };
+    event: Event | null = null;
+    private eventSub?: Subscription;
+
+    constructor(
+        private alertCtrl: AlertController,
+        private eventService: EventService
+    ) {}
+
+    ngOnInit() {
+        this.event = this.eventService.getEventoActual();
+        console.log('Evento cargado en descripción:', this.event);
+    }
 
 
 
-    constructor(private alertCtrl: AlertController) {}
+    ngOnDestroy() {
+        // Limpiamos la suscripción
+        this.eventSub?.unsubscribe();
+    }
 
     async suscribe() {
-        if (this.event?.isFree) {
+        if (!this.event) return;
+
+        if (!this.event.need_payment) {
             const alert = await this.alertCtrl.create({
                 header: 'Inscripción completa',
                 message: 'Te has inscrito gratis al evento.',
@@ -48,7 +63,7 @@ export class EventDescriptionComponent {
                 header: 'Pago requerido',
                 message: 'Este evento requiere pago. Procede con el pago para inscribirte.',
                 buttons: [
-                    { text: 'Cancelar', role: 'cancel'},
+                    { text: 'Cancelar', role: 'cancel' },
                     { text: 'Pagar', handler: () => this.paymentProcedure() }
                 ],
             });
@@ -59,5 +74,4 @@ export class EventDescriptionComponent {
     paymentProcedure() {
         console.log('Redirigiendo al pago...');
     }
-
 }

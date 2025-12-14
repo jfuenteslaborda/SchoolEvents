@@ -7,7 +7,7 @@ CREATE TABLE app_user (
     full_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    photo VARCHAR(255),
+    photo TEXT,
     date DATE,
     is_admin INTEGER DEFAULT 0
 );
@@ -20,6 +20,7 @@ CREATE TABLE event (
     price NUMERIC(10, 2) DEFAULT 0.00,
     capacity INTEGER,
     date TIMESTAMP WITHOUT TIME ZONE,
+    src VARCHAR(250),
     need_payment BOOLEAN DEFAULT FALSE
 );
 
@@ -125,6 +126,11 @@ GROUP BY
 ORDER BY
     signs_total DESC
 LIMIT 1;
+
+
+
+
+
 
 
 

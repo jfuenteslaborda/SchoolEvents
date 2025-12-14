@@ -1,9 +1,12 @@
+// messages.page.ts
+
 import { Component, OnInit } from '@angular/core';
-import {FooterMenuComponent} from "../../components/footer-menu/footer-menu.component";
-import { IonContent } from '@ionic/angular/standalone';
-import {HeaderMessagesComponent} from "../../components/header-messages/header-messages.component";
-import {MessageComponent} from "../../components/message/message.component";
-import {MessageModalComponent} from "../../components/message-modal/message-modal.component";
+import { CommonModule } from '@angular/common'; // Asegúrate de que esté aquí si usas directivas
+import { FooterMenuComponent } from "../../components/footer-menu/footer-menu.component";
+import { IonContent } from '@ionic/angular/standalone'; // Solo importamos tags Ion individuales
+import { HeaderMessagesComponent } from "../../components/header-messages/header-messages.component";
+import { MessageComponent } from "../../components/message/message.component";
+import { MessageModalComponent } from "../../components/message-modal/message-modal.component";
 
 @Component({
     selector: 'app-messages',
@@ -11,8 +14,9 @@ import {MessageModalComponent} from "../../components/message-modal/message-moda
     templateUrl: './messages.page.html',
     styleUrls: ['./messages.page.scss'],
     imports: [
-        FooterMenuComponent,
+        CommonModule,
         IonContent,
+        FooterMenuComponent,
         HeaderMessagesComponent,
         MessageComponent,
         MessageModalComponent,
@@ -20,8 +24,7 @@ import {MessageModalComponent} from "../../components/message-modal/message-moda
 })
 export class MessagesPage implements OnInit {
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit() {}
-
+    ngOnInit() {}
 }

@@ -22,7 +22,6 @@ public class EventDTO {
     private String description;
 
     @NotNull(message = "El precio no puede ser nulo")
-    @Min(value = 1, message = "El precio debe de ser mínimo 1")
     private Integer price;
 
     @NotNull(message = "La capacidad no puede ser nula")
@@ -35,4 +34,7 @@ public class EventDTO {
 
     @NotNull(message = "Debe haber necesidad de si es de pago")
     private Boolean need_payment;
+
+    @NotNull(message = "Debe de tener alguna imagen principal")
+    private String src;
 }

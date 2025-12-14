@@ -37,4 +37,7 @@ public class Event {
     @Column(name = "need_payment")
     private Boolean need_payment;
 
+    @Column(name = "src")
+    private String src;
+
 }

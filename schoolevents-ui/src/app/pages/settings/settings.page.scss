@@ -3,7 +3,13 @@ $primary-color: #3880ff;
 $secondary-color: #92949c;
 $text-color: #222428;
 
-// Contenedor principal
+.strength-bar {
+  height: 100%;
+  width: 0%; // Empieza vacía, se actualiza con [style.width.%]
+  background: linear-gradient(to right, red, yellow, green);
+  transition: width 0.3s ease-in-out;
+  z-index: 11;
+}
 .settings-container {
   padding: 16px;
 

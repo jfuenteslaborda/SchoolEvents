@@ -1,10 +1,9 @@
- export interface Event {
-    id: number;
+export interface EventStadistics {
+    event_id: number;
     title: string;
     description: string;
     price: number;
     capacity: number;
     date: string;
-    src: string
-    need_payment: boolean;
+    assist_num: number;
 }
