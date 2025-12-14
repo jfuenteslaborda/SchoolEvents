@@ -1,0 +1,19 @@
+# Node modules de UI
+schoolevents-ui/node_modules/
+
+# Angular / Ionic caché
+schoolevents-ui/.angular/
+
+# Archivos de IDE
+schoolevents-ui/.idea/
+
+# Node modules de API
+schoolevents-api/node_modules/
+
+# Archivos de IDE (si hay) para API
+schoolevents-api/.idea/
+
+# Logs y dist / build
+*.log
+schoolevents-ui/dist/
+schoolevents-api/dist/
