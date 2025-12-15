@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 import { Event } from "../../interfaces/Event";
 import { EventService } from "../../services/eventService/event-service";
 import { UserService } from '../../services/userService/user-service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable, tap, switchMap, BehaviorSubject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -16,21 +16,23 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
     styleUrls: ['./carousel-unfiltered.component.scss']
 })
 export class CarouselUnfilteredComponent implements OnInit, OnDestroy {
+    
+    eventos$: Observable<Event[]>;
+    private refreshEvents$ = new BehaviorSubject<void>(undefined);
 
-    eventos: Event[] = []; // Almacenar los eventos completos
-    slides: { image: string; title: string; description: string; }[] = [];
 
     currentIndex = 0;
     loading = false;
     error = '';
 
-    // --- Lógica de Admin/Edición ---
     isAdmin: boolean = false;
     private userSubscription: Subscription | null = null;
     showEditModal: boolean = false;
     editEventForm: FormGroup;
     imagePreviewSrc: string | ArrayBuffer | null = null;
     editingEventId: number | null = null;
+
+    eventosData: Event[] = [];
 
     constructor(
         private router: Router,
@@ -48,59 +50,60 @@ export class CarouselUnfilteredComponent implements OnInit, OnDestroy {
             need_payment: [false, Validators.required],
             src: ['', Validators.required]
         });
+
+        this.eventos$ = this.refreshEvents$.pipe(
+            tap(() => this.loading = true),
+            switchMap(() => this.eventService.obtenerEventosProximasDosSemanas()),
+            tap({
+                next: (events) => {
+                    this.eventosData = events;
+                    this.loading = false;
+                    this.currentIndex = 0;
+                    this.error = '';
+                },
+                error: (err) => {
+                    this.error = 'No se pudieron cargar los eventos';
+                    this.loading = false;
+                }
+            })
+        );
     }
 
     ngOnInit() {
         this.userSubscription = this.userService.currentUser$.subscribe(user => {
             this.isAdmin = !!user?.is_Admin;
         });
-        this.cargarEventosProximasDosSemanas();
     }
 
     ngOnDestroy() {
         this.userSubscription?.unsubscribe();
+        this.refreshEvents$.complete();
     }
 
-    cargarEventosProximasDosSemanas() {
-        this.loading = true;
-        this.eventos = [];
-        this.slides = [];
-
-        this.eventService.obtenerEventosProximasDosSemanas().subscribe({
-            next: (events: Event[]) => {
-                this.eventos = events; // Guardar eventos completos
-                this.slides = events.map(event => ({
-                    image: event.src || 'assets/default-event.jpg',
-                    title: event.title,
-                    description: event.description || ''
-                }));
-                this.loading = false;
-                this.currentIndex = 0;
-            },
-            error: (err) => {
-                this.error = 'No se pudieron cargar los eventos';
-                this.loading = false;
-            }
-        });
+    get slidesData(): { image: string; title: string; description: string; }[] {
+        return this.eventosData.map(event => ({
+            image: event.src || 'assets/default-event.jpg',
+            title: event.title,
+            description: event.description || ''
+        }));
     }
 
-    // UTILS DEL CARRUSEL
     get eventoActual(): Event | null {
-        return this.eventos.length > 0 ? this.eventos[this.currentIndex] : null;
+        return this.eventosData.length > 0 ? this.eventosData[this.currentIndex] : null;
     }
 
     next() {
-        if (!this.slides.length) return;
-        this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+        if (!this.eventosData.length) return;
+        this.currentIndex = (this.currentIndex + 1) % this.eventosData.length;
     }
 
     prev() {
-        if (!this.slides.length) return;
-        this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+        if (!this.eventosData.length) return;
+        this.currentIndex = (this.currentIndex - 1 + this.eventosData.length) % this.eventosData.length;
     }
 
     goTo(index: number) {
-        if (!this.slides.length) return;
+        if (!this.eventosData.length) return;
         this.currentIndex = index;
     }
 
@@ -109,8 +112,6 @@ export class CarouselUnfilteredComponent implements OnInit, OnDestroy {
         this.eventService.setEventoActivo(this.eventoActual);
         this.router.navigate(['/event']);
     }
-
-    // --- LÓGICA DE EDICIÓN ---
 
     editarEvento() {
         const evento = this.eventoActual;
@@ -141,7 +142,7 @@ export class CarouselUnfilteredComponent implements OnInit, OnDestroy {
         this.editEventForm.reset();
         this.imagePreviewSrc = null;
         this.editingEventId = null;
-        this.cargarEventosProximasDosSemanas(); // Refrescar
+        this.refreshEvents$.next();
     }
 
     handleImageUpload() {
@@ -196,7 +197,6 @@ export class CarouselUnfilteredComponent implements OnInit, OnDestroy {
         });
     }
 
-    // --- LÓGICA DE ELIMINACIÓN ---
 
     eliminarEvento() {
         const evento = this.eventoActual;
@@ -207,7 +207,7 @@ export class CarouselUnfilteredComponent implements OnInit, OnDestroy {
 
             this.eventService.eliminarEvento(eventId).subscribe({
                 next: () => {
-                    this.cargarEventosProximasDosSemanas();
+                    this.refreshEvents$.next();
                 },
                 error: (err) => {
                     alert('Hubo un error al intentar eliminar el evento.');

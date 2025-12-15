@@ -109,6 +109,7 @@ public class EventService {
         existingEvent.setPrice(Float.valueOf(eventDTO.getPrice())); // si es Integer en DTO y entidad, no hace falta Float.valueOf
         existingEvent.setCapacity(eventDTO.getCapacity());
         existingEvent.setNeed_payment(eventDTO.getNeed_payment());
+        existingEvent.setSrc(eventDTO.getSrc());
 
         Event updatedEvent = eventRepository.save(existingEvent);
 
