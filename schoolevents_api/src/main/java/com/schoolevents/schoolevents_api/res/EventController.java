@@ -6,6 +6,7 @@ import com.schoolevents.schoolevents_api.Services.EventService;
 import com.schoolevents.schoolevents_api.models.Event;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -34,7 +35,7 @@ public class EventController {
     }
 
     @GetMapping("/by_date/{date}")
-    public List<EventDTO> getEventByDate(@PathVariable LocalDate date) {
+    public List<EventDTO> getEventByDate(@PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate date) {
         return eventService.findByDate(date);
     }
 
