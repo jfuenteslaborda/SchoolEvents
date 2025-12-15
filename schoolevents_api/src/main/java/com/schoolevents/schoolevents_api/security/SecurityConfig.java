@@ -23,25 +23,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
-                        .requestMatchers(HttpMethod.PUT, "/comments/all").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/comments/by_event/").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/comments/by_id/").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/comments/by_user/").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/comments/by_event/").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/comments/create").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/comments/update/").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/comments/delete/").permitAll()
-
-
-                        .requestMatchers(HttpMethod.GET, "/prendas/filtrarestado").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/prendas/filtrarguardado").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/prendas/crearPrenda").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/marcas/crearMarca").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/colores/crearColores").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/usuarios/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/usuarios/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/prendas/prendaspopulares").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/usuarios/intercambiosactivos").permitAll()
                         .anyRequest().permitAll()
                 );
 

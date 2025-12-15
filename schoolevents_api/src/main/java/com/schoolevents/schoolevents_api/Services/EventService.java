@@ -4,6 +4,7 @@ package com.schoolevents.schoolevents_api.Services;
 import com.schoolevents.schoolevents_api.DTO.EventDTO;
 import com.schoolevents.schoolevents_api.DTO.EventStadisticsDTO;
 import com.schoolevents.schoolevents_api.exception.ElementNotFoundException;
+import com.schoolevents.schoolevents_api.exception.HttpMessageNotReadableException;
 import com.schoolevents.schoolevents_api.mappers.EventMapper;
 import com.schoolevents.schoolevents_api.models.*;
 import com.schoolevents.schoolevents_api.repositories.EventRepository;
@@ -74,14 +75,17 @@ public class EventService {
         } else return eventsDTO;
     }
 
-    public EventDTO save(Event event) {
+    public EventDTO save(EventDTO event) {
         if (event.getId() != null) {
-            throw new ElementNotFoundException("El evento ya existe");
-        }else {
-            Event e = eventRepository.save(event);
-            return eventMapper.eventToEventDTO(e);
+            throw new IllegalArgumentException("El evento ya existe, no puede tener ID al crear");
         }
+        if (event.getDate() == null) {
+            throw new HttpMessageNotReadableException("La fecha no es correcta");
+        }
+        Event savedEvent = eventRepository.save(eventMapper.eventDTOToEvent(event));
+        return eventMapper.eventToEventDTO(savedEvent);
     }
+
 
     public List<EventStadisticsDTO> getEventsStadistic() {
         if (eventRepository.getEventStadistics().isEmpty()){
@@ -89,25 +93,29 @@ public class EventService {
         }else return eventRepository.getEventStadistics();
     }
 
-    public EventDTO updateEvent(Event event, Long id) {
-        if (eventRepository.findById(id) == null) {
-            throw new ElementNotFoundException("Evento no encontrado con el id: "+id);
-        } else {
-            if (event == null) {
-                throw new ElementNotFoundException("No se puede actualizar un evento vacio");
-            } else {
-                Event e = eventRepository.findById(id);
-                e.setCapacity(event.getCapacity());
-                e.setDescription(event.getDescription());
-                e.setDate(event.getDate());
-                e.setPrice(event.getPrice());
-                e.setTitle(event.getTitle());
-                e.setNeed_payment(event.getNeed_payment());
-                Event event1 = eventRepository.save(e);
-                return eventMapper.eventToEventDTO(event1);
-            }
+    public EventDTO updateEvent(EventDTO eventDTO, Long id) {
+        if (eventDTO == null) {
+            throw new IllegalArgumentException("No se puede actualizar un evento vacío");
         }
+
+        Event existingEvent = eventRepository.findById(id);
+        if (existingEvent == null) {
+            throw new ElementNotFoundException("Evento no encontrado con el id: "+id);
+        }
+
+        existingEvent.setTitle(eventDTO.getTitle());
+        existingEvent.setDescription(eventDTO.getDescription());
+        existingEvent.setDate(eventDTO.getDate());
+        existingEvent.setPrice(Float.valueOf(eventDTO.getPrice())); // si es Integer en DTO y entidad, no hace falta Float.valueOf
+        existingEvent.setCapacity(eventDTO.getCapacity());
+        existingEvent.setNeed_payment(eventDTO.getNeed_payment());
+        existingEvent.setSrc(eventDTO.getSrc());
+
+        Event updatedEvent = eventRepository.save(existingEvent);
+
+        return eventMapper.eventToEventDTO(updatedEvent);
     }
+
 
     public void deleteById(Long id) {
         if (eventRepository.findById(id) == null) {

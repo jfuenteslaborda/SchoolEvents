@@ -3,8 +3,13 @@ package com.schoolevents.schoolevents_api.Services;
 import com.schoolevents.schoolevents_api.DTO.SignDTO;
 import com.schoolevents.schoolevents_api.exception.ElementNotFoundException;
 import com.schoolevents.schoolevents_api.mappers.SignMapper;
+import com.schoolevents.schoolevents_api.mappers.UserMapper;
+import com.schoolevents.schoolevents_api.models.Event;
 import com.schoolevents.schoolevents_api.models.Sign;
+import com.schoolevents.schoolevents_api.models.User;
+import com.schoolevents.schoolevents_api.repositories.EventRepository;
 import com.schoolevents.schoolevents_api.repositories.SignRepository;
+import com.schoolevents.schoolevents_api.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +20,17 @@ public class SignService {
 
     private final SignRepository signRepository;
     private final SignMapper signMapper;
+    private final UserMapper userMapper;
+    private final EventRepository eventRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public SignService(SignRepository signRepository, SignMapper signMapper) {
+    public SignService(SignRepository signRepository, SignMapper signMapper, UserMapper userMapper, EventRepository eventRepository, UserRepository userRepository) {
         this.signRepository = signRepository;
         this.signMapper = signMapper;
+        this.userMapper = userMapper;
+        this.eventRepository = eventRepository;
+        this.userRepository = userRepository;
     }
 
     public List<SignDTO> findAll(){
@@ -62,31 +73,72 @@ public class SignService {
         } else return signsDTO;
     }
 
-    public SignDTO save(Sign sign){
-        if (sign == null) {
-            throw new ElementNotFoundException("No se puede guardar un comentario vacio");
-        } else {
-            Sign s = signRepository.save(sign);
-            return signMapper.signToSignDTO(s);
+    public SignDTO save(SignDTO signDTO) {
+        if (signDTO == null) {
+            throw new ElementNotFoundException("No se puede guardar un registro de firma vacío");
         }
+
+        if (signDTO.getUser() == null || signDTO.getUser().getId() == null) {
+            throw new ElementNotFoundException("El registro debe estar asociado a un usuario válido");
+        }
+        User user = userRepository.findById(signDTO.getUser().getId());
+        if (user == null) {
+            throw new ElementNotFoundException("Usuario no encontrado con id: " + signDTO.getUser().getId());
+        }
+
+        if (signDTO.getEvent() == null || signDTO.getEvent().getId() == null) {
+            throw new ElementNotFoundException("El registro debe estar asociado a un evento válido");
+        }
+        Event event = eventRepository.findById(signDTO.getEvent().getId());
+        if (event == null) {
+            throw new ElementNotFoundException("Evento no encontrado con id: " + signDTO.getEvent().getId());
+        }
+
+        Sign sign = signMapper.signDTOToSign(signDTO);
+        sign.setUser(user);
+        sign.setEvent(event);
+
+        Sign savedSign = signRepository.save(sign);
+
+        return signMapper.signToSignDTO(savedSign);
     }
 
-    public SignDTO update(Sign sign, Long id){
-        if (sign == null) {
-            throw new ElementNotFoundException("No se puede actualizar un comentario vacio");
-        } else {
-            if (signRepository.findById(id) == null) {
-                throw new ElementNotFoundException("No se puede actualizar un comentario sin id");
-            } else {
-                Sign s = signRepository.findById(id);
-                s.setEvent(s.getEvent());
-                s.setUser(sign.getUser());
-                s.setDate(sign.getDate());
-                Sign s0 = signRepository.save(s);
-                return signMapper.signToSignDTO(s0);
-            }
+
+    public SignDTO update(SignDTO signDTO, Long id) {
+        if (signDTO == null) {
+            throw new ElementNotFoundException("No se puede actualizar un registro de firma vacío");
         }
+
+        Sign existingSign = signRepository.findById(id);
+        if (existingSign == null) {
+            throw new ElementNotFoundException("No se puede actualizar un registro de firma inexistente con id: " + id);
+        }
+
+        if (signDTO.getUser() == null || signDTO.getUser().getId() == null) {
+            throw new ElementNotFoundException("El registro debe estar asociado a un usuario válido");
+        }
+        User user = userRepository.findById(signDTO.getUser().getId());
+        if (user == null) {
+            throw new ElementNotFoundException("Usuario no encontrado con id: " + signDTO.getUser().getId());
+        }
+
+        if (signDTO.getEvent() == null || signDTO.getEvent().getId() == null) {
+            throw new ElementNotFoundException("El registro debe estar asociado a un evento válido");
+        }
+        Event event = eventRepository.findById(signDTO.getEvent().getId());
+        if (event == null) {
+            throw new ElementNotFoundException("Evento no encontrado con id: " + signDTO.getEvent().getId());
+        }
+
+        existingSign.setUser(user);
+        existingSign.setEvent(event);
+        existingSign.setDate(signDTO.getDate());
+
+        Sign updatedSign = signRepository.save(existingSign);
+
+        return signMapper.signToSignDTO(updatedSign);
     }
+
 
     public void delete(Long id){
         if (signRepository.findById(id) == null) {

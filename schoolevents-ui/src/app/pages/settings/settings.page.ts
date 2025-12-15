@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {
-    IonHeader,
-    IonToolbar,
-    IonTitle,
     IonContent,
     IonAvatar,
     IonButton,
@@ -21,8 +18,11 @@ import {
     swapHorizontalOutline,
     logOutOutline
 } from 'ionicons/icons';
-import {HeaderSettingsComponent} from "../../components/header-settings/header-settings.component";
-import {FooterMenuComponent} from "../../components/footer-menu/footer-menu.component";
+import { HeaderSettingsComponent } from "../../components/header-settings/header-settings.component";
+import { FooterMenuComponent } from "../../components/footer-menu/footer-menu.component";
+import { UserService } from "../../services/userService/user-service";
+import { User } from "../../interfaces/User";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'app-settings',
@@ -44,13 +44,14 @@ import {FooterMenuComponent} from "../../components/footer-menu/footer-menu.comp
 })
 export class SettingsPage implements OnInit {
 
-    username: string = 'Nombre de usuario';
-    email: string = 'Example@gmail.com';
-    password: string = '********';
+    user: User | null = null;
+    username: string = '';
+    email: string = '';
+    password: string = '';
     profileImage: string = 'assets/default-avatar.jpg';
     showPassword: boolean = false;
 
-    constructor() {
+    constructor(private userService: UserService, private router: Router) {
         addIcons({
             cameraOutline,
             eyeOutline,
@@ -62,16 +63,27 @@ export class SettingsPage implements OnInit {
     }
 
     ngOnInit() {
-        // Aquí puedes cargar los datos reales del usuario
         this.loadUserData();
+
+        this.userService.currentUser$.subscribe(user => {
+            if (user) {
+                this.user = user;
+                this.username = user.full_name;
+                this.email = user.email;
+                this.password = user.password;
+                this.profileImage = user.photo || 'assets/default-avatar.jpg';
+            }
+        });
     }
 
     loadUserData() {
-        // Simular carga de datos del usuario
-        // En una aplicación real, esto vendría de un servicio
-        this.username = 'Juan Pérez';
-        this.email = 'juan.perez@example.com';
-        this.password = '••••••••';
+        this.user = this.userService.getUsuarioActual();
+        if (this.user) {
+            this.username = this.user.full_name;
+            this.email = this.user.email;
+            this.password = this.user.password;
+            this.profileImage = this.user.photo || 'assets/default-avatar.jpg';
+        }
     }
 
     togglePasswordVisibility() {
@@ -79,40 +91,53 @@ export class SettingsPage implements OnInit {
     }
 
     changeProfileImage() {
-        // Lógica para cambiar la imagen de perfil
-        console.log('Cambiar imagen de perfil');
-        // Aquí podrías implementar la selección de imagen desde la galería o cámara
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+
+        input.onchange = (event: any) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e: any) => {
+                    this.profileImage = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+        input.click();
     }
 
     onImageError(event: any) {
-        // Manejar error de carga de imagen
         event.target.src = 'assets/images/profile-placeholder.png';
     }
 
     saveChanges() {
-        // Lógica para guardar los cambios
-        console.log('Guardando cambios:', {
-            username: this.username,
+        if (!this.user || !this.isFormValid()) return;
+
+        const updatedUser: User = {
+            ...this.user,
+            full_name: this.username,
             email: this.email,
-            password: this.password
+            password: this.password,
+            photo: this.profileImage
+        };
+
+        this.userService.actualizarUsuario(this.user!.id!, updatedUser).subscribe({
+            next: (resp) => {
+                console.log('Usuario actualizado y sobrescrito:', resp);
+            },
+            error: (err) => console.error('Error al actualizar usuario:', err)
         });
-
-        // Aquí iría la llamada a tu servicio para actualizar los datos
-        // this.userService.updateProfile({ username: this.username, email: this.email });
-    }
-
-    changeAccount() {
-        // Lógica para cambiar de cuenta
-        console.log('Cambiar de cuenta');
     }
 
     logout() {
-        // Lógica para cerrar sesión
+        this.userService.logout();
         console.log('Cerrando sesión');
+        this.router.navigate(['/login']);
     }
 
     isFormValid(): boolean {
-        // Validación básica del formulario
         return this.username.trim().length > 0 &&
             this.email.trim().length > 0 &&
             this.validateEmail(this.email);

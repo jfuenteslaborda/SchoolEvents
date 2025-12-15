@@ -4,6 +4,7 @@ import { CommonModule } from "@angular/common";
 import {ModalController} from "@ionic/angular";
 import {MessageService} from "../../services/messageService/message-service";
 import {MessageModalComponent} from "../message-modal/message-modal.component";
+import {Message} from "../../interfaces/Message";
 
 @Component({
     selector: 'app-message',
@@ -21,39 +22,30 @@ import {MessageModalComponent} from "../message-modal/message-modal.component";
         IonButton,
     ]
 })
+
 export class MessageComponent implements OnInit {
+
+    mensajes: Message[] = [];
+    loading = true;
 
     constructor(private modalCtrl: ModalController, private messageService: MessageService) { }
 
-    mensajes = [
-        {
-            nombre: 'Juan Pérez',
-            mensaje: 'Has recibido una nueva tarea de matemáticas.'
-        },
-        {
-            nombre: 'María López',
-            mensaje: 'El evento de ciencias ha sido actualizado.'
-        },
-        {
-            nombre: 'Carlos Sánchez',
-            mensaje: 'Tu asistencia al taller de arte ha sido confirmada.'
-        },
-        {
-            nombre: 'Ana Gómez',
-            mensaje: 'Nueva notificación de recordatorio: Reunión con padres.'
-        },
-        {
-            nombre: 'Luis Martínez',
-            mensaje: 'Tu comentario en el foro ha recibido respuesta.'
-        }
-    ];
-
-    loading = true;
-
     ngOnInit() {
-        setTimeout(() => {
-            this.loading = false;
-        }, 1000);
+        this.cargarMensajes();
+    }
+
+    cargarMensajes() {
+        this.loading = true;
+        this.messageService.obtenerMensajes().subscribe({
+            next: (data: Message[]) => {
+                this.mensajes = data;
+                this.loading = false;
+            },
+            error: (err) => {
+                console.error('Error cargando mensajes', err);
+                this.loading = false;
+            }
+        });
     }
 
     async abrirModal() {
@@ -61,16 +53,12 @@ export class MessageComponent implements OnInit {
             component: MessageModalComponent,
         });
 
-
         modal.onDidDismiss().then((result) => {
             if (result.data) {
+                this.cargarMensajes();
             }
         });
 
         await modal.present();
     }
-
-    /*cargarMensajes(mensajes: Observable<Message[]>) {
-        mensajes = this.messageService.getAllMessages();
-    }*/
 }

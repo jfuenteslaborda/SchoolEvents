@@ -3,6 +3,7 @@ package com.schoolevents.schoolevents_api.res;
 import com.schoolevents.schoolevents_api.DTO.MessageDTO;
 import com.schoolevents.schoolevents_api.Services.MessageService;
 import com.schoolevents.schoolevents_api.models.Message;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,12 +32,12 @@ class MessageController {
     }
 
     @PostMapping("/create")
-    public MessageDTO addMessage(@RequestBody Message message){
+    public MessageDTO addMessage(@Valid @RequestBody MessageDTO message){
         return messageService.save(message);
     }
 
     @PutMapping("/update/{id}")
-    public MessageDTO updateMessage(@PathVariable Long id, @RequestBody Message message){
+    public MessageDTO updateMessage(@PathVariable Long id, @Valid @RequestBody MessageDTO message){
         return messageService.updateMessage(message, id);
     }
 

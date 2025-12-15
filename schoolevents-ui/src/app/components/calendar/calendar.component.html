@@ -7,6 +7,8 @@
         [locale]="'es-ES'"
 ></ion-datetime>
 
-<div *ngIf="fechaConfirmada" class="date-buttom animate-fade">
+@if (fechaConfirmada){
+<div  class="date-buttom animate-fade">
     Fecha seleccionada: {{ fechaConfirmada }}
 </div>
+}

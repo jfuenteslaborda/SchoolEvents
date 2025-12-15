@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Message } from 'src/app/interfaces/Message'
@@ -8,31 +8,32 @@ import { Message } from 'src/app/interfaces/Message'
     providedIn: 'root'
 })
 export class MessageService {
-    private apiUrl = 'http://localhost:8080/messages'; // URL base del backend
 
-    constructor(private http: HttpClient) {}
+    private http = inject(HttpClient);
 
-    getAllMessages(): Observable<Message[]> {
-        return this.http.get<Message[]>(`${this.apiUrl}/all`);
+    constructor() {}
+
+    obtenerMensajes(): Observable<Message[]> {
+        return this.http.get<Message[]>(`/api/messages/all`);
     }
 
-    getMessageById(id: number): Observable<Message> {
-        return this.http.get<Message>(`${this.apiUrl}/by_id/${id}`);
+    obtenerMensajesPorId(id: number):Observable<Message>{
+        return this.http.get<Message>(`/api/messages/by_id/${id}`);
     }
 
-    getMessagesByUser(id: number): Observable<Message[]> {
-        return this.http.get<Message[]>(`${this.apiUrl}/by_user/${id}`);
+    obtenerMensajesPorUsuario(userId: number): Observable<Message[]> {
+        return this.http.get<Message[]>(`/api/messages/${userId}`);
     }
 
-    createMessage(message: Message): Observable<Message> {
-        return this.http.post<Message>(`${this.apiUrl}/create`, message);
+    crearMensaje(message: Message): Observable<Message> {
+        return this.http.post<Message>(`/api/messages/create`, message);
     }
 
-    updateMessage(id: number, message: Message): Observable<Message> {
-        return this.http.put<Message>(`${this.apiUrl}/update/${id}`, message);
+    actualizarMensaje(id: number, message: Message): Observable<Message> {
+        return this.http.put<Message>(`/api/messages/update/${id}`, message);
     }
 
-    deleteMessage(id: number): Observable<void> {
-        return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
+    eliminarMensaje(id: number): Observable<void> {
+        return this.http.delete<void>(`/api/messages/delete/${id}`);
     }
 }

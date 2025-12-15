@@ -1,5 +1,5 @@
-<ion-list class="list-comment">
-    <ion-card *ngFor="let c of comentarios" class="coment-card">
+<ion-list class="list-comment" *ngIf="comentariosUI.length > 0; else noComments">
+    <ion-card *ngFor="let c of comentariosUI" class="coment-card">
         <ion-item lines="none">
             <ion-avatar slot="start">
                 <img [src]="c.profilePic" alt="Foto de perfil">
@@ -11,6 +11,23 @@
         </ion-item>
     </ion-card>
 </ion-list>
+
+<ng-template #noComments>
+    <div style="
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      margin:1rem;
+      padding:0.5rem 1rem;
+      background-color: rgba(0,0,0,0.6);
+      color:white;
+      border-radius:12px;
+      font-size:0.9rem;
+      text-align:center;
+  ">
+        Sé el primero en comentar
+    </div>
+</ng-template>
 
 <ion-button class="buttom-comment"
             color="primary" (click)="abrirModal()">

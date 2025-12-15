@@ -4,6 +4,7 @@ package com.schoolevents.schoolevents_api.res;
 import com.schoolevents.schoolevents_api.DTO.ImageDTO;
 import com.schoolevents.schoolevents_api.Services.ImageService;
 import com.schoolevents.schoolevents_api.models.Image;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,12 +33,12 @@ public class ImageController {
     }
 
     @PostMapping("/create")
-    public ImageDTO addImage(@RequestBody Image image) {
+    public ImageDTO addImage(@Valid @RequestBody ImageDTO image) {
         return imageService.save(image);
     }
 
     @PutMapping("/update/{id}")
-    public ImageDTO updateImage(@PathVariable Long id, @RequestBody Image image) {
+    public ImageDTO updateImage(@PathVariable Long id, @Valid @RequestBody ImageDTO image) {
         return imageService.updateImage(image, id);
     }
 

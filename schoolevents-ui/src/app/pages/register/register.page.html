@@ -36,11 +36,10 @@
             />
             @if(correo?.invalid && correo?.touched){
                 <div  class="error">
-                <small *ngIf="correo?.errors?.['required']">El correo es obligatorio.</small>
-                <small *ngIf="correo?.errors?.['email']">Introduce un correo válido.</small>
-            </div>
+                    <small *ngIf="correo?.errors?.['required']">El correo es obligatorio.</small>
+                    <small *ngIf="correo?.errors?.['email']">Introduce un correo válido.</small>
+                </div>
             }
-
 
             <input
                     placeholder="Contraseña"
@@ -48,12 +47,29 @@
                     formControlName="password"
                     [class.invalid]="password?.invalid && password?.touched"
             />
-            <div *ngIf="password?.invalid && password?.touched" class="error">
-                <small *ngIf="password?.errors?.['required']">La contraseña es obligatoria.</small>
-                <small *ngIf="password?.errors?.['minlength']">Mínimo 6 caracteres.</small>
+            <div class="password-strength" style="height: 8px;
+                                                  width: 100%;
+                                                  background-color: #e0e0e0;
+                                                  border-radius: 9%;
+                                                  margin-bottom: 9%;
+                                                  margin-top: 5px;
+                                                  overflow: hidden;
+                                                  /* Estas propiedades ayudan a prevenir problemas de superposición y layout */
+                                                  position: relative;
+                                                  z-index: 10;">
+                <div class="strength-bar" [style.width.%]="passwordStrength" style="height: 100%;
+                                                                                      width: 20%;
+                                                                                      background: linear-gradient(to right, red, yellow, green);
+                                                                                      transition: width 0.3s ease-in-out;
+                                                                                      z-index: 11;">
+
+                </div>
             </div>
 
-            <button class="btn" type="submit" (click)="navigateWithAnimation('/calendar', $event)" [disabled]="registerForm.invalid">Sign In</button>
+            <div *ngIf="password?.invalid && password?.touched" class="error">
+            </div>
+
+            <button class="btn" type="submit" (click)="navigateWithAnimation('/login', $event)" [disabled]="registerForm.invalid">Sign In</button>
         </form>
     </div>
 </ion-content>

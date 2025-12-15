@@ -3,6 +3,7 @@ package com.schoolevents.schoolevents_api.exception;
 import jakarta.validation.UnexpectedTypeException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -36,4 +37,12 @@ public class ErrorController {
         error.put("error", ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<Map<String, String>> manejadorDeParseos(UnexpectedTypeException ex) {
+        Map<String, String> error = new HashMap<>();
+        error.put("error", "Error al parsear, mira si la fecha es correcta");
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
 }

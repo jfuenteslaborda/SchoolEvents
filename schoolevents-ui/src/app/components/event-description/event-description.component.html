@@ -1,15 +1,15 @@
 <ion-card>
     <ion-card-header>
-        <ion-card-title>{{ event.tittle }}</ion-card-title>
-        <ion-card-subtitle>{{ event.date }}</ion-card-subtitle>
+        <ion-card-title>{{ event?.title }}</ion-card-title>
+        <ion-card-subtitle>{{ event?.date }}</ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
-        <p>{{ event.description }}</p>
+        <p>{{ event?.description }}</p>
         <br>
         <p>
             <strong style="display: flex; justify-content: center">
-                {{ event.isFree ? 'Gratis' : 'Evento de pago' }}
+                {{ event?.need_payment ? 'Evento de pago' : 'Gratis' }}
             </strong>
         </p>
     </ion-card-content>

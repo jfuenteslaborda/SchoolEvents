@@ -7,7 +7,7 @@ CREATE TABLE app_user (
     full_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    photo VARCHAR(255),
+    photo TEXT,
     date DATE,
     is_admin INTEGER DEFAULT 0
 );
@@ -20,6 +20,7 @@ CREATE TABLE event (
     price NUMERIC(10, 2) DEFAULT 0.00,
     capacity INTEGER,
     date TIMESTAMP WITHOUT TIME ZONE,
+    src VARCHAR(250),
     need_payment BOOLEAN DEFAULT FALSE
 );
 
@@ -68,7 +69,7 @@ CREATE TABLE comment (
         ON DELETE CASCADE
 );
 
--- TABLA 6 Sign (CORREGIDA)
+-- TABLA 6 Sign 
 CREATE TABLE sign (
 	id SERIAL PRIMARY KEY, 
     user_id INTEGER NOT NULL,
@@ -109,9 +110,6 @@ LIMIT 5;
 
 
 
-
-
-
 SELECT
     au.id AS user_id,
     au.full_name,
@@ -125,6 +123,16 @@ GROUP BY
 ORDER BY
     signs_total DESC
 LIMIT 1;
+
+UPDATE event
+SET src = 'https://png.pngtree.com/thumb_back/fh260/background/20250526/pngtree-fun-outdoor-school-event-with-cheerful-children-and-banners-image_17344320.jpg'
+WHERE id = 2;
+
+
+
+
+
+
 
 
 

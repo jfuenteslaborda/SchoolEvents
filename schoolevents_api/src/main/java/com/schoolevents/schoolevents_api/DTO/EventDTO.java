@@ -5,13 +5,14 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.hibernate.sql.Update;
 
 import java.time.LocalDate;
 
 @Data
 public class EventDTO {
 
-    @NotNull(message = "El id no puede ser nulo")
+    @NotNull(groups = Update.class, message = "El id de evento no puede ser nulo")
     private Long id;
 
     @NotBlank(message = "Tiene que tener algún titulo")
@@ -21,7 +22,6 @@ public class EventDTO {
     private String description;
 
     @NotNull(message = "El precio no puede ser nulo")
-    @Min(value = 1, message = "El precio debe de ser mínimo 1")
     private Integer price;
 
     @NotNull(message = "La capacidad no puede ser nula")
@@ -34,4 +34,7 @@ public class EventDTO {
 
     @NotNull(message = "Debe haber necesidad de si es de pago")
     private Boolean need_payment;
+
+    @NotNull(message = "Debe de tener alguna imagen principal")
+    private String src;
 }

@@ -4,7 +4,7 @@
         <div class="header">
             <h1><span class="black">School</span><span class="green">Events</span></h1>
         </div>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit($event)">
             <h1><span>Inicia</span> Sesión</h1>
 
             <input
@@ -18,6 +18,10 @@
                 <small *ngIf="correo?.errors?.['email']">Introduce un correo válido.</small>
             </div>
 
+            <div *ngIf="userNotFound" class="error">
+                <small>Usuario no encontrado</small>
+            </div>
+
             <input
                     placeholder="Contraseña"
                     type="password"
@@ -29,9 +33,14 @@
                 <small *ngIf="password?.errors?.['minlength']">Mínimo 6 caracteres.</small>
             </div>
 
-            <button class="btn" type="submit" (click)="navigateWithAnimation('/calendar', $event)" [disabled]="loginForm.invalid">Log in</button>
+            <div *ngIf="loginError" class="error">
+                <small>{{ loginError }}</small>
+            </div>
+
+            <button class="btn" type="submit" [disabled]="loginForm.invalid">Log in</button>
         </form>
     </div>
+
 </ion-content>
 <ion-footer>
     <footer class="footer-container">
