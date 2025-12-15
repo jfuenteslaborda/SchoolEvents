@@ -27,7 +27,7 @@ export class CarouselImagesComponent implements OnInit {
     ngOnInit() {
         const evento: Event | null = this.eventService.getEventoActual();
         if (evento) {
-            this.loadImagesForEvent(evento.id);
+            this.loadImagesForEvent(evento.id!);
         }
     }
 

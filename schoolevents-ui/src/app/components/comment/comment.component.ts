@@ -38,15 +38,13 @@ export class CommentComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
-        // Subscribirse al usuario actual
         this.userSub = this.userService.currentUser$.subscribe(user => {
             this.user = user;
         });
 
-        // Cargar comentarios del evento activo
         const evento = this.eventService.getEventoActual();
         if (evento) {
-            this.cargarComentarios(evento.id);
+            this.cargarComentarios(evento.id!);
         }
     }
 

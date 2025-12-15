@@ -110,9 +110,6 @@ LIMIT 5;
 
 
 
-
-
-
 SELECT
     au.id AS user_id,
     au.full_name,
@@ -126,6 +123,10 @@ GROUP BY
 ORDER BY
     signs_total DESC
 LIMIT 1;
+
+UPDATE event
+SET src = 'https://png.pngtree.com/thumb_back/fh260/background/20250526/pngtree-fun-outdoor-school-event-with-cheerful-children-and-banners-image_17344320.jpg'
+WHERE id = 2;
 
 
 
