@@ -69,7 +69,7 @@ CREATE TABLE comment (
         ON DELETE CASCADE
 );
 
--- TABLA 6 Sign (CORREGIDA)
+-- TABLA 6 Sign 
 CREATE TABLE sign (
 	id SERIAL PRIMARY KEY, 
     user_id INTEGER NOT NULL,
@@ -126,6 +126,7 @@ GROUP BY
 ORDER BY
     signs_total DESC
 LIMIT 1;
+
 
 
 
