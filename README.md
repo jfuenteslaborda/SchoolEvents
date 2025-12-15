@@ -22,7 +22,7 @@ SchoolEvents es una aplicación web y móvil desarrollada con **Angular**, **Ion
 
 - **Frontend:** Angular, Ionic  
 - **Backend:** Spring Boot  
-- **Base de datos:** PostGres   
+- **Base de datos:** Postgres   
 
 ---
 
