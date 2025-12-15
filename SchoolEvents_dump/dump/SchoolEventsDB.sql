@@ -19,7 +19,7 @@ CREATE TABLE event (
     description TEXT,
     price NUMERIC(10, 2) DEFAULT 0.00,
     capacity INTEGER,
-    date TIMESTAMP WITHOUT TIME ZONE,
+    date DATE,
     src VARCHAR(250),
     need_payment BOOLEAN DEFAULT FALSE
 );
@@ -123,10 +123,6 @@ GROUP BY
 ORDER BY
     signs_total DESC
 LIMIT 1;
-
-UPDATE event
-SET src = 'https://png.pngtree.com/thumb_back/fh260/background/20250526/pngtree-fun-outdoor-school-event-with-cheerful-children-and-banners-image_17344320.jpg'
-WHERE id = 2;
 
 
 
