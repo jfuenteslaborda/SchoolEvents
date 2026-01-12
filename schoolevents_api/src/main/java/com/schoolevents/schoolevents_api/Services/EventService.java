@@ -106,7 +106,7 @@ public class EventService {
         existingEvent.setTitle(eventDTO.getTitle());
         existingEvent.setDescription(eventDTO.getDescription());
         existingEvent.setDate(eventDTO.getDate());
-        existingEvent.setPrice(Float.valueOf(eventDTO.getPrice())); // si es Integer en DTO y entidad, no hace falta Float.valueOf
+        existingEvent.setPrice(Float.valueOf(eventDTO.getPrice()));
         existingEvent.setCapacity(eventDTO.getCapacity());
         existingEvent.setNeed_payment(eventDTO.getNeed_payment());
         existingEvent.setSrc(eventDTO.getSrc());

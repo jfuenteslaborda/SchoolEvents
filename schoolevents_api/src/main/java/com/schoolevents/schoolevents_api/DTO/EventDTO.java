@@ -35,6 +35,5 @@ public class EventDTO {
     @NotNull(message = "Debe haber necesidad de si es de pago")
     private Boolean need_payment;
 
-    @NotNull(message = "Debe de tener alguna imagen principal")
     private String src;
 }

@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,8 +28,8 @@ public class EventStadisticsDTO {
     private BigDecimal price;
     @Min(value = 5, message = "La capacidad debe de ser minima")
     private Integer capacity;
-    @NotNull(message = "La fecha no debe de ser nula")
+    @NotBlank(message = "La fecha no debe de ser nula")
     @JsonFormat(pattern = "dd-MM-yyyy")
-    private LocalDateTime date;
+    private Date date;
     private Long assist_num;
 }
