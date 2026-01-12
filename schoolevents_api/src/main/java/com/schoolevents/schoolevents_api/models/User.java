@@ -34,4 +34,13 @@ public class User {
 
     @Column(name = "is_admin")
     private Integer is_Admin;
+
+    public User(String full_name, String email, String password, String photo, LocalDate date, Integer is_Admin) {
+        this.full_name = full_name;
+        this.email = email;
+        this.password = password;
+        this.photo = photo;
+        this.date = date;
+        this.is_Admin = is_Admin;
+    }
 }
