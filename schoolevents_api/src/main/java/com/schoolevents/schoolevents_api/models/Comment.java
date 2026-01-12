@@ -33,4 +33,10 @@ public class Comment {
     @JoinColumn(name = "event_id",  nullable = false)
     private Event event;
 
+    public Comment(String description, LocalDate date, User user, Event event) {
+        this.description = description;
+        this.date = date;
+        this.user = user;
+        this.event = event;
+    }
 }

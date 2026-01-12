@@ -27,4 +27,10 @@ public class Message {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    public Message(String content, LocalDate send_date, User user) {
+        this.content = content;
+        this.send_date = send_date;
+        this.user = user;
+    }
 }

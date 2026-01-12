@@ -40,4 +40,13 @@ public class Event {
     @Column(name = "src")
     private String src;
 
+    public Event(String title, String description, Float price, Integer capacity, LocalDate date, Boolean need_payment, String src) {
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.capacity = capacity;
+        this.date = date;
+        this.need_payment = need_payment;
+        this.src = src;
+    }
 }

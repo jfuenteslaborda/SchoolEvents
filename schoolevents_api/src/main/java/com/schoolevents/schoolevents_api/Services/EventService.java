@@ -82,6 +82,19 @@ public class EventService {
         if (event.getDate() == null) {
             throw new HttpMessageNotReadableException("La fecha no es correcta");
         }
+        if (event.getCapacity() < 5){
+            throw new IllegalArgumentException("La capacidad no puede ser menor que 5");
+        }
+        if (event.getPrice()<0){
+            throw new IllegalArgumentException("La precio no puede ser menor que 0");
+        }
+        if (event.getNeed_payment() != null && event.getNeed_payment() && event.getPrice() == 0){
+            throw new IllegalArgumentException("El evento es de pago, el precio no puede ser 0");
+        }
+        if (event.getNeed_payment() != null && !event.getNeed_payment() && event.getPrice() > 0){
+            throw new IllegalArgumentException("El evento es gratuito");
+        }
+
         Event savedEvent = eventRepository.save(eventMapper.eventDTOToEvent(event));
         return eventMapper.eventToEventDTO(savedEvent);
     }
