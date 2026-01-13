@@ -1,23 +1,30 @@
 package com.schoolevents.schoolevents_api.Services;
 
 import com.schoolevents.schoolevents_api.DTO.EventDTO;
+import com.schoolevents.schoolevents_api.DTO.EventStadisticsDTO;
 import com.schoolevents.schoolevents_api.DTO.UserDTO;
 import com.schoolevents.schoolevents_api.exception.ElementNotFoundException;
 import com.schoolevents.schoolevents_api.mappers.*;
 import com.schoolevents.schoolevents_api.models.*;
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.util.AssertionErrors.assertNotNull;
 
 @SpringBootTest
+@ActiveProfiles("test")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ServicesTest {
 
@@ -50,13 +57,16 @@ class ServicesTest {
     private SignService signService;
     @Autowired
     private SignMapper signMapper;
+    @Autowired
+    private EntityManager em;
 
     private User user1;
     private User user2;
     private Event event1;
     private Event event2;
 
-    @BeforeAll
+    @BeforeEach
+    @Transactional
     void setupDatabase() {
 
         User tempUser1 = new User("Juan Pérez","juan@gmail.com","123","photo1.jpg",LocalDate.now(),0);
@@ -88,6 +98,8 @@ class ServicesTest {
 
         signService.save(signMapper.signToSignDTO(new Sign(user1,event1,LocalDate.now())));
         signService.save(signMapper.signToSignDTO(new Sign(user2,event2,LocalDate.now())));
+
+        em.flush();
     }
 
     // -- TESTS --
@@ -169,4 +181,90 @@ class ServicesTest {
             eventService.updateEvent(eventMapper.eventToEventDTO(tempEvent1), 10L);
         });
     }
+
+    //Crea un Registro de un Usuario a un Evento - Positivo
+    @Test
+    void createSignTestPositive() {
+        assertNotNull("Registrado", signService.save(signMapper.signToSignDTO(new Sign(user1,event1,LocalDate.now()))));
+    }
+
+    //Crea un Registro de un Usuario a un evento - Negativo
+    @Test
+    void createSignTestNegative() {
+        assertThrows(ElementNotFoundException.class, () -> {
+            signService.save(signMapper.signToSignDTO(new Sign(user1, eventMapper.eventDTOToEvent(eventService.findById(10L)), LocalDate.now())));
+        });
+    }
+
+    //Ver eventos donde el Usuario participa - Positivo
+    @Test
+    @Transactional
+    void findSignsByUserTestPositive() {
+        assertNotNull("Encontrado", signService.findByUserId(1L));
+    }
+
+    //Ver eventos donde el Usuario participa - Negativo
+    @Test
+    @Transactional
+    void findSignsByUserTestNegative() {
+        assertThrows(ElementNotFoundException.class, () -> {
+            signService.findByUserId(20L);
+        });
+    }
+
+    //Ver top 5 Eventos con mas registros - Positivo
+    @Test
+    @Transactional
+    void findEventsStadisticTestPositive() {
+
+        List<EventStadisticsDTO> stats = eventService.getEventsStadistic();
+
+        assertNotNull("Encontrado",stats);
+        assertFalse(stats.isEmpty(), "La lista de estadísticas no debería estar vacía");
+    }
+
+    //Ver top 5 eventos con mas registros - Negativo
+    @Test
+    @Transactional
+    void findEventsStadisticTestNegative() {
+        em.createQuery("DELETE FROM Sign").executeUpdate();
+        em.createQuery("DELETE FROM Comment").executeUpdate();
+        em.createQuery("DELETE FROM Image").executeUpdate();
+        em.createQuery("DELETE FROM Message").executeUpdate();
+        em.createQuery("DELETE FROM Event").executeUpdate();
+        em.createQuery("DELETE FROM User").executeUpdate();
+
+        em.flush();
+
+        assertThrows(ElementNotFoundException.class, () -> {
+            eventService.getEventsStadistic();
+        });
+    }
+
+    //Consultar el Usuario con mas registros de Eventos - Positivo
+    @Test
+    @Transactional
+    void findUserStadisticTestPositive() {
+        assertNotNull("Encontrado", userService.getUserStadistics());
+    }
+
+    //Consultar el Usuario con mas registros de Eventos - Negativo
+    @Test
+    @Transactional
+    void findUserStadisticTestNegative() {
+        em.createQuery("DELETE FROM Sign").executeUpdate();
+        em.createQuery("DELETE FROM Comment").executeUpdate();
+        em.createQuery("DELETE FROM Image").executeUpdate();
+        em.createQuery("DELETE FROM Message").executeUpdate();
+        em.createQuery("DELETE FROM Event").executeUpdate();
+        em.createQuery("DELETE FROM User").executeUpdate();
+
+        em.flush();
+
+        assertThrows(ElementNotFoundException.class, () -> {
+            userService.getUserStadistics();
+        });
+    }
+
+
 }

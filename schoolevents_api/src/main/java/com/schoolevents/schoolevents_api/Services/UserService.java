@@ -43,7 +43,7 @@ public class UserService {
 
     public UserStadisticsDTO getUserStadistics(){
         if (userRepository.getUserStadistic() == null){
-            return new UserStadisticsDTO();
+            throw new ElementNotFoundException("El usuario no existe");
         } else return userRepository.getUserStadistic();
     }
 

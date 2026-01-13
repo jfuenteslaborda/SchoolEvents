@@ -4,7 +4,6 @@ import com.schoolevents.schoolevents_api.DTO.EventStadisticsDTO;
 import com.schoolevents.schoolevents_api.models.Event;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
-import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.util.List;
