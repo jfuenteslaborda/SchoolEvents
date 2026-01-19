@@ -8,7 +8,6 @@ import com.schoolevents.schoolevents_api.mappers.*;
 import com.schoolevents.schoolevents_api.models.*;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +24,7 @@ import static org.springframework.test.util.AssertionErrors.assertNotNull;
 
 @SpringBootTest
 @ActiveProfiles("test")
+@Transactional
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ServicesTest {
 
@@ -62,8 +62,10 @@ class ServicesTest {
 
     private User user1;
     private User user2;
+    private User user3;
     private Event event1;
     private Event event2;
+    private Event event3;
 
     @BeforeEach
     @Transactional
@@ -71,6 +73,7 @@ class ServicesTest {
 
         User tempUser1 = new User("Juan Pérez","juan@gmail.com","123","photo1.jpg",LocalDate.now(),0);
         User tempUser2 = new User("Ana López","ana@gmail.com","456","photo2.jpg",LocalDate.now(),0);
+        User tempUser3 = new User(1L, "José Fuentes","jose@gmail.com","456","photo3.jpg",LocalDate.now(),1);
 
         UserDTO savedUserDTO1 = userService.save(userMapper.userToUserDTO(tempUser1));
         UserDTO savedUserDTO2 = userService.save(userMapper.userToUserDTO(tempUser2));
@@ -80,6 +83,7 @@ class ServicesTest {
 
         Event tempEvent1 = new Event("Concierto","Concierto en vivo",15F,100,LocalDate.now().plusDays(5),true,"event1.jpg");
         Event tempEvent2 = new Event("Teatro","Obra teatral",0F,80,LocalDate.now().plusDays(10),false,"event2.jpg");
+        Event tempEvent3 = new Event(1L,"Juegos","Evento de juegos",0F,80,LocalDate.now().plusDays(10),false,"event3.jpg");
 
         EventDTO savedEventDTO1 = eventService.save(eventMapper.eventToEventDTO(tempEvent1));
         EventDTO savedEventDTO2 = eventService.save(eventMapper.eventToEventDTO(tempEvent2));
@@ -139,7 +143,7 @@ class ServicesTest {
     //Buscar un Evento - Positivo
     @Test
     void findEventByIdTestPositive() {
-        Event event = eventMapper.eventDTOToEvent(eventService.findById(1L));
+        Event event = eventMapper.eventDTOToEvent(eventService.findById(2L));
         assertNotNull("Encontrado", event);
     }
 
