@@ -12,6 +12,9 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
+import java.time.LocalDate;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -202,7 +205,7 @@ public class ServicesIntegrationTest {
 
     //Ejemplo 7 - Eliminar Registro - Positivo
     @Test
-    void deleteSign_positivo() {
+    void deleteSign() {
         Long id = 1L;
 
         when(signRepositoryTest.findById(id)).thenReturn(new Sign());
@@ -211,6 +214,44 @@ public class ServicesIntegrationTest {
 
         verify(signRepositoryTest, times(1)).findById(id);
         verify(signRepositoryTest, times(1)).deleteById(id);
+    }
+
+    //Ejemplo 8 - Estadisticas de Usuario - Negativo
+    @Test
+    void userStadistic(){
+        when(userRepositoryTest.getUserStadistic())
+                .thenThrow(new ElementNotFoundException("El usuario no existe"));
+
+        assertThrows(ElementNotFoundException.class, () -> userRepositoryTest.getUserStadistic());
+
+        verify(userRepositoryTest, times(1)).getUserStadistic();
+    }
+
+    //Ejemplo 9 - Estadisticas de Eventos - Positivo
+    @Test
+    void eventStadistic(){
+        EventStadisticsDTO mockDto = Mockito.mock(EventStadisticsDTO.class);
+
+        when(eventRepositoryTest.getEventStadistics())
+                .thenReturn(List.of(mockDto));
+
+        this.eventServiceTest.getEventsStadistic();
+
+        verify(eventRepositoryTest, times(2)).getEventStadistics();
+    }
+
+    //Ejemplo 10 - Eventos en 2 semanas - Negativo
+    @Test
+    void eventsInTwoWeeks(){
+        LocalDate start = LocalDate.now();
+        LocalDate end = start.plusWeeks(2);
+        when(eventRepositoryTest.findByDateBetween(start, end))
+                .thenThrow(new ElementNotFoundException("El evento no existe"));
+
+        assertThrows(ElementNotFoundException.class, () -> eventRepositoryTest.findByDateBetween(start, end));
+
+        verify(eventRepositoryTest, times(1)).findByDateBetween(start, end);
+        
     }
 
 
