@@ -126,7 +126,7 @@ public class ServicesIntegrationTest {
         verify(eventRepositoryTest, times(1)).save(any(Event.class));
     }
 
-    // Ejemplo 4 - Buscar Evento Por Titulo - Positivo
+    // Ejemplo 4 - Buscar Evento Por Título - Positivo
     @Test
     void findByTitlePositive(){
         //Given

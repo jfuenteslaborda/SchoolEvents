@@ -2,7 +2,6 @@ package com.schoolevents.schoolevents_api.Services;
 
 import com.schoolevents.schoolevents_api.DTO.EventDTO;
 import com.schoolevents.schoolevents_api.DTO.EventStadisticsDTO;
-import com.schoolevents.schoolevents_api.DTO.UserDTO;
 import com.schoolevents.schoolevents_api.exception.ElementNotFoundException;
 import com.schoolevents.schoolevents_api.mappers.*;
 import com.schoolevents.schoolevents_api.models.*;
@@ -61,23 +60,20 @@ class ServicesTest {
     private EntityManager em;
 
     private User user1;
-    private User user2;
-    private User user3;
     private Event event1;
     private Event event2;
-    private Event event3;
 
     @BeforeEach
     @Transactional
     void setupDatabase() {
         user1 = userMapper.userDTOToUser(userService.save(userMapper.userToUserDTO(new User("Juan Pérez","juan@gmail.com","123","photo1.jpg",LocalDate.now(),0))));
-        user2 = userMapper.userDTOToUser(userService.save(userMapper.userToUserDTO(new User("Ana López","ana@gmail.com","456","photo2.jpg",LocalDate.now(),0))));
-        user3 = userMapper.userDTOToUser(userService.save(userMapper.userToUserDTO(new User("José Fuentes","jose@gmail.com","789","photo3.jpg",LocalDate.now(),1))));
+        User user2 = userMapper.userDTOToUser(userService.save(userMapper.userToUserDTO(new User("Ana López", "ana@gmail.com", "456", "photo2.jpg", LocalDate.now(), 0))));
+        User user3 = userMapper.userDTOToUser(userService.save(userMapper.userToUserDTO(new User("José Fuentes", "jose@gmail.com", "789", "photo3.jpg", LocalDate.now(), 1))));
 
 
         event1 = eventMapper.eventDTOToEvent(eventService.save(eventMapper.eventToEventDTO(new Event("Concierto","Concierto en vivo",15F,100,LocalDate.now().plusDays(5),true,"event1.jpg"))));
         event2 = eventMapper.eventDTOToEvent(eventService.save(eventMapper.eventToEventDTO(new Event("Teatro","Obra teatral",0F,80,LocalDate.now().plusDays(10),false,"event2.jpg"))));
-        event3 = eventMapper.eventDTOToEvent(eventService.save(eventMapper.eventToEventDTO(new Event("Juegos","Evento de juegos",0F,80,LocalDate.now().plusDays(10),false,"event3.jpg"))));
+        Event event3 = eventMapper.eventDTOToEvent(eventService.save(eventMapper.eventToEventDTO(new Event("Juegos", "Evento de juegos", 0F, 80, LocalDate.now().plusDays(10), false, "event3.jpg"))));
 
 
         commentService.save(commentMapper.commentToCommentDTO(new Comment("¡Genial!", LocalDate.now(), user1, event1)));
@@ -89,7 +85,7 @@ class ServicesTest {
 
 
         messageService.save(messageMapper.messageToMessageDTO(new Message("¿Hay entradas?",LocalDate.now(),user1)));
-        messageService.save(messageMapper.messageToMessageDTO(new Message("¿Dónde es?",LocalDate.now(),user2)));
+        messageService.save(messageMapper.messageToMessageDTO(new Message("¿Dónde es?",LocalDate.now(), user2)));
 
 
         signService.save(signMapper.signToSignDTO(new Sign(user1,event1,LocalDate.now())));
@@ -257,7 +253,7 @@ class ServicesTest {
         assertNotNull("Encontrado", userService.getUserStadistics());
     }
 
-    //Consultar el Usuario con mas registros de Eventos - Negativo
+    //Consultar el Usuario con más registros de Eventos - Negativo
     @Test
     @Transactional
     void findUserStadisticTestNegative() {
