@@ -70,43 +70,36 @@ class ServicesTest {
     @BeforeEach
     @Transactional
     void setupDatabase() {
+        user1 = userMapper.userDTOToUser(userService.save(userMapper.userToUserDTO(new User("Juan Pérez","juan@gmail.com","123","photo1.jpg",LocalDate.now(),0))));
+        user2 = userMapper.userDTOToUser(userService.save(userMapper.userToUserDTO(new User("Ana López","ana@gmail.com","456","photo2.jpg",LocalDate.now(),0))));
+        user3 = userMapper.userDTOToUser(userService.save(userMapper.userToUserDTO(new User("José Fuentes","jose@gmail.com","789","photo3.jpg",LocalDate.now(),1))));
 
-        User tempUser1 = new User("Juan Pérez","juan@gmail.com","123","photo1.jpg",LocalDate.now(),0);
-        User tempUser2 = new User("Ana López","ana@gmail.com","456","photo2.jpg",LocalDate.now(),0);
-        User tempUser3 = new User(1L, "José Fuentes","jose@gmail.com","456","photo3.jpg",LocalDate.now(),1);
 
-        UserDTO savedUserDTO1 = userService.save(userMapper.userToUserDTO(tempUser1));
-        UserDTO savedUserDTO2 = userService.save(userMapper.userToUserDTO(tempUser2));
+        event1 = eventMapper.eventDTOToEvent(eventService.save(eventMapper.eventToEventDTO(new Event("Concierto","Concierto en vivo",15F,100,LocalDate.now().plusDays(5),true,"event1.jpg"))));
+        event2 = eventMapper.eventDTOToEvent(eventService.save(eventMapper.eventToEventDTO(new Event("Teatro","Obra teatral",0F,80,LocalDate.now().plusDays(10),false,"event2.jpg"))));
+        event3 = eventMapper.eventDTOToEvent(eventService.save(eventMapper.eventToEventDTO(new Event("Juegos","Evento de juegos",0F,80,LocalDate.now().plusDays(10),false,"event3.jpg"))));
 
-        user1 = userMapper.userDTOToUser(savedUserDTO1);
-        user2 = userMapper.userDTOToUser(savedUserDTO2);
-
-        Event tempEvent1 = new Event("Concierto","Concierto en vivo",15F,100,LocalDate.now().plusDays(5),true,"event1.jpg");
-        Event tempEvent2 = new Event("Teatro","Obra teatral",0F,80,LocalDate.now().plusDays(10),false,"event2.jpg");
-        Event tempEvent3 = new Event(1L,"Juegos","Evento de juegos",0F,80,LocalDate.now().plusDays(10),false,"event3.jpg");
-
-        EventDTO savedEventDTO1 = eventService.save(eventMapper.eventToEventDTO(tempEvent1));
-        EventDTO savedEventDTO2 = eventService.save(eventMapper.eventToEventDTO(tempEvent2));
-
-        event1 = eventMapper.eventDTOToEvent(savedEventDTO1);
-        event2 = eventMapper.eventDTOToEvent(savedEventDTO2);
 
         commentService.save(commentMapper.commentToCommentDTO(new Comment("¡Genial!", LocalDate.now(), user1, event1)));
         commentService.save(commentMapper.commentToCommentDTO(new Comment("Me encanta", LocalDate.now(), user2, event2)));
 
+
         imageService.save(imageMapper.imageToImageDTO(new Image("img1.jpg","Escenario",event1)));
         imageService.save(imageMapper.imageToImageDTO(new Image("img2.jpg","Cartel",event2)));
+
 
         messageService.save(messageMapper.messageToMessageDTO(new Message("¿Hay entradas?",LocalDate.now(),user1)));
         messageService.save(messageMapper.messageToMessageDTO(new Message("¿Dónde es?",LocalDate.now(),user2)));
 
+
         signService.save(signMapper.signToSignDTO(new Sign(user1,event1,LocalDate.now())));
         signService.save(signMapper.signToSignDTO(new Sign(user2,event2,LocalDate.now())));
+
 
         em.flush();
     }
 
-    // -- TESTS --
+    // TESTS
 
     //Crear un Usario - Positivo
     @Test
@@ -143,7 +136,7 @@ class ServicesTest {
     //Buscar un Evento - Positivo
     @Test
     void findEventByIdTestPositive() {
-        Event event = eventMapper.eventDTOToEvent(eventService.findById(2L));
+        Event event = eventMapper.eventDTOToEvent(eventService.findById(event2.getId()));
         assertNotNull("Encontrado", event);
     }
 
@@ -173,9 +166,19 @@ class ServicesTest {
     //Actualiza el Evento buscado - Positivo
     @Test
     void updateEventTestPositive() {
-        Event tempEvent1 = new Event("Concierto0","Concierto en vivo",15F,100,LocalDate.now().plusDays(5),true,"event1.jpg");
-        assertNotNull("Actualizado", eventService.updateEvent(eventMapper.eventToEventDTO(tempEvent1), 1L));
+        Event tempEvent1 = new Event(
+                "Concierto0",
+                "Concierto en vivo",
+                15F,
+                100,
+                LocalDate.now().plusDays(5),
+                true,
+                "event1.jpg"
+        );
+
+        assertNotNull("Actualizado", eventService.updateEvent(eventMapper.eventToEventDTO(tempEvent1), event1.getId()));
     }
+
 
     //Actualiza el Evento buscado - Negativo
     @Test
@@ -204,8 +207,10 @@ class ServicesTest {
     @Test
     @Transactional
     void findSignsByUserTestPositive() {
-        assertNotNull("Encontrado", signService.findByUserId(1L));
+        // Usar el ID dinámico de user1
+        assertNotNull("Encontrado", signService.findByUserId(user1.getId()));
     }
+
 
     //Ver eventos donde el Usuario participa - Negativo
     @Test
