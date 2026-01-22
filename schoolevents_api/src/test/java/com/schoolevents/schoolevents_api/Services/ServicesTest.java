@@ -203,7 +203,6 @@ class ServicesTest {
     @Test
     @Transactional
     void findSignsByUserTestPositive() {
-        // Usar el ID dinámico de user1
         assertNotNull("Encontrado", signService.findByUserId(user1.getId()));
     }
 

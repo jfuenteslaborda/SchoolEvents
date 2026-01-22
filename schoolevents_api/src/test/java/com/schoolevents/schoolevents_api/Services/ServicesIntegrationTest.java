@@ -65,7 +65,7 @@ public class ServicesIntegrationTest {
     ImageMapper imageMapperTest;
 
 
-    //Ejemplo 1 - Crear Usuario - Negativo
+    //Ejemplo 1 - Crear Usuario - Negativo (Caso 1)
     @Test
     void saveUser(){
         when(userRepositoryTest.save(any(User.class)))
@@ -92,7 +92,7 @@ public class ServicesIntegrationTest {
         verify(this.userRepositoryTest, times(1)).findById(anyLong());
     }
 
-    // Ejemplo 3 - Crear Evento - Positivo
+    // Ejemplo 3 - Crear Evento - Positivo (Caso 2)
     @Test
     void saveEvent(){
         Event event = new Event();
@@ -126,7 +126,7 @@ public class ServicesIntegrationTest {
         verify(eventRepositoryTest, times(1)).save(any(Event.class));
     }
 
-    // Ejemplo 4 - Buscar Evento Por Título - Positivo
+    // Ejemplo 4 - Buscar Evento Por Título - Positivo (Caso 3)
     @Test
     void findByTitlePositive(){
         //Given
@@ -158,7 +158,7 @@ public class ServicesIntegrationTest {
         Mockito.verifyNoInteractions(this.eventMapperTest);
     }
 
-    //Ejemplo 6 - Buscar Evento Por Id - Positivo
+    //Ejemplo 6 - Buscar Evento Por Id - Positivo (Caso 4)
     @Test
     void findEventById(){
         when(this.eventRepositoryTest.findById(anyLong()))
@@ -173,7 +173,7 @@ public class ServicesIntegrationTest {
 
     }
 
-    //Ejemplo 7 - Modificar Evento - Negativo
+    //Ejemplo 7 - Modificar Evento - Negativo (Caso 5)
     @Test
     void putEvent(){
         when(eventRepositoryTest.findById(anyLong()))
@@ -184,7 +184,7 @@ public class ServicesIntegrationTest {
         verify(eventRepositoryTest, times(1)).findById(anyLong());
     }
 
-    //Ejemplo 8 - Crear Registro - Positivo
+    //Ejemplo 8 - Crear Registro - Positivo (Caso 6)
     @Test
     void createSign() {
         SignDTO signDTO = new SignDTO();
@@ -223,7 +223,7 @@ public class ServicesIntegrationTest {
         verify(signMapperTest, times(1)).signToSignDTO(savedSign);
     }
 
-    //Ejemplo 9 - Subir Imagen - Negativo
+    //Ejemplo 9 - Subir Imagen - Negativo (Caso 7)
     @Test
     void uploadImage() {
         ImageDTO imageDTO = new ImageDTO();
@@ -242,7 +242,7 @@ public class ServicesIntegrationTest {
         Mockito.verifyNoInteractions(imageRepositoryTest);
     }
 
-    //Ejemplo 10 - Consultar Eventos donde el Usuario Participa - Positivo
+    //Ejemplo 10 - Consultar Eventos donde el Usuario Participa - Positivo (Caso 8)
     @Test
     void findSignsByUser() {
         Long userId = 5L;
@@ -272,7 +272,7 @@ public class ServicesIntegrationTest {
         verify(signMapperTest, times(1)).signToSignDTO(sign2);
     }
 
-    //Ejemplo 11 - Estadisticas de Eventos - Positivo
+    //Ejemplo 11 - Estadisticas de Eventos - Positivo (Caso 9)
     @Test
     void eventStadistic(){
         EventStadisticsDTO mockDto = Mockito.mock(EventStadisticsDTO.class);
@@ -408,7 +408,7 @@ public class ServicesIntegrationTest {
         verify(signRepositoryTest, times(1)).deleteById(id);
     }
 
-    //Ejemplo 17 - Estadisticas de Usuario - Negativo
+    //Ejemplo 17 - Estadisticas de Usuario - Negativo (Caso 10)
     @Test
     void userStadistic(){
         when(userRepositoryTest.getUserStadistic())
