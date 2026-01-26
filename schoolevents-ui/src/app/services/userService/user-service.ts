@@ -14,7 +14,7 @@ export class UserService {
     private currentUserSubject = new BehaviorSubject<User | null>(null);
     public currentUser$ = this.currentUserSubject.asObservable();
 
-    private currentUser: User | null = null; // Variable interna
+    private currentUser: User | null = null;
 
     constructor() {}
 

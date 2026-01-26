@@ -29,4 +29,10 @@ public class Sign {
 
     @Column(name = "date", nullable = false)
     private LocalDate date;
+
+    public Sign(User user, Event event, LocalDate date) {
+        this.user = user;
+        this.event = event;
+        this.date = date;
+    }
 }

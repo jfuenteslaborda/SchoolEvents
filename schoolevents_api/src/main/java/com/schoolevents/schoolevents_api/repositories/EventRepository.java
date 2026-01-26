@@ -4,7 +4,6 @@ import com.schoolevents.schoolevents_api.DTO.EventStadisticsDTO;
 import com.schoolevents.schoolevents_api.models.Event;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
-import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -23,7 +22,7 @@ public interface EventRepository extends Repository<Event, Long> {
             "    e.description,\n" +
             "    e.price,\n" +
             "    e.capacity,\n" +
-            "    e.date,\n" +
+            "    e.date, \n" +
             "    COUNT(s.user_id) AS assist_num\n" +
             "    FROM\n" +
             "    event e\n" +

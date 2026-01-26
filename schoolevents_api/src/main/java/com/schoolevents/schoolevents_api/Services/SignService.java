@@ -20,7 +20,6 @@ public class SignService {
 
     private final SignRepository signRepository;
     private final SignMapper signMapper;
-    private final UserMapper userMapper;
     private final EventRepository eventRepository;
     private final UserRepository userRepository;
 
@@ -28,7 +27,6 @@ public class SignService {
     public SignService(SignRepository signRepository, SignMapper signMapper, UserMapper userMapper, EventRepository eventRepository, UserRepository userRepository) {
         this.signRepository = signRepository;
         this.signMapper = signMapper;
-        this.userMapper = userMapper;
         this.eventRepository = eventRepository;
         this.userRepository = userRepository;
     }
@@ -40,7 +38,7 @@ public class SignService {
             signsDTO.add(signMapper.signToSignDTO(sign));
         }
         if (signs.isEmpty()){
-            throw new ElementNotFoundException("No hay comentarios registrados");
+            throw new ElementNotFoundException("No hay registros");
         } else return signsDTO;
     }
 
@@ -58,7 +56,7 @@ public class SignService {
             signsDTO.add(signMapper.signToSignDTO(sign));
         }
         if (signs.isEmpty()){
-            throw new ElementNotFoundException("No hay comentarios registrados para el evento con el id: "+event_id);
+            throw new ElementNotFoundException("No hay registros para el evento con el id: "+event_id);
         } else return signsDTO;
     }
 
@@ -69,7 +67,7 @@ public class SignService {
             signsDTO.add(signMapper.signToSignDTO(sign));
         }
         if (signs.isEmpty()){
-            throw new ElementNotFoundException("No hay comentarios registrados para el usuario con el id: "+user_id);
+            throw new ElementNotFoundException("No hay registros para el usuario con el id: "+user_id);
         } else return signsDTO;
     }
 
@@ -142,7 +140,7 @@ public class SignService {
 
     public void delete(Long id){
         if (signRepository.findById(id) == null) {
-            throw new ElementNotFoundException("No se puede eliminar un comentario sin id");
+            throw new ElementNotFoundException("No se puede eliminar un registro sin id");
         } else signRepository.deleteById(id);
     }
 }

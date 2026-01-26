@@ -16,7 +16,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
     styleUrls: ['./carousel-unfiltered.component.scss']
 })
 export class CarouselUnfilteredComponent implements OnInit, OnDestroy {
-    
+
     eventos$: Observable<Event[]>;
     private refreshEvents$ = new BehaviorSubject<void>(undefined);
 

@@ -6,13 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class UserStadisticsDTO {
-    @NotNull(message = "Debe de estar asociado a algun usuario")
-    private Integer user_id;
-    @NotBlank(message = "Debe de tener algún nombre")
-    private String full_name;
-    private Long signs_total;
+public interface UserStadisticsDTO {
+    Long getUser_id();
+    String getFull_name();
+    Long getSigns_total();
 }
+

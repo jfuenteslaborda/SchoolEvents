@@ -26,4 +26,9 @@ public class Image {
     @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
+    public Image(String src, String description, Event event) {
+        this.src = src;
+        this.description = description;
+        this.event = event;
+    }
 }

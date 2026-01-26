@@ -23,7 +23,9 @@ public class UserDTO {
     @Email(message = "Debe ser un email válido")
     private String email;
 
+    @NotBlank(message = "Debe haber alguna contraseña")
     private String password;
+
     private String photo;
 
     @NotNull(message = "Debe de haber alguna fecha")
