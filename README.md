@@ -35,12 +35,12 @@ cd SchoolEvents
 ```
 2. **Backend (Spring Boot):**
 ```bash
-cd backend
+cd schoolevents_api
 ./mvnw spring-boot:run
 ```
 3. **Frontend (Angular + Ionic):**
 ```bash
-cd frontend
+cd schoolevents_ui
 npm install
 ionic serve
 ```
